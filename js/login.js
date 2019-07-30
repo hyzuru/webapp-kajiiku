@@ -5,7 +5,7 @@ const login = () => {
 
   if (username === "" && password === "") {
     const navigator = document.querySelector("#navigator");
-    navigator.resetToPage("pages/home.html");
+    navigator.resetToPage("home.html");
   } else {
     ons.notification.alert("Wrong username/password combination");
   }
