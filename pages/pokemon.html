@@ -1,0 +1,45 @@
+<ons-page id="pokemon">
+  <script>
+    ons.ready(function() {
+      var pullHook = document.getElementById("pull-hook");
+
+      pullHook.addEventListener("changestate", function(event) {
+        var message = "";
+
+        switch (event.state) {
+          case "initial":
+            message = "Pull to refresh";
+            break;
+          case "preaction":
+            message = "Release";
+            break;
+          case "action":
+            message = "Loading...";
+            break;
+        }
+
+        pullHook.innerHTML = message;
+      });
+
+      pullHook.onAction = function(done) {
+        setTimeout(done, 1000);
+      };
+    });
+  </script>
+
+  <ons-pull-hook id="pull-hook">
+    Pull to refresh
+  </ons-pull-hook>
+
+  <ons-list id="pokemon-list">
+    <ons-list-item>bulbasaur</ons-list-item>
+    <ons-list-item>charmander</ons-list-item>
+    <ons-list-item>squirtle</ons-list-item>
+    <ons-list-item>pikachu</ons-list-item>
+    <ons-list-item>trubbish</ons-list-item>
+  </ons-list>
+
+  <ons-fab position="bottom right" onclick="loadPage('page1.html')">
+    <ons-icon icon="md-plus"></ons-icon>
+  </ons-fab>
+</ons-page>
