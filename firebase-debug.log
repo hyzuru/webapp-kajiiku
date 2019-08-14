@@ -1,0 +1,26 @@
+[debug] [2019-08-28T15:13:58.135Z] ----------------------------------------------------------------------
+[debug] [2019-08-28T15:13:58.137Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\User\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2019-08-28T15:13:58.138Z] CLI Version:   7.3.0
+[debug] [2019-08-28T15:13:58.138Z] Platform:      win32
+[debug] [2019-08-28T15:13:58.138Z] Node Version:  v10.15.1
+[debug] [2019-08-28T15:13:58.139Z] Time:          Thu Aug 29 2019 00:13:58 GMT+0900 (Japan Standard Time)
+[debug] [2019-08-28T15:13:58.139Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-08-28T15:13:58.151Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-08-28T15:13:58.152Z] > authorizing via signed-in user
+[debug] [2019-08-28T15:13:58.152Z] [iam] checking project todoapp-a93bf for permissions ["firebase.projects.get"]
+[debug] [2019-08-28T15:13:58.153Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/todoapp-a93bf:testIamPermissions  
+
+[debug] [2019-08-28T15:13:58.988Z] <<< HTTP RESPONSE 200
+[debug] [2019-08-28T15:13:58.990Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/todoapp-a93bf  
+ 
+[debug] [2019-08-28T15:13:59.707Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'D:\Users\User\Desktop\apptests\webapp-papa-remakeHTML'...
+[info] 
+[debug] [2019-08-28T15:13:59.711Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/todoapp-a93bf/webApps/-/config  
+ 
+[debug] [2019-08-28T15:14:00.626Z] <<< HTTP RESPONSE 200
+[warn] !  hosting: Port 5000 is not available. Trying another port...
+[info] i  hosting: Serving hosting files from: public
+[info] +  hosting: Local server: http://localhost:5005
