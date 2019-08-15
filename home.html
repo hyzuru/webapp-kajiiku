@@ -1,13 +1,20 @@
 <ons-page id="home">
   <script>
-    const openMenu = () => {
-      document.querySelector("#menu").open();
-    };
+    // const openMenu = () => {
+    //   document.querySelector("#menu").open();
+    // };
+    // document.addEventListener("prechange", ({ target, tabItem }) => {
+    //   if (target.matches("#tabbar")) {
+    //     document.querySelector(
+    //       "#home-toolbar .center"
+    //     ).innerHTML = tabItem.getAttribute("label");
+    //   }
+    // });
   </script>
   <script src="js/app.js"></script>
 
   <ons-toolbar id="home-toolbar">
-    <div class="center">Home</div>
+    <div class="center">Requests</div>
     <div class="left">
       <ons-toolbar-button onclick="openMenu()">
         <ons-icon icon="md-menu"></ons-icon>
@@ -15,10 +22,10 @@
     </div>
   </ons-toolbar>
 
-  <ons-tabbar>
-    <ons-tab page="pokemon.html" label="Pokémon"></ons-tab>
-    <ons-tab page="saved.html" label="Saved"></ons-tab>
-    <ons-tab page="tab3.html" label="tab3"></ons-tab>
+  <ons-tabbar id="tabbar">
+    <ons-tab page="requests.html" label="Requests"></ons-tab>
+    <ons-tab page="saved.html" label="Completed"></ons-tab>
+    <ons-tab page="tab3.html" label="Profile"></ons-tab>
   </ons-tabbar>
 
   <!-- <ons-button onclick="loadPage('page1.html')">Go to page 1 </ons-button> -->
@@ -29,23 +36,76 @@
   <template id="page1.html">
     <ons-page id="page1">
       <ons-toolbar>
-        <!-- <div class="left" onclick="openMenu()">
-          <ons-toolbar-button onclick="openMenu()">
-            <ons-icon icon="md-menu"></ons-icon>
-          </ons-toolbar-button>
-        </div> -->
         <div class="left"><ons-back-button>Requests</ons-back-button></div>
         <div class="center">New Request</div>
       </ons-toolbar>
 
-      <p>This is the first page.</p>
-      <ons-button id="push-button" position="bottom right">
-        <ons-icon icon="md-plus"></ons-icon>
-      </ons-button>
+      <p>新しいリクエストをここに作る.</p>
+      <form class="js-form">
+        <input
+          autofocus
+          type="text"
+          aria-label="Enter a new todo item"
+          placeholder="E.g. Build a web app"
+          class="js-todo-input"
+        />
+      </form>
 
-      <p>Select a category</p>
-      <p>Type a comment</p>
-      <textarea name="request-details" id="" cols="30" rows="10"></textarea>
+      <!-- <form action="" class="js-form">
+        <input
+          type="text"
+          class="js-todo-input"
+          placeholder="E.g. do something"
+        />
+        <ons-list id="task-category">
+          <ons-list-item onclick="loadPage('category-1.html')"
+            >タスクを選ぶ</ons-list-item
+          >
+        </ons-list>
+        <p>Type a comment</p>
+        <textarea name="request-details" id="" cols="30" rows="10"></textarea>
+        <button type="submit">Submit</button>
+      </form> -->
+      <script>
+        // To do function from here
+
+        let todoItems = [];
+
+        function addTodo(text) {
+          const todo = {
+            text,
+            checked: false,
+            id: Date.now()
+          };
+
+          todoItems.push(todo);
+          console.log(todoItems);
+          const list = document.querySelector(".js-todo-list");
+          list.insertAdjacentHTML(
+            "beforeend",
+            `
+            <ons-list-item class="todo-item" data-key="${
+              todo.id
+            }"> <input id="${todo.id}" type="checkbox"/>
+              <label for="${todo.id}" class="tick js-tick"></label>
+              <span>${todo.text}</span></ons-list-item>
+            `
+          );
+        }
+
+        const form = document.querySelector(".js-form");
+        form.addEventListener("submit", event => {
+          event.preventDefault();
+          const input = document.querySelector(".js-todo-input");
+
+          const text = input.value.trim();
+          if (text !== "") {
+            addTodo(text);
+            input.value = "";
+            input.focus();
+          }
+        });
+      </script>
     </ons-page>
   </template>
 
