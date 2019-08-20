@@ -2,31 +2,67 @@
 <html>
   <head>
     <meta charset="ja" />
+
+     
     <link rel="stylesheet" href="lib/onsen/css/onsenui.css" />
     <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.min.css" />
     <script src="lib/onsen/js/onsenui.min.js"></script>
+
+    <!-- Vue -->
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script>
+      Vue.config.devtools = true
+      // After you create app
+      // window.__VUE_DEVTOOLS_GLOBAL_HOOK__.Vue = app.constructor;
+    </script>
+    <!-- V-cascade plug-in -->
+    <!-- <script src="https://unpkg.com/v-cascade/lib/v-cascade.min.js"></script>  -->
+    <script src="node_modules/v-cascade/src/main.js"></script> 
+    <style type="text/css">
+      .box {
+        height: 200px;
+        width: 200px; 
+        text-align: center;
+      }
+      .red {
+        background-color: red;
+      }
+      .green {
+        background-color: green;
+      }
+    </style>  
   </head>
   <body>
+    
     <ons-splitter>
       <!-- The side menu -->
       <ons-splitter-side id="menu" collapse>
         <ons-page>
+          <ons-toolbar>
+              <div class="left"><ons-back-button>Page 1</ons-back-button></div>
+              <div class="center"></div>
+          </ons-toolbar>
           <ons-list>
             <ons-list-item onclick="loadPage('page2.html')">
               Page 2
             </ons-list-item>
-          </ons-list>
+            <ons-list-item onclick="loadPage('page2.html')">
+              Page 2
+            </ons-list-item>
+            <ons-list-item onclick="loadPage('page2.html')">
+              Page 2
+            </ons-list-item>
+            </ons-list> 
         </ons-page>
       </ons-splitter-side>
+    <!-- Everything not in the side menu -->
+        <ons-splitter-content>
+          <ons-navigator id="navigator" page="login.html"> </ons-navigator>
+          <!-- <ons-navigator id="navigator" page="home.html"> </ons-navigator> -->
+        </ons-splitter-content>
+      </ons-splitter>
 
-      <!-- Everything not in the side menu -->
-      <ons-splitter-content>
-        <!-- <ons-navigator id="navigator" page="login.html"> </ons-navigator> -->
-        <ons-navigator id="navigator" page="home.html"> </ons-navigator>
-      </ons-splitter-content>
-    </ons-splitter>
-
-    <!-- <ons-template id="login.html">
+    <ons-template id="login.html">
       <ons-page id="login">
         <div style="text-align: center; margin-top: 200px">
           <p>
@@ -52,9 +88,229 @@
           </p>
         </div>
       </ons-page>
-    </ons-template> -->
+    </ons-template> 
 
-    <!-- <script src="js/login.js"></script> -->
-    <script src="js/app.js"></script>
+    <template id="requests.html">
+      <ons-page id="requests">
+        <ons-pull-hook id="pull-hook">
+          Pull to refresh
+        </ons-pull-hook>
+
+        
+        <!-- <script src="node_modules/vue/dist/vue.js"></script> -->
+ 
+        <v-cascade
+        v-model="locationModal"
+        :data="location"
+        :title="['省份','城市','区县']"
+        addClass="cascade-location"
+        @success="locationSuccess"
+        @cancel="cancel"
+      ></v-cascade>
+
+
+        <div class="container">
+          <h1 class="app-title">todos</h1>
+          <!-- <ons-list id="todo-list js-todo-list"> -->
+          <ul class="todo-list js-todo-list"></ul>
+          <!-- </ons-list> -->
+          <!-- <ons-list-item class="todo-list js-todo-list">bulbasaur</ons-list-item>
+          <ons-list-item class="todo-list js-todo-list">charmander</ons-list-item>
+          <ons-list-item class="todo-list js-todo-list">squirtle</ons-list-item>
+          <ons-list-item class="todo-list js-todo-list">pikachu</ons-list-item>
+          <ons-list-item class="todo-list js-todo-list">trubbish</ons-list-item> -->
+      
+          <form class="js-form">
+            <input
+              autofocus
+              type="text"
+              aria-label="Enter a new todo item"
+              placeholder="E.g. Build a web app"
+              class="js-todo-input"
+            />
+            <button type="submit">
+              submit
+            </button>
+          </form>
+        </div>
+      
+        <ons-fab position="bottom right" onclick="loadPage('page1.html')">
+          <ons-icon icon="md-plus"></ons-icon>
+        </ons-fab>
+        <script src="js/todo.js"></script>
+
+        <!-- Put v-cascade here -->
+ 
+          
+      </ons-page>
+    </template>
+
+
+    <template id="completed.html">
+        <ons-page id="completed">
+            <script></script>
+          
+            <p>Completed Requests go here.</p>
+          </ons-page>
+          
+      </template>
+      <template id="profile.html">
+          <ons-page id="profile">
+              <script></script>
+            
+              <p>Profile placeholder goes here.</p>
+            </ons-page>
+            
+        </template>
+
+        <template id="page1.html">
+            <ons-page id="page1">
+              <ons-toolbar>
+                <div class="left"><ons-back-button>Requests</ons-back-button></div>
+                <div class="center">New Request</div>
+              </ons-toolbar>
+        
+              <p>新しいリクエストをここに作る.</p>
+              <form class="js-form">
+                <input
+                  autofocus
+                  type="text"
+                  aria-label="Enter a new todo item"
+                  placeholder="E.g. Build a web app"
+                  class="js-todo-input"
+                />
+        
+                <ons-list id="task-category">
+                  <ons-list-item onclick="loadPage('category-1.html')" tappable modifier="chevron"
+                    >タスクを選ぶ</ons-list-item
+                  >
+                </ons-list>
+                <p>Type a comment</p>
+                <textarea name="request-details" id="" cols="30" rows="10"></textarea>
+                <button type="submit">Submit</button>
+              </form>
+        
+              <div id="vapp">
+                  <p>{{ display }}</p>
+                  <colored-box class="red" v-show="display == 'redbox'"></colored-box>
+                  <colored-box class="green" v-show="display == 'greenbox'"></colored-box>
+              </div>
+          
+              <script>
+                      Vue.component('ColoredBox', {
+                    template: "<div class=\"box\"><button v-on:click=\"toggleMe()\">Toggle Now</button></div>",
+                    methods: {
+                      toggleMe() {
+                        this.$root.toggleBox()
+                      }
+                    }
+                  })
+                  const vueApp = new Vue({
+                    el: '#vapp',
+                    data: { 
+                    display: 'redbox' 
+                    },
+                    methods: {
+                      toggleBox() {
+                        this.display == 'redbox' ? this.display = 'greenbox' : this.display = 'redbox'
+                      }
+                    }
+                  })
+                  </script>          
+                  
+        
+        
+              <script>
+                // To do function from here
+        
+                let todoItems = [];
+        
+                function addTodo(text) {
+                  const todo = {
+                    text,
+                    checked: false,
+                    id: Date.now()
+                  };
+        
+                  todoItems.push(todo);
+                  console.log(todoItems);
+                  const list = document.querySelector(".js-todo-list");
+                  list.insertAdjacentHTML(
+                    "beforeend",
+                    `
+                    <ons-list-item class="todo-item" data-key="${
+                      todo.id
+                    }"> <input id="${todo.id}" type="checkbox"/>
+                      <label for="${todo.id}" class="tick js-tick"></label>
+                      <span>${todo.text}</span></ons-list-item>
+                    `
+                  );
+                }
+        
+                const form = document.querySelector(".js-form");
+                form.addEventListener("submit", event => {
+                  event.preventDefault();
+                  const input = document.querySelector(".js-todo-input");
+        
+                  const text = input.value.trim();
+                  if (text !== "") {
+                    addTodo(text);
+                    input.value = "";
+                    input.focus();
+                  }
+                });
+              </script>
+            </ons-page>
+          </template>
+
+          <template id="page2.html">
+              <ons-page id="page2">
+                <ons-toolbar>
+                  <div class="left"><ons-back-button>Page 1</ons-back-button></div>
+                  <div class="center"></div>
+                </ons-toolbar>
+          
+                <p>This is the second page.</p>
+              </ons-page>
+            </template>
+                      
+
+  <template id="category-1.html">
+      <ons-page id="category-1">
+          <ons-toolbar>
+            <div class="left"><ons-back-button>New Request</ons-back-button></div>
+            <div class="center">Category</div>
+          </ons-toolbar>
+
+  
+        
+          <ons-list id="pokemon-list">
+            <ons-list-item onclick="loadPage('category-souji.html')" tappable modifier="chevron"
+              >そうじ</ons-list-item
+            >
+            <ons-list-item onclick="loadPage('category-ikuji.html')" tappable modifier="chevron"
+              >いくじ</ons-list-item
+            >
+            <ons-list-item onclick="loadPage('category-kaimono.html')" tappable modifier="chevron"
+              >かいもの</ons-list-item
+            >
+            <ons-list-item onclick="loadPage('category-ryouri.html')" tappable modifier="chevron"
+              >りょうり
+            </ons-list-item>
+            <ons-list-item onclick="loadPage('category-sentaku.html')" tappable modifier="chevron"
+              >せんたく</ons-list-item
+            >
+          </ons-list>
+        </ons-page>
+  </template>
+    <script src="js/login.js"></script>
+    <script src="js/myApp.js"></script>
+    <!-- <script src="node_modules/vue/dist/vue.js"></script> -->
+     <!-- <script src="js/selector.vue"></script> -->
+      
+      <!-- <script src="https://unpkg.com/v-cascade/lib/v-cascade.min.js"></script> -->
+      <!-- <script src="node_modules/v-cascade/src/main.js"></script>  -->
+
+
   </body>
 </html>
