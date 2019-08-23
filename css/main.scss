@@ -1,0 +1,41 @@
+
+.app {
+    text-align: center;
+    padding: 50px 0 20px;
+  }
+  .example {
+    border-bottom: 1px dashed #efefef;
+    width: 400px;
+    margin: 0 auto 40px;
+    max-width: 100%;
+  }
+  .select {
+    width: 350px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin: 30px auto 0;
+    display: block;
+    font-size: 14px;
+    cursor: pointer;
+  }
+//   h1{
+//     font-size: 45px;
+//     color: #42b983;
+//   }
+//   h3 {
+//     margin-top: 20px;
+//     margin-bottom: 10px;
+//     color: #999;
+//     font-weight: normal;
+//     font-size: 18px;
+//     letter-spacing: 1px;
+//     a {
+//       color: #42b983;
+//       &:hover {
+//         text-decoration: none;
+//       }
+//     }
+//   }
