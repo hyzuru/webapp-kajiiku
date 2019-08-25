@@ -2,13 +2,10 @@
 <html>
   <head>
     <meta charset="ja" />
-
-     
     <link rel="stylesheet" href="lib/onsen/css/onsenui.css" />
     <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.min.css" />
     <link rel="stylesheet" href="css/main.css">
     <script src="lib/onsen/js/onsenui.min.js"></script>
-
 
     <!-- Vue -->
     <script src="node_modules/vue/dist/vue.js"></script>
@@ -18,160 +15,12 @@
       // window.__VUE_DEVTOOLS_GLOBAL_HOOK__.Vue = app.constructor;
     </script>
         <script src="js/main.js"></script>
-    <!-- V-cascade plug-in -->
-    <!-- <script src="https://unpkg.com/v-cascade/lib/v-cascade.min.js"></script>  -->
-    <script src="node_modules/v-cascade/src/main.js"></script> 
-    <!-- <style type="text/css">
-      .box {
-        height: 200px;
-        width: 200px; 
-        text-align: center;
-      }
-      .red {
-        background-color: red;
-      }
-      .green {
-        background-color: green;
-      }
-    </style>   -->
-    <style>
-    
-    html {
-  box-sizing: border-box;
-}
 
-*, *::before, *::after {
-  box-sizing: inherit;
-  margin: 0;
-  padding: 0;
-}
-
-body {
- font-family:
- -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans,
-  Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
- line-height: 1.4;
-}
-
-.container {
-  width: 100%;
-  max-width: 500px;
-  margin: 0 auto;
-  padding-left: 10px;
-  padding-right: 10px;
-  color: #333;
-  height: 90vh;
-  margin-top: 5vh;
-  margin-bottom: 5vh;
-  overflow-y: auto;
-}
-
-.app-title {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 80px;
-  opacity: 0.5;
-}
-
-/* svg {
-  width: 64px;
-  height: 64px;
-} */
-
-.todo-list {
-  list-style: none;
-  margin-bottom: 20px;
-}
-
-.todo-item {
-  margin-bottom: 10px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.todo-item span {
-  flex-grow: 1;
-  margin-left: 10px;
-  margin-right: 10px;
-  font-size: 22px;
-}
-
-.done span {
-  text-decoration: line-through;
-}
-
-input[type="checkbox"] {
-  display: none;
-}
-
-.tick {
-  width: 20px;
-  height: 20px;
-  border: 3px solid #333;
-  border-radius: 50%;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.tick::before {
-  content: '✓';
-  font-size: 15px;
-  display: none;
-}
-
-.done .tick::before {
-  display: inline;
-}
-
-.delete-todo {
-  border: none;
-  background-color: transparent;
-  outline: none;
-  cursor: pointer;
-}
-
-.delete-todo svg {
-  width: 20px;
-  height: 20px;
-  pointer-events: none;
-}
-
-form {
-  width: 100%;
-  /* display: flex; */
-  justify-content: space-between;
-}
-
-.empty-state {
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  display: none;
-}
-
-.checklist-icon {
-  margin-bottom: 20px;
-}
-
-.empty-state__title, .empty-state__description {
-  margin-bottom: 20px;
-}
-
-.todo-list:empty {
-  display: none;
-}
-
-.todo-list:empty + .empty-state {
-  display: flex;
-}
-    </style>
+        <link rel="stylesheet" href="css/categorystyle.css">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
+        <script type="text/javascript" src="js/category.js"></script>
   </head>
   <body>
-    
     <ons-splitter>
       <!-- The side menu -->
       <ons-splitter-side id="menu" collapse>
@@ -234,21 +83,23 @@ form {
         <ons-pull-hook id="pull-hook">
           Pull to refresh
         </ons-pull-hook>
- 
-        <script src="node_modules/vue/dist/vue.js"></script>
-        
-<script type="text/javascript" src="js/App.vue"></script>
-<script type="text/javascript" src="js/components/v-cascade.vue"></script>
-
-
-
-
         <div class="container">
           <h1 class="app-title">todos</h1>
           <!-- <ons-list id="todo-list js-todo-list"> -->
-          <ul class="todo-list js-todo-list"></ul>
+          <ul class="todo-list js-todo-list">
+            <!-- <li class="todo-item" data-key="1566658474566">
+                <input id="1566658474566" type="checkbox">
+                <label for="1566658474566" class="tick js-tick"></label>
+                <span>temporary to do item</span>
+                <button class="openDetails">
+                    詳細を見る
+                </button>
+                <button class="delete-todo js-delete-todo">
+                  <svg><use href="#delete-icon"></use></svg>
+                </button>
+              </li> -->
+          </ul>
           <!-- </ons-list> -->
-        
       
           <form class="js-form">
             <input
@@ -265,9 +116,9 @@ form {
         </div>
         <svg>
             <defs>
-              <symbol id="checklist-icon" viewBox="-52 0 512 512"><path d="m217.140625 47.226562c0 7.1875-5.832031 13.015626-13.019531 13.015626-7.191406 0-13.019532-5.828126-13.019532-13.015626 0-7.191406 5.828126-13.019531 13.019532-13.019531 7.1875 0 13.019531 5.828125 13.019531 13.019531zm0 0"/><path d="m140.917969 98.820312c4.144531 0 7.5-3.355468 7.5-7.5v-11.4375c0-4.140624-3.355469-7.5-7.5-7.5-4.140625 0-7.5 3.359376-7.5 7.5v11.4375c0 4.144532 3.359375 7.5 7.5 7.5zm0 0"/><path d="m267.320312 98.820312c4.144532 0 7.5-3.355468 7.5-7.5v-11.4375c0-4.140624-3.355468-7.5-7.5-7.5-4.140624 0-7.5 3.359376-7.5 7.5v11.4375c0 4.144532 3.359376 7.5 7.5 7.5zm0 0"/><path d="m204.121094 104.925781c8.242187 0 15.984375-3.449219 21.246094-9.464843 2.726562-3.117188 2.40625-7.855469-.710938-10.582032-3.121094-2.726562-7.855469-2.410156-10.582031.710938-2.410157 2.753906-6.039063 4.335937-9.953125 4.335937-3.917969 0-7.542969-1.582031-9.953125-4.335937-2.726563-3.121094-7.464844-3.4375-10.582031-.710938-3.121094 2.726563-3.4375 7.464844-.710938 10.582032 5.257812 6.015624 13 9.464843 21.246094 9.464843zm0 0"/><path d="m162.492188 184.390625c-1.308594-3.929687-5.558594-6.054687-9.484376-4.742187-21.402343 7.132812-37.015624 17.507812-46.878906 25.582031v-9.789063c0-4.140625-3.359375-7.5-7.5-7.5s-7.5 3.359375-7.5 7.5v12.710938c0 11.421875 13.816406 17.8125 22.5 10.359375 8.640625-7.410157 23.304688-17.695313 44.121094-24.636719 3.929688-1.308594 6.054688-5.554688 4.742188-9.484375zm0 0"/><path d="m211.460938 208.035156h98.148437c4.144531 0 7.5-3.359375 7.5-7.5s-3.355469-7.5-7.5-7.5h-98.148437c-4.140626 0-7.5 3.359375-7.5 7.5s3.359374 7.5 7.5 7.5zm0 0"/><path d="m162.492188 245.972656c-1.308594-3.929687-5.558594-6.054687-9.484376-4.746094-21.402343 7.136719-37.015624 17.511719-46.878906 25.585938v-9.789062c0-4.144532-3.359375-7.5-7.5-7.5s-7.5 3.355468-7.5 7.5v12.710937c0 11.40625 13.8125 17.808594 22.5 10.359375 8.640625-7.410156 23.304688-17.699219 44.121094-24.636719 3.929688-1.308593 6.054688-5.554687 4.742188-9.484375zm0 0"/><path d="m211.460938 269.617188h98.148437c4.144531 0 7.5-3.359376 7.5-7.5 0-4.144532-3.355469-7.5-7.5-7.5h-98.148437c-4.140626 0-7.5 3.355468-7.5 7.5 0 4.140624 3.359374 7.5 7.5 7.5zm0 0"/><path d="m162.492188 307.554688c-1.308594-3.929688-5.558594-6.054688-9.484376-4.746094-21.402343 7.136718-37.015624 17.511718-46.878906 25.585937v-9.789062c0-4.144531-3.359375-7.5-7.5-7.5s-7.5 3.355469-7.5 7.5v12.710937c0 11.402344 13.8125 17.808594 22.5 10.359375 8.640625-7.410156 23.308594-17.699219 44.121094-24.636719 3.929688-1.308593 6.054688-5.554687 4.742188-9.484374zm0 0"/><path d="m211.460938 331.199219h98.148437c4.144531 0 7.5-3.359375 7.5-7.5 0-4.144531-3.355469-7.5-7.5-7.5h-98.148437c-4.140626 0-7.5 3.355469-7.5 7.5 0 4.140625 3.359374 7.5 7.5 7.5zm0 0"/><path d="m98.628906 372.6875c-4.140625 0-7.5 3.359375-7.5 7.5v12.710938c0 11.402343 13.808594 17.820312 22.5 10.359374 8.640625-7.410156 23.308594-17.699218 44.121094-24.636718 3.929688-1.308594 6.054688-5.558594 4.746094-9.484375-1.3125-3.933594-5.558594-6.054688-9.488282-4.746094-21.398437 7.132813-37.015624 17.511719-46.878906 25.582031v-9.789062c0-4.140625-3.359375-7.496094-7.5-7.496094zm0 0"/><path d="m211.460938 392.777344h98.148437c4.144531 0 7.5-3.355469 7.5-7.5 0-4.140625-3.355469-7.5-7.5-7.5h-98.148437c-4.140626 0-7.5 3.359375-7.5 7.5 0 4.144531 3.359374 7.5 7.5 7.5zm0 0"/><path d="m369.109375 67.765625h-51.667969v-1.007813c0-13.617187-11.078125-24.695312-24.695312-24.695312h-41.683594c-2.578125-23.621094-22.648438-42.0625-46.941406-42.0625-24.296875 0-44.363282 18.441406-46.945313 42.0625h-41.679687c-13.617188 0-24.695313 11.078125-24.695313 24.695312v1.007813h-51.671875c-21.574218 0-39.128906 17.554687-39.128906 39.128906v48.898438c0 4.140625 3.359375 7.5 7.5 7.5s7.5-3.359375 7.5-7.5v-48.898438c0-13.304687 10.824219-24.128906 24.128906-24.128906h51.671875v18.847656h-43.507812c-4.144531 0-7.5 3.359375-7.5 7.5v345.066407c0 4.140624 3.355469 7.5 7.5 7.5h234.792969c4.144531 0 7.5-3.359376 7.5-7.5 0-4.144532-3.355469-7.5-7.5-7.5h-227.292969v-330.066407h36.472656c.003906.019531.011719.039063.015625.058594.007812.039063.011719.078125.019531.113281 2.320313 11.316406 12.648438 19.726563 24.195313 19.726563h177.25c11.441406 0 21.882812-8.457031 24.191406-19.726563.007812-.035156.015625-.074218.023438-.113281.003906-.019531.007812-.035156.011718-.058594h36.476563v330.066407h-41.359375c-4.144532 0-7.5 3.355468-7.5 7.5 0 4.140624 3.355468 7.5 7.5 7.5h48.859375c4.140625 0 7.5-3.359376 7.5-7.5v-345.066407c0-4.140625-3.359375-7.5-7.5-7.5h-43.507813v-18.847656h51.671875c13.304688 0 24.128907 10.824219 24.128907 24.128906v365.976563c0 13.304687-10.824219 24.128906-24.128907 24.128906h-329.984375c-13.304687 0-24.128906-10.824219-24.128906-24.128906v-287.082032c0-4.140624-3.359375-7.5-7.5-7.5s-7.5 3.359376-7.5 7.5v287.082032c0 21.574218 17.554688 39.128906 39.128906 39.128906h329.980469c21.578125 0 39.128906-17.554688 39.128906-39.128906v-365.976563c.003907-21.574219-17.550781-39.128906-39.128906-39.128906zm-263.308594-1.007813c0-5.347656 4.347657-9.695312 9.695313-9.695312h48.972656c5.792969 0 7.425781-5.015625 7.425781-9.839844 0-17.765625 14.457031-32.222656 32.226563-32.222656 17.765625 0 32.222656 14.453125 32.222656 32.222656 0 4.8125 1.691406 9.839844 7.425781 9.839844h48.976563c5.347656 0 9.695312 4.347656 9.695312 9.695312v42.355469c0 1.875.128906 3.769531-.4375 5.582031-1.226562 3.945313-4.914062 6.816407-9.257812 6.816407h-177.25c-4.34375 0-8.03125-2.871094-9.261719-6.816407-.558594-1.796874-.433594-3.71875-.433594-5.582031zm0 0"/></symbol>
+              <!-- <symbol id="checklist-icon" viewBox="-52 0 512 512"><path d="m217.140625 47.226562c0 7.1875-5.832031 13.015626-13.019531 13.015626-7.191406 0-13.019532-5.828126-13.019532-13.015626 0-7.191406 5.828126-13.019531 13.019532-13.019531 7.1875 0 13.019531 5.828125 13.019531 13.019531zm0 0"/><path d="m140.917969 98.820312c4.144531 0 7.5-3.355468 7.5-7.5v-11.4375c0-4.140624-3.355469-7.5-7.5-7.5-4.140625 0-7.5 3.359376-7.5 7.5v11.4375c0 4.144532 3.359375 7.5 7.5 7.5zm0 0"/><path d="m267.320312 98.820312c4.144532 0 7.5-3.355468 7.5-7.5v-11.4375c0-4.140624-3.355468-7.5-7.5-7.5-4.140624 0-7.5 3.359376-7.5 7.5v11.4375c0 4.144532 3.359376 7.5 7.5 7.5zm0 0"/><path d="m204.121094 104.925781c8.242187 0 15.984375-3.449219 21.246094-9.464843 2.726562-3.117188 2.40625-7.855469-.710938-10.582032-3.121094-2.726562-7.855469-2.410156-10.582031.710938-2.410157 2.753906-6.039063 4.335937-9.953125 4.335937-3.917969 0-7.542969-1.582031-9.953125-4.335937-2.726563-3.121094-7.464844-3.4375-10.582031-.710938-3.121094 2.726563-3.4375 7.464844-.710938 10.582032 5.257812 6.015624 13 9.464843 21.246094 9.464843zm0 0"/><path d="m162.492188 184.390625c-1.308594-3.929687-5.558594-6.054687-9.484376-4.742187-21.402343 7.132812-37.015624 17.507812-46.878906 25.582031v-9.789063c0-4.140625-3.359375-7.5-7.5-7.5s-7.5 3.359375-7.5 7.5v12.710938c0 11.421875 13.816406 17.8125 22.5 10.359375 8.640625-7.410157 23.304688-17.695313 44.121094-24.636719 3.929688-1.308594 6.054688-5.554688 4.742188-9.484375zm0 0"/><path d="m211.460938 208.035156h98.148437c4.144531 0 7.5-3.359375 7.5-7.5s-3.355469-7.5-7.5-7.5h-98.148437c-4.140626 0-7.5 3.359375-7.5 7.5s3.359374 7.5 7.5 7.5zm0 0"/><path d="m162.492188 245.972656c-1.308594-3.929687-5.558594-6.054687-9.484376-4.746094-21.402343 7.136719-37.015624 17.511719-46.878906 25.585938v-9.789062c0-4.144532-3.359375-7.5-7.5-7.5s-7.5 3.355468-7.5 7.5v12.710937c0 11.40625 13.8125 17.808594 22.5 10.359375 8.640625-7.410156 23.304688-17.699219 44.121094-24.636719 3.929688-1.308593 6.054688-5.554687 4.742188-9.484375zm0 0"/><path d="m211.460938 269.617188h98.148437c4.144531 0 7.5-3.359376 7.5-7.5 0-4.144532-3.355469-7.5-7.5-7.5h-98.148437c-4.140626 0-7.5 3.355468-7.5 7.5 0 4.140624 3.359374 7.5 7.5 7.5zm0 0"/><path d="m162.492188 307.554688c-1.308594-3.929688-5.558594-6.054688-9.484376-4.746094-21.402343 7.136718-37.015624 17.511718-46.878906 25.585937v-9.789062c0-4.144531-3.359375-7.5-7.5-7.5s-7.5 3.355469-7.5 7.5v12.710937c0 11.402344 13.8125 17.808594 22.5 10.359375 8.640625-7.410156 23.308594-17.699219 44.121094-24.636719 3.929688-1.308593 6.054688-5.554687 4.742188-9.484374zm0 0"/><path d="m211.460938 331.199219h98.148437c4.144531 0 7.5-3.359375 7.5-7.5 0-4.144531-3.355469-7.5-7.5-7.5h-98.148437c-4.140626 0-7.5 3.355469-7.5 7.5 0 4.140625 3.359374 7.5 7.5 7.5zm0 0"/><path d="m98.628906 372.6875c-4.140625 0-7.5 3.359375-7.5 7.5v12.710938c0 11.402343 13.808594 17.820312 22.5 10.359374 8.640625-7.410156 23.308594-17.699218 44.121094-24.636718 3.929688-1.308594 6.054688-5.558594 4.746094-9.484375-1.3125-3.933594-5.558594-6.054688-9.488282-4.746094-21.398437 7.132813-37.015624 17.511719-46.878906 25.582031v-9.789062c0-4.140625-3.359375-7.496094-7.5-7.496094zm0 0"/><path d="m211.460938 392.777344h98.148437c4.144531 0 7.5-3.355469 7.5-7.5 0-4.140625-3.355469-7.5-7.5-7.5h-98.148437c-4.140626 0-7.5 3.359375-7.5 7.5 0 4.144531 3.359374 7.5 7.5 7.5zm0 0"/><path d="m369.109375 67.765625h-51.667969v-1.007813c0-13.617187-11.078125-24.695312-24.695312-24.695312h-41.683594c-2.578125-23.621094-22.648438-42.0625-46.941406-42.0625-24.296875 0-44.363282 18.441406-46.945313 42.0625h-41.679687c-13.617188 0-24.695313 11.078125-24.695313 24.695312v1.007813h-51.671875c-21.574218 0-39.128906 17.554687-39.128906 39.128906v48.898438c0 4.140625 3.359375 7.5 7.5 7.5s7.5-3.359375 7.5-7.5v-48.898438c0-13.304687 10.824219-24.128906 24.128906-24.128906h51.671875v18.847656h-43.507812c-4.144531 0-7.5 3.359375-7.5 7.5v345.066407c0 4.140624 3.355469 7.5 7.5 7.5h234.792969c4.144531 0 7.5-3.359376 7.5-7.5 0-4.144532-3.355469-7.5-7.5-7.5h-227.292969v-330.066407h36.472656c.003906.019531.011719.039063.015625.058594.007812.039063.011719.078125.019531.113281 2.320313 11.316406 12.648438 19.726563 24.195313 19.726563h177.25c11.441406 0 21.882812-8.457031 24.191406-19.726563.007812-.035156.015625-.074218.023438-.113281.003906-.019531.007812-.035156.011718-.058594h36.476563v330.066407h-41.359375c-4.144532 0-7.5 3.355468-7.5 7.5 0 4.140624 3.355468 7.5 7.5 7.5h48.859375c4.140625 0 7.5-3.359376 7.5-7.5v-345.066407c0-4.140625-3.359375-7.5-7.5-7.5h-43.507813v-18.847656h51.671875c13.304688 0 24.128907 10.824219 24.128907 24.128906v365.976563c0 13.304687-10.824219 24.128906-24.128907 24.128906h-329.984375c-13.304687 0-24.128906-10.824219-24.128906-24.128906v-287.082032c0-4.140624-3.359375-7.5-7.5-7.5s-7.5 3.359376-7.5 7.5v287.082032c0 21.574218 17.554688 39.128906 39.128906 39.128906h329.980469c21.578125 0 39.128906-17.554688 39.128906-39.128906v-365.976563c.003907-21.574219-17.550781-39.128906-39.128906-39.128906zm-263.308594-1.007813c0-5.347656 4.347657-9.695312 9.695313-9.695312h48.972656c5.792969 0 7.425781-5.015625 7.425781-9.839844 0-17.765625 14.457031-32.222656 32.226563-32.222656 17.765625 0 32.222656 14.453125 32.222656 32.222656 0 4.8125 1.691406 9.839844 7.425781 9.839844h48.976563c5.347656 0 9.695312 4.347656 9.695312 9.695312v42.355469c0 1.875.128906 3.769531-.4375 5.582031-1.226562 3.945313-4.914062 6.816407-9.257812 6.816407h-177.25c-4.34375 0-8.03125-2.871094-9.261719-6.816407-.558594-1.796874-.433594-3.71875-.433594-5.582031zm0 0"/></symbol> -->
               
-              <symbol id="delete-icon" viewBox="0 0 448 448"><path d="m224 0c-123.710938 0-224 100.289062-224 224s100.289062 224 224 224 224-100.289062 224-224c-.132812-123.65625-100.34375-223.867188-224-224zm124.449219 325.824219c4.15625 4.015625 5.828125 9.964843 4.363281 15.558593s-5.835938 9.964844-11.429688 11.429688-11.542968-.207031-15.558593-4.363281l-101.824219-101.824219-101.824219 101.824219c-6.277343 6.0625-16.257812 5.976562-22.429687-.195313s-6.257813-16.152344-.195313-22.429687l101.824219-101.824219-101.824219-101.824219c-4.15625-4.015625-5.828125-9.964843-4.363281-15.558593s5.835938-9.964844 11.429688-11.429688 11.542968.207031 15.558593 4.363281l101.824219 101.824219 101.824219-101.824219c6.277343-6.0625 16.257812-5.976562 22.429687.195313s6.257813 16.152344.195313 22.429687l-101.824219 101.824219zm0 0" fill="#D80027"/></symbol>
+              <!-- <symbol id="delete-icon" viewBox="0 0 448 448"><path d="m224 0c-123.710938 0-224 100.289062-224 224s100.289062 224 224 224 224-100.289062 224-224c-.132812-123.65625-100.34375-223.867188-224-224zm124.449219 325.824219c4.15625 4.015625 5.828125 9.964843 4.363281 15.558593s-5.835938 9.964844-11.429688 11.429688-11.542968-.207031-15.558593-4.363281l-101.824219-101.824219-101.824219 101.824219c-6.277343 6.0625-16.257812 5.976562-22.429687-.195313s-6.257813-16.152344-.195313-22.429687l101.824219-101.824219-101.824219-101.824219c-4.15625-4.015625-5.828125-9.964843-4.363281-15.558593s5.835938-9.964844 11.429688-11.429688 11.542968.207031 15.558593 4.363281l101.824219 101.824219 101.824219-101.824219c6.277343-6.0625 16.257812-5.976562 22.429687.195313s6.257813 16.152344.195313 22.429687l-101.824219 101.824219zm0 0" fill="#D80027"/></symbol> -->
             </defs>
           </svg>
       
@@ -275,62 +126,6 @@ form {
           <ons-icon icon="md-plus"></ons-icon>
         </ons-fab>
         <script src="js/todo.js"></script>
-
-
-        <form name="frm" method=post action=''>
-            <table border=0 cellpadding=0 cellspacing=0 width=250>
-            
-            
-            <tr><td align="center">
-             Your name<input type="text" name="c_name" size=12 value=test>
-            <input type="text" name="c_name2" size=12 value=test2>
-             <input type=button value='Submit' onclick="post_value();">
-            </td></tr>
-            </table></form>
-
-        <!-- Put v-cascade here -->
- 
-        
-        <!-- <script>
-
-    
-            const home = new Vue({
-                  el: '#home',
-                  template: `<div class="home">
-    <div class="title">What do I need to do today?</div>
-    <input v-model="myTodo" /><button @click="addToDo">Add</button>
-  </div>`,
-                
-  name: 'home',
-  data: function () {
-    return {
-      myTodo: ''
-    }
-  },
-  methods: {
-    addToDo: function () {
-      console.log('myTodo: ' + this.myTodo)
-    }
-  }
-})
-</script>   -->
-
-<!-- <div id="homeApp"></div> -->
-
-<!-- <script>
-import app from 'node-modules/v-cascade/src/App'
-
-export default {
-  el: '#app',
-  components: {
-    Sidebar
-  }
-}
-
-</script> -->
-
-
-
       </ons-page>
     </template>
 
@@ -354,528 +149,98 @@ export default {
 
         <template id="page1.html">
             <ons-page id="page1">
+                <link rel="stylesheet" href="css/categorystyle.css">
+
+                
               <ons-toolbar>
                 <div class="left"><ons-back-button>Requests</ons-back-button></div>
                 <div class="center">New Request</div>
               </ons-toolbar>
-        
+
               <p>新しいリクエストをここに作る.</p>
-              <form class="js-form">
-                <input
-                  autofocus
-                  type="text"
-                  aria-label="Enter a new todo item"
-                  placeholder="E.g. Build a web app"
-                  class="js-todo-input"
-                />
+
+              
+
+        <div class="container">
+            <h1 class="app-title">リクエスト作成</h1>
+            <p>リクエスト</p>
+            <!-- <ons-list id="todo-list js-todo-list"> -->
+            <ul class="todo-list js-todo-list"></ul>
+            <!-- </ons-list> -->
         
-                <ons-list id="task-category">
+                <nav class="gnav">
+                  <form action=''>
+                    <ons-list class="toggle" id="clickthis" >
+                        <ons-list-item tappable modifier="chevron" id="changethis"
+                          >タスクを選ぶ</ons-list-item
+                        >
+      
+                      </ons-list>
+<!-- 
+                    <div class="toggle" id="clickthis">
+                        <form action="" name="selectTask">
+                            <input id="inputTask" autofocus type="text" value="" autocomplete="off"  placeholder="カテゴリー" class="js-todo-input" >
+                        </form>
+                    </div> -->
+
+                    <ul class="menu1"><div class="overlay overlay-a"></div>
+                      <li class="toggle2"><span class="toggle2-inner">掃除</span>
+                        <ul class="menu2" id="category1">
+                          <div class="overlay"></div>
+                          <li><a href="#" class="selectMenu">掃除１</a></li>
+                          <li><a href="#" class="selectMenu">掃除２</a></li>
+                          
+                        </ul>
+                      </li>
+                      <li class="toggle2"><span class="toggle2-inner">料理</span>
+                        <ul class="menu2" id="category2">
+                            <div class="overlay"></div>
+                          <li class="toggle3"><a href="#" class="selectMenu">食器を洗う</a></li>
+                          <li class="toggle3"><a href="#" class="selectMenu">食器を拭く</a></li>
+                          <li class="toggle3"><a href="#" class="selectMenu">食器を片付ける</a></li>
+                          <li class="toggle3"><a href="#" class="selectMenu">朝食を作る</a></li>
+                          <li class="toggle3"><a href="#" class="selectMenu">昼食を作る</a></li>
+                          <li class="toggle3"><a href="#" class="selectMenu">夕食を作る</a></li>
+                        </ul>
+                      </li>
+                      <li class="toggle2"><span class="toggle2-inner">洗濯</span>
+                        <ul class="menu2" id="category3">
+                            <div class="overlay"></div>
+                            <li class="toggle3"><a href="#" class="selectMenu">sentaku1</a></li>
+                          <li class="toggle3"><a href="#" class="selectMenu">sentaku2</a></li>
+                        </ul>
+                      </li>
+                      <li class="toggle2"><span class="toggle2-inner">育児</span>
+                        <ul class="menu2" id="category4">
+                            <div class="overlay"></div>
+                            <li class="toggle3"><a href="#" class="selectMenu">育児１</a></li>
+                          <li class="toggle3"><a href="#" class="selectMenu">育児２</a></li>
+                        </ul>
+                      </li>
+                      <li class="toggle2"><span class="toggle2-inner">買い物</span>
+                        <ul class="menu2" id="category5">
+                            <div class="overlay"></div>
+                            <li class="toggle3"><a href="#" class="selectMenu">買い物1</a></li>
+                          <li class="toggle3"><a href="#" class="selectMenu">買い物2</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                    </nav>
+                       
+                <!-- <ons-list id="task-category">
                   <ons-list-item onclick="loadPage('category-1.html')" tappable modifier="chevron"
                     >タスクを選ぶ</ons-list-item
-                  >
+                  > -->
+
                 </ons-list>
-                <p>Type a comment</p>
-                <textarea name="request-details" id="" cols="30" rows="10"></textarea>
-                <button type="submit">Submit</button>
+                <p>コメント</p>
+                <textarea name="request-details" id="taskComment" rows="10"></textarea>
+                <button type="submit" class="submitBtn">追加</button>
               </form>
         
-              <form name="frm" method=post action=''>
-                  <table border=0 cellpadding=0 cellspacing=0 width=250>
-                  
-                      <input type=text name='p_name' id=n1 size='8'> 
-                      <input type=text name='p_name2' id=n2 size='8'> 
-                      <input type=button value='Submit' onclick="post_value();">
 
-                    </td></tr>
-                  </table></form>
-
-
-              <script>
-
-function post_value(){
-opener.document.f1.n1.value = document.frm.c_name.value;
-opener.document.f1.n2.value = document.frm.c_name2.value;
-
-self.close();
-}
-
-
-              let todoItems = [];
-
-function addTodo(text) {
-  const todo = {
-    text,
-    checked: false,
-    id: Date.now(),
-  };
-
-  todoItems.push(todo);
-  console.log(todoItems);
-
-  const list = document.querySelector('.js-todo-list');
-  list.insertAdjacentHTML('beforeend', `
-    <li class="todo-item" data-key="${todo.id}">
-      <input id="${todo.id}" type="checkbox"/>
-      <label for="${todo.id}" class="tick js-tick"></label>
-      <span>${todo.text}</span>
-      <button class="delete-todo js-delete-todo">
-        <svg><use href="#delete-icon"></use></svg>
-      </button>
-    </li>
-  `);
-}
-
-function toggleDone(key) {
-  const index = todoItems.findIndex(item => item.id === Number(key));
-  todoItems[index].checked = !todoItems[index].checked;
-
-  const item = document.querySelector(`[data-key='${key}']`);
-  if (todoItems[index].checked) {
-    item.classList.add('done');
-  } else {
-    item.classList.remove('done');
-  }
-}
-
-function deleteTodo(key) {
-  todoItems = todoItems.filter(item => item.id !== Number(key));
-  const item = document.querySelector(`[data-key='${key}']`);
-  item.remove();
-  
-  const list = document.querySelector('.js-todo-list');
-  if (todoItems.length === 0) list.innerHTML = '';
-}
-
-const form = document.querySelector('.js-form');
-form.addEventListener('submit', event => {
-  event.preventDefault();
-  const input = document.querySelector('.js-todo-input');
-
-  const text = input.value.trim();
-  if (text !== '') {
-    addTodo(text);
-    input.value = '';
-    input.focus();
-  }
-});
-
-const list = document.querySelector('.js-todo-list');
-list.addEventListener('click', event => {
-  if (event.target.classList.contains('js-tick')) {
-    const itemKey = event.target.parentElement.dataset.key;
-    toggleDone(itemKey);
-  }
-  
-  if (event.target.classList.contains('js-delete-todo')) {
-    const itemKey = event.target.parentElement.dataset.key;
-    deleteTodo(itemKey);
-  }
-
-});
-              
-              </script>
-              
-<script>
-
-    
-const vCascade = new Vue({
-      el: '#v-Cascade',
-      template: `  <div :class="cascadeClasses">
-        <transition name="fade">
-          <div class="cascade__mask" v-show="visible" @click.stop="close()"></div>
-        </transition>
-        <transition name="slide">
-          <div class="cascade__content" v-show="visible">
-            <div class="cascade__header">
-              <div class="cascade__back" @click.stop="back()">
-                <i class="iconfont icon-back"></i>
-              </div>
-              <div class="cascade__title">
-                {{titleName}}
-              </div>
-            </div>
-            <div class="cascade__search" v-if="filterable">
-              <input
-                type="text"
-                class="cascade__search--input"
-                v-model="query"
-                :placeholder="placeholder"
-                autocomplete="off"
-                spellcheck="false"
-                ref="input"
-                v-focus="autoFocus"
-              >
-              <div class="cascade__search--comfirm" v-show="showComfirm" @click="comfirm">
-                确认
-              </div>
-            </div>
-            <div class="cascade__list">
-              <div class="cascade__item" v-if="isMatch(item.label)" :key="item.key" v-for="item in casData" @click.stop="selectItem(item,casData)">
-                  <p>{{item.label}}</p>
-              </div>
-              <div class="cascade__loading" v-show="remote && loading">
-                <img src="../assets/loading.gif" alt="loading">
-              </div>
-              <div class="cascade__noSearchResultTip" v-show="showComfirm && query && !loading">
-                {{noFoundStr}}
-              </div>
-            </div>
-          </div>
-        </transition>
-      </div>`,
-    
-      mixins: [ ScrollbarMixins ],
-      props: {
-        title: {
-          type: Array
-        },
-        value: {
-          type: Boolean,
-          default: false
-        },
-        addClass: {
-          type: String
-        },
-        spLevel: {
-          type: Number,
-          default: 9999
-        },
-        placeholder: {
-          type: String,
-          default: 'Please enter...'
-        },
-        noFoundStr: {
-          type: String,
-          default: 'Nothing found, click Button to use custom content'
-        },
-        data: {
-          type: Array,
-          default: () => []
-        },
-        autoFocus: {
-          type: Boolean,
-          default: true
-        },
-        scrollable: {
-          type: Boolean,
-          default: false
-        },
-        filterable: {
-          type: Boolean,
-          default: false
-        },
-        remote: {
-          type: Boolean,
-          default: false
-        },
-        loading: {
-          type: Boolean,
-          default: false
-        },
-        remoteMethod: {
-          type: Function
-        }
-      },
-      data () {
-        return {
-          level: 1,
-          casData: this.data,
-          casTitle: this.title,
-          visible: this.value,
-          path: [],
-          pathName: [],
-          query: ''
-        }
-      },
-      methods: {
-        selectItem (item, casData) {
-          // Delete previous selection
-          this.path.length = this.level - 1
-          this.pathName.length = this.level - 1
-    
-          this.path.push(item.key)
-          this.pathName.push(item.label)
-          if (item.children && item.children.length && this.level < this.spLevel) {
-            this.query = ''
-            this[`data_${this.level}`] = casData
-            this.level++
-            this.casData = item.children
-          } else {
-            this.$emit('input', false)
-            this.$emit('success', { path: this.path, pathName: this.pathName })
-          }
-        },
-        comfirm () {
-          // Delete previous selection
-          this.path.length = this.level - 1
-          this.pathName.length = this.level - 1
-    
-          this.path.push('-1')
-          this.pathName.push(this.query)
-    
-          this.$emit('input', false)
-          this.$emit('success', { path: this.path, pathName: this.pathName })
-        },
-        close () {
-          this.visible = false
-          this.$emit('input', false)
-          this.$emit('cancel')
-        },
-        back () {
-          if (this.level === 1) {
-            this.close()
-            return false
-          }
-          this.level--
-          this.casData = this[`data_${this.level}`]
-        },
-        isMatch (name) {
-          if (!this.filterable || this.remote) {
-            return true
-          } else if (name.indexOf(this.query) > -1) {
-            return true
-          } else {
-            return false
-          }
-        }
-      },
-      created () {},
-      computed: {
-        titleName () {
-          return this.title[this.level - 1] ? this.title[this.level - 1] : 'Title'
-        },
-        cascadeClasses () {
-          return [
-            'cascade',
-            {
-              [this.addClass]: this.addClass,
-              'filterable': this.filterable
-            }
-          ]
-        },
-        showComfirm () {
-          if (!this.remote) {
-            return this.casData.find((item) => item.label.indexOf(this.query) > -1) === undefined
-          } else {
-            return !this.casData.length
-          }
-        }
-      },
-      watch: {
-        value (val) {
-          this.visible = val
-          if (val) {
-            if (!this.scrollable) {
-              this.addScrollEffect()
-            }
-            if (this.remote && !this.casData.length) {
-              this.remoteMethod(this.query)
-            }
-          } else {
-            this.removeScrollEffect()
-          }
-        },
-        data (val) {
-          this.casData = val
-        },
-        loading (val) {
-          if (val) {
-            this.casData = []
-          }
-        },
-        scrollable (val) {
-          if (!val) {
-            this.addScrollEffect()
-          } else {
-            this.removeScrollEffect()
-          }
-        },
-        query (val) {
-          if (this.remote || this.filterable) {
-            this.$emit('on-query-change', val)
-            if (this.remoteMethod) {
-              this.remoteMethod(val)
-            }
-          }
-        }
-      },
-      directives: {
-        focus: {
-          inserted: function (el, binding) {
-            if (binding.value) {
-              el.focus()
-            }
-          },
-          componentUpdated: function (el, binding) {
-            if (binding.value) {
-              el.focus()
-            }
-          }
-        }
-      },
-      components: {}
-    })
-    
-    </script>
-    
-    <script>
-        
-        import vCascade from 'v-cascade'
-    
-    Vue.use(vCascade)
-    
-    const app = new Vue({
-      el: '#app',
-      components: {
-        'v-cascade': vCascade,
-      },
-      data () {
-        return {
-          location: location,               // 地区数据
-          locationModal: false,             // 地区选择器
-          locationValue: '',                // 地区输入框值
-          job: job,                         // 职称数据
-          jobModal: false,                  // 职称选择器
-          jobValue: '',                     // 职称输入框值
-          locationSearch: location,         // 地区数据
-          locationSearchModal: false,       // 地区选择器
-          locationSearchValue: '',          // 地区输入框值
-          remoteModal: false,               // 远程选择器
-          remoteValue: '',                  // 远程输入框值
-          remoteLoading: false,             // 远程loading
-          remoteData: [
-            {
-              'key': 'default_data_1',
-              'label': 'default_data_1'
-            },
-            {
-              'key': 'default_data_2',
-              'label': 'default_data_2'
-            },
-            {
-              'key': 'default_data_3',
-              'label': 'default_data_3'
-            },
-            {
-              'key': 'default_data_4',
-              'label': 'default_data_4'
-            },
-            {
-              'key': 'default_data_5',
-              'label': 'default_data_5'
-            },
-            {
-              'key': 'tip',
-              'label': 'search U.S. states with input'
-            }
-          ]                                // 远程默认数据
-        }
-      },
-      methods: {
-        locationSuccess (data) {
-          console.log('success', data)
-          this.locationValue = data.pathName.join(',')
-        },
-        jobSuccess (data) {
-          console.log('success', data)
-          this.jobValue = data.pathName.join(',')
-        },
-        locationSearchSuccess (data) {
-          console.log('success', data)
-          this.locationSearchValue = data.pathName.join(',')
-        },
-        RemoteSuccess (data) {
-          console.log('success', data)
-          this.remoteValue = data.pathName.join(',')
-        },
-        queryChange (val) {
-          console.log(val)
-        },
-        cancel () {
-          console.log('cancel')
-        },
-        open (modal, event) {
-          event.target.blur()
-          this[modal] = true
-        },
-        remoteMethod (query) {
-          let self = this
-          this.remoteLoading = true
-          // simulate api call
-          setTimeout(function () {
-            var remoteMockData = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New hampshire', 'New jersey', 'New mexico', 'New york', 'North carolina', 'North dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode island', 'South carolina', 'South dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West virginia', 'Wisconsin', 'Wyoming']
-            var remoteFormatData = []
-            self.remoteLoading = false
-            remoteFormatData = remoteMockData.map(item => {
-              // format the data structure
-              return {
-                'key': item,
-                'label': item
-              }
-            })
-            self.remoteData = remoteFormatData.filter(item => item.label.toLowerCase().indexOf(query.toLowerCase()) > -1)
-          }, 500)
-        }
-      }
-    })
-    </script>
-    
-    
-            <div id="app"></div>
-            
-      
-                <div class="app">
-                  <h1>V-cascade</h1>
-                  <div class="example example-1">
-                    <input class="select select-location" v-model="locationValue" type="text" name="location" id="location" placeholder="カテゴリー" @click.stop="open('locationModal',$event)">
-                
-                    <v-cascade
-                      v-model="locationModal"
-                      :data="location"
-                      :title="['省份','城市','区县']"
-                      addClass="cascade-location"
-                      @success="locationSuccess"
-                      @cancel="cancel"
-                    >
-                    </v-cascade>
-                  </div>
-                </div>
-            
-
-              <div id="app"></div>
-
-<!-- 
-              <div id="vapp">
-                  <p>{{ display }}</p>
-                  <colored-box class="red" v-show="display == 'redbox'"></colored-box>
-                  <colored-box class="green" v-show="display == 'greenbox'"></colored-box>
-              </div> -->
-          
-              <!-- <script>
-                      Vue.component('ColoredBox', {
-                    template: "<div class=\"box\"><button v-on:click=\"toggleMe()\">Toggle Now</button></div>",
-                    methods: {
-                      toggleMe() {
-                        this.$root.toggleBox()
-                      }
-                    }
-                  })
-                  const vueApp = new Vue({
-                    el: '#vapp',
-                    data: { 
-                    display: 'redbox' 
-                    },
-                    methods: {
-                      toggleBox() {
-                        this.display == 'redbox' ? this.display = 'greenbox' : this.display = 'redbox'
-                      }
-                    }
-                  })
-                  </script>          
-                   -->
-        
-        <!-- <script src="js/todo.js"></script> -->
-           
+                  <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
+                  <script type="text/javascript" src="js/category.js"></script>
             </ons-page>
           </template>
 
