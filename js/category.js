@@ -4,10 +4,23 @@ $(function(){
 	$(this).toggleClass('visible');
 	$('.toggle2').removeClass('visible2');
   });
+
   $('.toggle2').click(function(){
 	$(this).toggleClass('visible2');
 	$(this).siblings().removeClass('visible2');
   });
+
+  $('.closeMenu').click(function(){
+    // var thisParent = $(this).parent().parent();
+    //     console.log(thisParent.attr('class'));
+    $('.menu1').removeClass('visible');
+    });
+
+    $('.backToMenu1').click(function(){
+      // var thisParent = $(this).parent().parent();
+      //     console.log(thisParent.attr('class'));
+      $('.menu2').removeClass('visible');
+      });
 
   $('.selectMenu').click(function(){
     // Close the menu

@@ -79,22 +79,39 @@
 
     <template id="requests.html">
       <ons-page id="requests">
-
-        <ons-pull-hook id="pull-hook">
-          Pull to refresh
-        </ons-pull-hook>
+          
+            <ons-pull-hook id="pull-hook">
+              Pull to refresh
+            </ons-pull-hook>
+          
         <div class="container">
-          <h1 class="app-title">todos</h1>
+
+            <!-- <p style="text-align: center">
+                <ons-button onclick="showModal()">Show modal</ons-button>
+              </p> -->
+
+          <h1 class="app-title">リクエスト</h1>
           <ons-list class="todo-list js-todo-list">
+            <ons-list-item class="todo-item" data-key="1566658474566">
+                <input id="1566658474566" type="checkbox">
+                <label for="1566658474566" class="tick js-tick"></label>
+                <span>temporary to do item</span>
+                <button class="openDetails" name="showmodalbutton" onclick="showModal(this)">
+                    詳細
+                </button>
+                <button class="delete-todo js-delete-todo">
+                  <svg><use href="#delete-icon"></use></svg>
+                </button>
+              </ons-list-item>
              </ons-list>
-             
+
           <!-- <ul class="todo-list js-todo-list"> -->
             <!-- <li class="todo-item" data-key="1566658474566">
                 <input id="1566658474566" type="checkbox">
                 <label for="1566658474566" class="tick js-tick"></label>
                 <span>temporary to do item</span>
                 <button class="openDetails">
-                    詳細を見る
+                    詳細
                 </button>
                 <button class="delete-todo js-delete-todo">
                   <svg><use href="#delete-icon"></use></svg>
@@ -102,7 +119,13 @@
               </li> -->
           <!-- </ul> -->
          
-      
+         <!-- add the empty state here -->
+    <div class="empty-state">
+        <svg class="checklist-icon"><use href="#checklist-icon"></use></svg>
+        <h2 class="empty-state__title">リクエストがありません。</h2>
+        <!-- <p class="empty-state__description">What do you want to get done today?</p> -->
+      </div>
+      <!-- end -->
 
           <form class="js-form">
             <input
@@ -112,17 +135,65 @@
               placeholder="E.g. Build a web app"
               class="js-todo-input"
             />
-            <button type="submit">
+            <button type="submit" class="submitBtn">
               submit
             </button>
           </form>
         </div>
       
-      
+    
+
         <ons-fab position="bottom right" onclick="loadPage('page1.html')">
           <ons-icon icon="md-plus"></ons-icon>
         </ons-fab>
         <script src="js/todo.js"></script>
+        <script src="js/pull-hook.js"></script>
+
+        <ons-modal direction="up">
+            <div style="text-align: center;">
+              <div style="background-color: #fff; height: 50vh; width:100vw;">
+              <p style=" z-index:50; color:#000;">
+                <!-- <ons-icon icon="md-spinner" size="28px" spin></ons-icon> --> Loading...
+                This is a modal
+              </p>
+              <!-- <button onclick="closeModal()">Close</button> -->
+              <button class="closeBtn">Close</button>
+              </div>
+            </div>
+          </ons-modal>
+        <script>
+            function showModal(el) {
+              var elname = el.tagName ;
+              // get text of the item that was clicked
+              console.log(elname);
+              console.log(el.parentElement.parentElement.tagName);
+              var dataKey = el.parentElement.parentElement.getAttribute('data-key');
+              console.log(dataKey)
+              // display the modal
+
+            var modal = document.querySelector('ons-modal');
+            modal.show();
+                   
+            var mText = modal.querySelector('p') ;
+            mText.textContent =  "Change modal text to this text.<br>Data Key: " + dataKey;
+            
+
+            var closeButton = document.querySelector('.closeBtn');
+            closeButton.onclick = function(){
+              // var modal = document.querySelector('ons-modal');
+              modal.hide();
+            };
+
+            }
+            // function closeModal() {
+            //   // var thisTodo = $(this).attr('name') ;
+            //   // console.log(thisTodo);
+            //   var modal = document.querySelector('ons-modal');
+            //   modal.hide();
+            // }
+          
+            </script>
+            
       </ons-page>
     </template>
 
@@ -165,8 +236,8 @@
             <ul class="todo-list js-todo-list"></ul>
             <!-- </ons-list> -->
         
-                <nav class="gnav">
-                  <form action=''>
+         
+                  <form id="myForm" action=''>
                     <ons-list class="toggle" id="clickthis" >
                         <ons-list-item tappable modifier="chevron" id="changethis"
                           >タスクを選ぶ</ons-list-item
@@ -181,48 +252,62 @@
                     </div> -->
 
                     <ul class="menu1"><div class="overlay overlay-a"></div>
-                      <li class="toggle2"><span class="toggle2-inner">掃除</span>
+                      <li class="toggle2-a "><span class="toggle2-inner closeMenu">Close Menu</span>
+                      <li class="toggle2 toggle2-a"><span class="toggle2-inner">料理</span>
                         <ul class="menu2" id="category1">
                           <div class="overlay"></div>
-                          <li><a href="#" class="selectMenu">掃除１</a></li>
-                          <li><a href="#" class="selectMenu">掃除２</a></li>
-                          
-                        </ul>
-                      </li>
-                      <li class="toggle2"><span class="toggle2-inner">料理</span>
-                        <ul class="menu2" id="category2">
-                            <div class="overlay"></div>
+                          <li  class="toggle3"><a href="#" class="backToMenu1">Back</a></li>
                           <li class="toggle3"><a href="#" class="selectMenu">食器を洗う</a></li>
                           <li class="toggle3"><a href="#" class="selectMenu">食器を拭く</a></li>
                           <li class="toggle3"><a href="#" class="selectMenu">食器を片付ける</a></li>
                           <li class="toggle3"><a href="#" class="selectMenu">朝食を作る</a></li>
                           <li class="toggle3"><a href="#" class="selectMenu">昼食を作る</a></li>
                           <li class="toggle3"><a href="#" class="selectMenu">夕食を作る</a></li>
+                          
                         </ul>
                       </li>
-                      <li class="toggle2"><span class="toggle2-inner">洗濯</span>
+                      <li class="toggle2 toggle2-a"><span class="toggle2-inner">掃除</span>
+                        <ul class="menu2" id="category2">
+                            <div class="overlay"></div>
+                          <li  class="toggle3"><a href="#" class="backToMenu1">Back</a></li>
+                          <li class="toggle3"><a href="#" class="selectMenu">テーブルを拭く</a></li>
+                          <li class="toggle3"><a href="#" class="selectMenu">掃除機をかける</a></li>
+                          <li class="toggle3"><a href="#" class="selectMenu">トイレを掃除する</a></li>
+                          <li class="toggle3"><a href="#" class="selectMenu">お風呂を掃</a></li>
+
+                        </ul>
+                      </li>
+                      <li class="toggle2 toggle2-a"><span class="toggle2-inner">洗濯</span>
                         <ul class="menu2" id="category3">
                             <div class="overlay"></div>
-                            <li class="toggle3"><a href="#" class="selectMenu">sentaku1</a></li>
-                          <li class="toggle3"><a href="#" class="selectMenu">sentaku2</a></li>
+                            <li  class="toggle3"><a href="#" class="backToMenu1">Back</a></li>
+                            <li class="toggle3"><a href="#" class="selectMenu">洗濯物を洗う</a></li>
+                            <li class="toggle3"><a href="#" class="selectMenu">洗濯物を干す</a></li>
+                            <li class="toggle3"><a href="#" class="selectMenu">洗濯物をたたむ</a></li>
+                            <li class="toggle3"><a href="#" class="selectMenu">洗濯物をしまう</a></li>
                         </ul>
                       </li>
-                      <li class="toggle2"><span class="toggle2-inner">育児</span>
+                      <li class="toggle2 toggle2-a"><span class="toggle2-inner">育児</span>
                         <ul class="menu2" id="category4">
                             <div class="overlay"></div>
-                            <li class="toggle3"><a href="#" class="selectMenu">育児１</a></li>
-                          <li class="toggle3"><a href="#" class="selectMenu">育児２</a></li>
+                            <li  class="toggle3"><a href="#" class="backToMenu1">Back</a></li>
+                            <li class="toggle3"><a href="#" class="selectMenu">おむつを替える</a></li>
+                          <li class="toggle3"><a href="#" class="selectMenu">子供の歯磨きをする</a></li>
+                          <li class="toggle3"><a href="#" class="selectMenu">子供の着替えをする</a></li>
+                          <li class="toggle3"><a href="#" class="selectMenu">子供</a></li>
                         </ul>
                       </li>
-                      <li class="toggle2"><span class="toggle2-inner">買い物</span>
+                      <li class="toggle2 toggle2-a"><span class="toggle2-inner">買い物</span>
                         <ul class="menu2" id="category5">
                             <div class="overlay"></div>
-                            <li class="toggle3"><a href="#" class="selectMenu">買い物1</a></li>
-                          <li class="toggle3"><a href="#" class="selectMenu">買い物2</a></li>
+                            <li  class="toggle3"><a href="#" class="backToMenu1">Back</a></li>
+                            <li class="toggle3"><a href="#" class="selectMenu">夕食の買い物をする</a></li>
+                          <li class="toggle3"><a href="#" class="selectMenu">おむつを買う</a></li>
+                          <li class="toggle3"><a href="#" class="selectMenu">トイレットペーパーを買う</a></li>
                         </ul>
                       </li>
                     </ul>
-                    </nav>
+                  
                        
                 <!-- <ons-list id="task-category">
                   <ons-list-item onclick="loadPage('category-1.html')" tappable modifier="chevron"
@@ -232,12 +317,19 @@
                 </ons-list>
                 <p>コメント</p>
                 <textarea name="request-details" id="taskComment" rows="10"></textarea>
-                <button type="submit" class="submitBtn">追加</button>
+                <button onclick="submitform()" class="submitBtn">追加</button>
               </form>
         
 
                   <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
                   <script type="text/javascript" src="js/category.js"></script>
+                  <script>
+                  function submitform() {
+                        document.myForm.addEventListener('click', console.log("submit has been pressed"));
+                      };
+
+                      
+                   </script>
             </ons-page>
           </template>
 
@@ -262,7 +354,7 @@
 
   
         
-          <ons-list id="pokemon-list">
+          <ons-list id="request-list">
             <ons-list-item onclick="loadPage('category-souji.html')" tappable modifier="chevron"
               >そうじ</ons-list-item
             >

@@ -31,7 +31,7 @@
 	width: 100vw;
 }
 /* メニューの開閉　2段目 */
-.toggle2 {
+.toggle2-a {
 	box-sizing: border-box;
 	display: table;
 	position: relative;

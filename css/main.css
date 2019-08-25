@@ -132,11 +132,11 @@ input[type="checkbox"] {
   background-size: contain;
 }
 
-/* .delete-todo svg {
+.delete-todo svg {
   width: 20px;
   height: 20px;
   pointer-events: none;
-} */
+}
 
 form {
   width: 100%;
@@ -175,10 +175,13 @@ form {
   width: 100%;
 }
 
-.submitBtn{
-  padding: 2px 30px;
-  background-image: linear-gradient(170deg, #FFFFA9, #FF559A);
+
+.submitBtn,
+.openDetails{
+  padding: 2px 20px;
+  background-image: linear-gradient(160deg, #FFFFA9, #FF559A);
   border-radius: 15px;
-border: transparent;
-box-shadow: #707070 2PX 3px 5px;
+  border: transparent;
+  box-shadow: #707070 2PX 3px 5px;
+  color: #fff;
 }
