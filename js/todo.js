@@ -19,7 +19,14 @@
         todo.id
       }" type="checkbox"/>
       <label for="${todo.id}" class="tick js-tick"></label>
-      <span>${todo.text}</span></ons-list-item>
+      <span>${todo.text}</span>
+      <button class="openDetails">
+          詳細を見る
+      </button>
+      <button class="delete-todo js-delete-todo">
+        <svg><use href="#delete-icon"></use></svg>
+      </button></ons-list-item>
+      
     `
     );
   }
