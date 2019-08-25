@@ -13,7 +13,8 @@
   
     const list = document.querySelector('.js-todo-list');
     list.insertAdjacentHTML('beforeend', `
-    <ons-list-item class="todo-item" data-key="${todo.id}"> <input id="${
+    <ons-list-item class="todo-item" data-key="${todo.id}"> <div class="center list-item__center">
+  <input id="${
         todo.id
       }" type="checkbox"/>
       <label for="${todo.id}" class="tick js-tick"></label>
@@ -23,7 +24,7 @@
   </button>
   <button class="delete-todo js-delete-todo">
     <svg><use href="#delete-icon"></use></svg>
-  </button>
+  </button></div>
   </ons-list-item>
     `);
   }

@@ -168,15 +168,18 @@
               console.log(elname);
               console.log(el.parentElement.parentElement.tagName);
               var dataKey = el.parentElement.parentElement.getAttribute('data-key');
-              console.log(dataKey)
+              console.log(dataKey);
+
+              var todoTextLabel = el.parentElement.parentElement.querySelector('span').textContent;
+              console.log(todoTextLabel);
               // display the modal
 
             var modal = document.querySelector('ons-modal');
             modal.show();
                    
             var mText = modal.querySelector('p') ;
-            mText.textContent =  "Change modal text to this text.<br>Data Key: " + dataKey;
-            
+            mText.innerHTML =  "Change modal text to this text.<br>Data Key: " + dataKey+"<br>Request Name: ";
+            mText.innerHTML += todoTextLabel;
 
             var closeButton = document.querySelector('.closeBtn');
             closeButton.onclick = function(){
