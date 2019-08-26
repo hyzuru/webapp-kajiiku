@@ -2,13 +2,15 @@
   
   let todoItems = [];
 
-  function addTodo(text) {
+  function addTodo(text,comment) {
     const todo = {
       text,
+      comment,
       checked: false,
       id: Date.now(),
     };
-  
+
+
     todoItems.push(todo);
   
     const list = document.querySelector('.js-todo-list');
@@ -19,6 +21,7 @@
       }" type="checkbox"/>
       <label for="${todo.id}" class="tick js-tick"></label>
       <span>${todo.text}</span>
+      <span class="todo-itemComment">${todo.comment}</span>
       <button class="openDetails" name="showmodalbutton" onclick="showModal(this)">
       詳細
   </button>
@@ -27,6 +30,7 @@
   </button></div>
   </ons-list-item>
     `);
+    loadPage('home.html');
   }
   
   function toggleDone(key) {
@@ -53,14 +57,29 @@
   const form = document.querySelector('.js-form');
   form.addEventListener('submit', event => {
     event.preventDefault();
+
     const input = document.querySelector('.js-todo-input');
-  
-    const text = input.value.trim();
-    if (text !== '') {
-      addTodo(text);
+    console.log(input);
+    const comment = input.value.trim();
+    console.log(comment);
+
+    const selector = document.querySelector('.js-todo-selector div');
+    console.log(selector);
+    const text = selector.textContent.trim();
+    console.log(text);
+
+    
+    if (text !== 'タスクを選ぶ') {
+      addTodo(text,comment);
+      selector.textContent = 'タスクを選ぶ';
       input.value = '';
-      input.focus();
+    } 
+    else {
+      var msg = "タスクは選択されていません。";
+      var d1 = document.querySelector(".js-form div.warningMsg");
+      d1.innerHTML = msg;
     }
+
   });
   
   const list = document.querySelector('.js-todo-list');
