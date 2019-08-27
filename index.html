@@ -270,28 +270,24 @@
 
             
           }
-          function doTask() {
-
+          function doTask(event) {
+            // console.log(event.target);
             var modal = document.querySelector('ons-modal.taskDetailsModal');
             // var elname = modal.tagName ;
               // get text of the item that was clicked
               // console.log(elname);
               var dataKey = modal.querySelector('div.noDisplay').innerHTML;
               console.log(dataKey);
+              var checkString = document.querySelector('.todo-item');
+              console.log(checkString);
+              if (dataKey === checkString.getAttribute('data-key')) {
+                  console.log(checkString.getAttribute('data-key'))
+                // this.checkString.classList.add('done');
+              }  
+            
 
-              var todoItemMatch = document.querySelector('ons-list-item').getAttribute('data-key');
-              if (odoItemMatch = dataKey) {
-                // console.log(this.document.querySelector('ons-list-item'));
-                this.document.querySelector('ons-list-item').remove();
-              }
-              // console.log(todoItemMatch);
 
-              // var todoTextLabel = el.parentElement.parentElement.querySelector('span').textContent;
-              // console.log(todoTextLabel);
-
-              // var todoTextComment = el.parentElement.parentElement.querySelector('span.todo-itemComment').textContent;
-              //   var todoTextComment = todoTextComment.replace(/\s+/g, '');
-              //   console.log(todoTextComment);
+       
             modal.hide();
             var modal = document.querySelector('ons-modal.doTaskConfirmation');
             modal.show();
@@ -299,8 +295,9 @@
             var closeButton = document.querySelector('.closeBtn2');
               closeButton.onclick = function(){
               // var modal = document.querySelector('ons-modal');
-              console.log(closeButton);
+              // console.log(closeButton);
               modal.hide();
+              toggleDone(itemKey);
             };
           }
 

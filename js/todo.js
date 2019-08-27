@@ -40,6 +40,7 @@
     const item = document.querySelector(`[data-key='${key}']`);
     if (todoItems[index].checked) {
       item.classList.add('done');
+      // document.querySelector
     } else {
       item.classList.remove('done');
     }
@@ -85,12 +86,15 @@
   const list = document.querySelector('.js-todo-list');
   list.addEventListener('click', event => {
     if (event.target.classList.contains('js-tick')) {
-      const itemKey = event.target.parentElement.dataset.key;
+      const itemKey = event.target.parentElement.parentElement.dataset.key;
+      // console.log(event.target.parentElement.parentElement.tagName);
+
       toggleDone(itemKey);
     }
     
     if (event.target.classList.contains('js-delete-todo')) {
-      const itemKey = event.target.parentElement.dataset.key;
+      const itemKey = event.target.parentElement.parentElement.dataset.key;
+      // console.log(event.target.parentElement.dataset);
       deleteTodo(itemKey);
     }
   
