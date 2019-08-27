@@ -209,6 +209,11 @@ form {
   
 }
 
+.closeBtn2{
+  width: 90%;
+  margin: 10px auto 100px;
+  }
+
 /* login page */
 .loginBtn{
 width: 90%;
@@ -236,3 +241,4 @@ text-align: center;
 font-size: 0.8rem;
 padding: 20px;
 }
+
