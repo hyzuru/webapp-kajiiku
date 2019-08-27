@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- testpage -->
 
 <ons-page id="pokemon">
@@ -148,3 +149,155 @@
     <ons-icon icon="md-plus"></ons-icon>
   </ons-fab>
 </ons-page>
+=======
+<!-- testpage -->
+
+<ons-page id="pokemon">
+  <script>
+    ons.ready(function() {
+      var pullHook = document.getElementById("pull-hook");
+
+      pullHook.addEventListener("changestate", function(event) {
+        var message = "";
+
+        switch (event.state) {
+          case "initial":
+            message = "Pull to refresh";
+            break;
+          case "preaction":
+            message = "Release";
+            break;
+          case "action":
+            message = "Loading...";
+            break;
+        }
+
+        pullHook.innerHTML = message;
+      });
+
+      pullHook.onAction = function(done) {
+        setTimeout(done, 1000);
+      };
+    });
+  </script>
+
+  <!-- <ons-pull-hook id="pull-hook">
+    Pull to refresh
+  </ons-pull-hook> -->
+
+  <div class="main">
+    <h1>TO-DO LIST</h1>
+    <form class="" action="index.html" method="post">
+      <input type="text" placeholder="new task" name="task" />
+      <button type="submit"><strong>ADD</strong></button>
+    </form>
+    <div class="tasksBoard">
+      <ul>
+        <li>
+          <span class="delete">×</span><input type="checkbox" /><label
+            >Vanilla JavaScript</label
+          >
+        </li>
+        <li>
+          <span class="delete">×</span><input type="checkbox" /><label
+            >Vue.js</label
+          >
+        </li>
+        <li>
+          <span class="delete">×</span><input type="checkbox" /><label
+            >React.js</label
+          >
+        </li>
+        <li>
+          <span class="delete">×</span><input type="checkbox" /><label
+            >Node.js</label
+          >
+        </li>
+      </ul>
+      <a id="clear">Clear</a>
+    </div>
+  </div>
+  <script>
+    // To do function from here
+
+    loadEvents();
+    // load every event in the page
+    function loadEvents() {
+      document.querySelector("form").addEventListener("submit", submit);
+    }
+    // subit data function
+    function submit(e) {
+      e.preventDefault();
+      let input = document.querySelector("input");
+      if (input.value != "") addTask(input.value);
+      input.value = "";
+    }
+
+    // add tasks
+    function addTask(task) {
+      let ul = document.querySelector("ul");
+      let li = document.createElement("li");
+      li.innerHTML = `<span class="delete">×</span><input type="checkbox"><label>${task}</label>`;
+      ul.appendChild(li);
+      document.querySelector(".tasksBoard").style.display = "block";
+    }
+    loadEvents();
+    // load every event in the page
+    function loadEvents() {
+      document.querySelector("form").addEventListener("submit", submit);
+      // recently added
+      document.getElementById("clear").addEventListener("click", clearList);
+    }
+
+    function clearList(e) {
+      // setting the ul innerHML to an empty string
+      let ul = (document.querySelector("ul").innerHTML = "");
+    }
+    loadEvents();
+    // load every event in the page
+    function loadEvents() {
+      document.querySelector("form").addEventListener("submit", submit);
+      document.getElementById("clear").addEventListener("click", clearList);
+      // recently added
+      document.querySelector("ul").addEventListener("click", deleteOrTick);
+    }
+    // deleteTick
+    function deleteOrTick(e) {
+      if (e.target.className == "delete") deleteTask(e);
+      else {
+        tickTask(e);
+      }
+    }
+
+    // delete task
+    function deleteTask(e) {
+      let remove = e.target.parentNode;
+      let parentNode = remove.parentNode;
+      parentNode.removeChild(remove);
+    }
+
+    // tick a task
+    function tickTask(e) {
+      const task = e.target.nextSibling;
+      if (e.target.checked) {
+        task.style.textDecoration = "line-through";
+        task.style.color = "#ff0000";
+      } else {
+        task.style.textDecoration = "none";
+        task.style.color = "#2f4f4f";
+      }
+    }
+  </script>
+  <!-- <ons-list id="request-list">
+    <ons-list-item class="todo-list js-todo-list">bulbasaur</ons-list-item>
+    <ons-list-item class="todo-list js-todo-list">charmander</ons-list-item>
+    <ons-list-item class="todo-list js-todo-list">squirtle</ons-list-item>
+    <ons-list-item class="todo-list js-todo-list">pikachu</ons-list-item>
+    <ons-list-item class="todo-list js-todo-list">trubbish</ons-list-item>
+  </ons-list> -->
+
+  <ons-fab position="bottom right" onclick="loadPage('page1.html')">
+    <ons-icon icon="md-plus"></ons-icon>
+  </ons-fab>
+</ons-page>
+>>>>>>> c652d46ee3d4c738a2aff240bae13a1c874f9f7c

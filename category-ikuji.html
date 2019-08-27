@@ -1,31 +1,32 @@
 <!-- testpage -->
 
 <ons-page id="category-2">
-<script>
-   for(var i in document.getElementsByClassName('pokemon-list')) {
-        var link = document.getElementsByClassName('pokemon-list')[i];
-
-        link.onclick = function(e) { 
-            e.preventDefault();
-
-            //using returned e attributes
-            window.location = e.srcElement.attributes.href.textContent;  
-            console.log(window.location)   
-        } 
-    } 
-  </script>
-
-  <ons-toolbar>
-    <div class="left"><ons-back-button>Category</ons-back-button></div>
-    <div class="center">そうじ</div>
-  </ons-toolbar>
-
-  <ons-list id="pokemon-list">
-    <ons-list-item onclick="loadPage('#')" class="item" tappable modifier="chevron">寝かしつけ</ons-list-item>
-    <ons-list-item onclick="loadPage('#')" class="item" tappable modifier="chevron">子どもと遊ぶ</ons-list-item>
-    <ons-list-item onclick="loadPage('#')" class="item" tappable modifier="chevron">オムツをかえる</ons-list-item>
-    <ons-list-item onclick="loadPage('#')" class="item" tappable modifier="chevron">食べさせる</ons-list-item>
-  </ons-list>
-</ons-page>
-
-
+        <script>
+           for(var i in document.getElementsByClassName('pokemon-list')) {
+                var link = document.getElementsByClassName('pokemon-list')[i];
+        
+                link.onclick = function(e) { 
+                    e.preventDefault();
+        
+                    //using returned e attributes
+                    window.location = e.srcElement.attributes.href.textContent;  
+                    console.log(window.location)   
+                } 
+            } 
+          </script>
+        
+          <ons-toolbar>
+            <div class="left"><ons-back-button>Category</ons-back-button></div>
+            <div class="center">そうじ</div>
+          </ons-toolbar>
+        
+          <ons-list id="pokemon-list">
+            <ons-list-item onclick="loadPage('#')" class="item" tappable modifier="chevron">寝かしつけ</ons-list-item>
+            <ons-list-item onclick="loadPage('#')" class="item" tappable modifier="chevron">子どもと遊ぶ</ons-list-item>
+            <ons-list-item onclick="loadPage('#')" class="item" tappable modifier="chevron">オムツをかえる</ons-list-item>
+            <ons-list-item onclick="loadPage('#')" class="item" tappable modifier="chevron">食べさせる</ons-list-item>
+          </ons-list>
+        </ons-page>
+        
+        
+        
