@@ -12,7 +12,14 @@
 
 
     todoItems.push(todo);
-  
+
+     firebase.database().ref('todolist/cooking').push({
+        taskName:text,
+        taskComment:comment
+        // checked:checked,
+        // id:id
+      })
+    
     const list = document.querySelector('.js-todo-list');
     list.insertAdjacentHTML('beforeend', `
     <ons-list-item class="todo-item" data-key="${todo.id}"> <div class="center list-item__center">
@@ -31,6 +38,8 @@
   </ons-list-item>
     `);
     loadPage('home.html');
+
+    
   }
   
   function toggleDone(key) {

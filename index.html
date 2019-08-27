@@ -140,6 +140,55 @@
               再読み込み
             </ons-pull-hook>
           
+            <div id="app">
+                <!-- <ul>
+                  <li v-for="item in todo" :key="item">
+                    {{item.contents}}
+                  </li>
+                </ul> -->
+                <ul>
+                  <li v-for="item in list">{{item.taskName}} / {{item.taskComment}}</li>
+                </ul>
+              </div>
+
+              <script>
+              // vue_firebase
+                    var app = new Vue({
+                  el: '#app',
+                  data () {
+                    return {
+                      list: [] // 最新状態はここにコピーされる
+                    }
+                  },
+                  // data: {
+                  //     todo : []
+                  // },
+                  created: function() {
+                    firebase.database().ref('todolist/cooking').on('value', snapshot => {
+                      if (snapshot) {
+                          const rootList = snapshot.val()
+                          let list = []
+                          // データオブジェクトを配列に変更する
+                          Object.keys(rootList).forEach((val, key) => {
+                            rootList[val].id = val
+                            list.push(rootList[val])
+                          })
+                          // vueのdataに突っ込む
+                          this.list = list
+                  }
+                })
+                        // let MyTodoList = [];
+                        // firebase.database().ref('todolist/cooking/')
+                        // .on("value", function(snapshot) {
+                        //         MyTodoList = snapshot.val();
+                        //         // console.log(snapshot.val());
+                        // });
+                        // console.log(MyTodoList);
+                  },
+                })
+              
+              </script>
+
         <div class="container">
 
             <!-- <p style="text-align: center">
@@ -478,8 +527,30 @@
           </ons-list>
         </ons-page>
   </template>
+
+  <!-- firebase -->
+  <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+  <script>
+
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyAROv7vfjwjisKxhe0rX0N5Q1_rbJB5fx0",
+        authDomain: "todoapp-a93bf.firebaseapp.com",
+        databaseURL: "https://todoapp-a93bf.firebaseio.com",
+        projectId: "todoapp-a93bf",
+        storageBucket: "todoapp-a93bf.appspot.com",
+        messagingSenderId: "922166981395",
+        appId: "1:922166981395:web:55378480a5150ca4"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+    </script>
     <script src="js/login.js"></script>
     <script src="js/myApp.js"></script>
+
+    
     <!-- <script src="node_modules/vue/dist/vue.js"></script> -->
      <!-- <script src="js/selector.vue"></script> -->
       
