@@ -15,8 +15,8 @@
 
      firebase.database().ref('todolist/cooking').push({
         taskName:text,
-        taskComment:comment
-        // checked:checked,
+        taskComment:comment,
+        checked:false
         // id:id
       })
     

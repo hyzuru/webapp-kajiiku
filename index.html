@@ -141,13 +141,34 @@
             </ons-pull-hook>
           
             <div id="app">
-                <!-- <ul>
-                  <li v-for="item in todo" :key="item">
-                    {{item.contents}}
-                  </li>
-                </ul> -->
+                <ons-list class="todo-list js-todo-list">
+                  <ons-list-item v-for="item in list">
+                      <input id="1566658474566" type="checkbox">
+                      <label for="1566658474566" class="tick js-tick"></label>
+                    <span>{{item.taskName}} {{item.taskComment}}</span>
+                      <button class="openDetails" name="showmodalbutton" onclick="showModal(this)">
+                          詳細
+                      </button>
+                      <button class="delete-todo js-delete-todo" onclick="delete()">
+                        <svg><use href="#delete-icon"></use></svg>
+                      </button>
+                  </ons-list-item>
+                <!-- <ons-list-item class="todo-item" data-key="1566658474566">
+                    <input id="1566658474566" type="checkbox">
+                    <label for="1566658474566" class="tick js-tick"></label>
+                    <span>洗濯をまわす</span>
+                    <span class="todo-itemComment">洗濯物まわしてもらえるかな？
+                        お願いします！</span>
+                    <button class="openDetails" name="showmodalbutton" onclick="showModal(this)">
+                        詳細
+                    </button>
+                    <button class="delete-todo js-delete-todo">
+                      <svg><use href="#delete-icon"></use></svg>
+                    </button>
+                  </ons-list-item> -->
+                </ons-list>
                 <ul>
-                  <li v-for="item in list">{{item.taskName}} / {{item.taskComment}}</li>
+                  <li v-for="item in list">{{item.taskName}} {{item.taskComment}} </li>
                 </ul>
               </div>
 
@@ -177,15 +198,8 @@
                           this.list = list
                   }
                 })
-                        // let MyTodoList = [];
-                        // firebase.database().ref('todolist/cooking/')
-                        // .on("value", function(snapshot) {
-                        //         MyTodoList = snapshot.val();
-                        //         // console.log(snapshot.val());
-                        // });
-                        // console.log(MyTodoList);
-                  },
-                })
+              }
+            })
               
               </script>
 
