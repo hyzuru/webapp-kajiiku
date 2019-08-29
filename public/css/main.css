@@ -1,0 +1,244 @@
+.app {
+  text-align: center;
+  padding: 50px 0 20px;
+}
+
+.example {
+  border-bottom: 1px dashed #efefef;
+  width: 400px;
+  margin: 0 auto 40px;
+  max-width: 100%;
+}
+
+.select {
+  width: 350px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin: 30px auto 0;
+  display: block;
+  font-size: 14px;
+  cursor: pointer;
+}
+/*# sourceMappingURL=main.css.map */
+
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+ font-family:
+ -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans,
+  Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+ line-height: 1.4;
+}
+
+.container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #333;
+  height: 90vh;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  overflow-y: auto;
+}
+
+.app-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 80px;
+  opacity: 0.5;
+}
+
+/* svg {
+  width: 64px;
+  height: 64px;
+} */
+
+.todo-list {
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+.todo-item {
+  /* margin-bottom: 10px; */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.todo-item span {
+  flex-grow: 1;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 22px;
+}
+
+.done span {
+  text-decoration: line-through;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+.tick {
+  width: 20px;
+  height: 20px;
+  border: 3px solid #333;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  /* background: url("../assets/icons8-unchecked-checkbox-32.png") no-repeat; */
+
+}
+
+.tick::before {
+  /* background: url("../assets/icons8-checked-checkbox-32.png") no-repeat; */
+  /* width: 20px;
+  height: 20px; */
+  background-size: contain;
+  content: '✓';
+  font-size: 15px;
+  display: none;
+}
+
+.done .tick::before {
+  display: inline;
+}
+
+.delete-todo {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  background: url("../assets/icons8-delete-bin-24.png") no-repeat;
+  width: 20px;
+  height: 20px;
+  background-size: contain;
+}
+
+.delete-todo svg {
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+form {
+  width: 100%;
+  /* display: flex; */
+  justify-content: space-between;
+}
+
+.empty-state {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+
+.checklist-icon {
+  margin-bottom: 20px;
+}
+
+.empty-state__title, .empty-state__description {
+  margin-bottom: 20px;
+}
+
+.todo-list:empty {
+  display: none;
+}
+
+.todo-list:empty + .empty-state {
+  display: flex;
+}
+
+.list-item--chevron:before {
+  z-index: 0;
+}
+
+#taskComment {
+  width: 100%;
+}
+.js-todo-input{
+  width: 100%;
+}
+
+.submitBtn,
+.openDetails,
+.doTaskBtn{
+  padding: 2px 20px;
+  background-image: linear-gradient(160deg, #FFFFA9, #FF559A);
+  border-radius: 15px;
+  border: transparent;
+  box-shadow: #707070 2PX 3px 5px;
+  color: #fff;
+}
+.closeBtn{
+  padding: 2px 20px;
+  background-color: #EEEEEE;
+  border-radius: 15px;
+  border: transparent;
+  box-shadow: #707070 2PX 3px 5px;
+  color: #707070;
+}
+
+.todo-itemComment {
+  display: none;
+}
+
+.todo-hLine{
+  width:80%; 
+  height:1px; 
+  background: #9BD4FF;
+  margin: 0 auto;
+  
+}
+
+.closeBtn2{
+  width: 90%;
+  margin: 10px auto 100px;
+  }
+
+/* login page */
+.loginBtn{
+width: 90%;
+margin: 10px auto 100px;
+}
+.newAccBtn{
+  width: 60%;
+  border-radius: 20px;
+  border: #333 solid 1px;
+  background-color: transparent;
+  color: #333;
+}
+.loginInput{
+  width: 90%;
+padding: 10px ;
+margin: 5px auto;
+background-color: #ffffff50
+}
+.noDisplay {
+  display: none;
+}
+.warningMsg{
+color: red;
+text-align: center;
+font-size: 0.8rem;
+padding: 20px;
+}
+
