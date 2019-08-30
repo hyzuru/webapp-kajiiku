@@ -7,7 +7,7 @@ $(function(){
 
   $('.toggle2').click(function(){
 	$(this).toggleClass('visible2');
-	$(this).siblings().removeClass('visible2');
+  $(this).siblings().removeClass('visible2');
   });
 
   $('.closeMenu').click(function(){
