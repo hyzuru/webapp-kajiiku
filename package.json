@@ -1,0 +1,27 @@
+{
+  "name": "webapp-papa-remakehtml",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "v-cascade": "0.0.8",
+    "vue": "^2.6.10"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hyzuru/webapp-papa-recode.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hyzuru/webapp-papa-recode/issues"
+  },
+  "homepage": "https://github.com/hyzuru/webapp-papa-recode#readme"
+}
