@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="ja" />
+    <link rel="stylesheet" href="lib/onsen/css/onsenui.css" />
+    <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.min.css" />
+    <link rel="stylesheet" href="css/main.css">
+    <script src="lib/onsen/js/onsenui.min.js"></script>
+
+    <!-- Vue -->
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script>
+      Vue.config.devtools = true
+      // After you create app
+      // window.__VUE_DEVTOOLS_GLOBAL_HOOK__.Vue = app.constructor;
+    </script>
+        <script src="js/main.js"></script>
+
+        <link rel="stylesheet" href="css/categorystyle.css">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
+        <script type="text/javascript" src="js/category.js"></script>
+  </head>
+  <body>
+    <ons-splitter>
+      <!-- The side menu -->
+      <ons-splitter-side id="menu" collapse>
+        <ons-page>
+          <ons-toolbar>
+              <div class="left"><ons-back-button>Page 1</ons-back-button></div>
+              <div class="center"></div>
+          </ons-toolbar>
+          <ons-list>
+            <ons-list-item onclick="loadPage('page2.html')">
+              Page 2
+            </ons-list-item>
+            <ons-list-item onclick="loadPage('page2.html')">
+              Page 2
+            </ons-list-item>
+            <ons-list-item onclick="loadPage('page2.html')">
+              Page 2
+            </ons-list-item>
+            </ons-list>
+        </ons-page>
+      </ons-splitter-side>
+    <!-- Everything not in the side menu -->
+        <ons-splitter-content>
+          <ons-navigator id="navigator" page="login.html"> </ons-navigator>
+          <!-- <ons-navigator id="navigator" page="/home.html"> </ons-navigator> -->
+        </ons-splitter-content>
+      </ons-splitter>
+
+    <ons-template id="login.html">
+      <ons-page id="login">
+
+        <div style="text-align: center; margin-top: 200px">
+            <h1 class="app-title">かじいく</h1>
+
+          <p>
+            <ons-input
+              id="email"
+              placeholder="email"
+              modifier="underbar"
+              class="loginInput"
+              type="email"
+            ></ons-input>
+          </p>
+
+          <p>
+            <ons-input
+              id="password"
+              placeholder="Password"
+              type="password"
+              modifier="underbar"
+              class="loginInput"
+            >
+            </ons-input>
+          </p>
+
+          <p>
+            <ons-button onclick="login()" class="loginBtn">ログイン</ons-button>
+          </p>
+          <p>
+              <ons-button onclick="loadPage('signup.html')" class="newAccBtn">アカウントを作成する</ons-button>
+            </p>
+        </div>
+      </ons-page>
+    </ons-template> 
+
+<ons-template id="home.html">
+  <ons-page id="home">
+    <!-- <script src="js/app.js"></script> -->
+    <ons-toolbar id="home-toolbar">
+      <div class="center">リクエスト</div>
+      <!-- <div class="left">
+        <ons-toolbar-button onclick="openMenu()">
+          <ons-icon icon="md-menu"></ons-icon>
+        </ons-toolbar-button>
+      </div> -->
+    </ons-toolbar>
+  
+    <ons-tabbar id="tabbar">
+      <ons-tab page="requests.html" label="リクエスト"></ons-tab>
+      <ons-tab page="completed.html" label="終わったタスク"></ons-tab>
+      <ons-tab page="profile.html" label="プロフィール"></ons-tab>
+    </ons-tabbar>
+    <!-- <ons-button onclick="loadPage('page1.html')">Go to page 1 </ons-button> -->
+    <!-- <ons-navigator swipeable id="myNavigator"></ons-navigator> -->
+    <!-- <ons-navigator swipeable id="myNavigator" page="page1.html"></ons-navigator> -->
+  </ons-page>
+
+</ons-template>
+
+    <ons-template id="signup.html">
+        <ons-page id="signup">
+          <div style="text-align: center; margin-top: 200px">
+            <p>
+              <ons-input
+              id="newEmail"
+              placeholder="email"
+              modifier="underbar"
+              class="loginInput"
+              type="email"
+              ></ons-input>
+            </p>
+
+            <p>
+              <ons-input
+              id="newPassword"
+              placeholder="Password"
+              type="password"
+              modifier="underbar"
+              class="signUpInput"
+              >
+              </ons-input>
+            </p>
+            <p>
+                <ons-input
+                  id="passwordConfirm"
+                  placeholder="Password again"
+                  type="password"
+                  modifier="underbar"
+                >
+                </ons-input>
+              </p>
+              <p>
+                  <div class="control">
+                      <label class="radio">
+                        <input type="radio" name="answer" value="mama">
+                        ママ
+                      </label>
+                      <label class="radio">
+                        <input type="radio" name="answer" value="papa">
+                        パパ
+                      </label>
+                    </div>
+              </p>
+            <p>
+              <ons-button onclick="signUp()">登録</ons-button>
+            </p>
+          </div>
+        </ons-page>
+      </ons-template>
+
+
+    <template id="requests.html">
+      <ons-page id="requests">
+
+            <ons-pull-hook id="pull-hook">
+              再読み込み
+            </ons-pull-hook>
+
+            <div id="app">
+                <ons-list class="todo-list js-todo-list">
+                  <ons-list-item v-for="item in list">
+                      <input id="1566658474566" type="checkbox">
+                      <label for="1566658474566" class="tick js-tick"></label>
+                    <span>{{item.taskName}} {{item.taskComment}}</span>
+                      <button class="openDetails" name="showmodalbutton" onclick="showModal(this)">
+                          詳細
+                      </button>
+                      <button class="delete-todo js-delete-todo" onclick="delete()">
+                        <svg><use href="#delete-icon"></use></svg>
+                      </button>
+                  </ons-list-item>
+                <!-- <ons-list-item class="todo-item" data-key="1566658474566">
+                    <input id="1566658474566" type="checkbox">
+                    <label for="1566658474566" class="tick js-tick"></label>
+                    <span>洗濯をまわす</span>
+                    <span class="todo-itemComment">洗濯物まわしてもらえるかな？
+                        お願いします！</span>
+                    <button class="openDetails" name="showmodalbutton" onclick="showModal(this)">
+                        詳細
+                    </button>
+                    <button class="delete-todo js-delete-todo">
+                      <svg><use href="#delete-icon"></use></svg>
+                    </button>
+                  </ons-list-item> -->
+                </ons-list>
+                <ul>
+                  <li v-for="item in list">{{item.taskName}} {{item.taskComment}} </li>
+                </ul>
+              </div>
+
+              <script>
+              // vue_firebase
+                    var app = new Vue({
+                  el: '#app',
+                  data () {
+                    return {
+                      list: [] // 最新状態はここにコピーされる
+                    }
+                  },
+                  // data: {
+                  //     todo : []
+                  // },
+                  created: function() {
+                    firebase.database().ref('todolist/cooking').on('value', snapshot => {
+                      if (snapshot) {
+                          const rootList = snapshot.val()
+                          let list = []
+                          // データオブジェクトを配列に変更する
+                          Object.keys(rootList).forEach((val, key) => {
+                            rootList[val].id = val
+                            list.push(rootList[val])
+                          })
+                          // vueのdataに突っ込む
+                          this.list = list
+                  }
+                })
+                        // let MyTodoList = [];
+                        // firebase.database().ref('todolist/cooking/')
+                        // .on("value", function(snapshot) {
+                        //         MyTodoList = snapshot.val();
+                        //         // console.log(snapshot.val());
+                        // });
+                        // console.log(MyTodoList);
+                  }
+                })
+
+              </script>
+
+        <div class="container">
+
+            <!-- <p style="text-align: center">
+                <ons-button onclick="showModal()">Show modal</ons-button>
+              </p> -->
+
+          <!-- <h1 class="app-title">リクエスト</h1> -->
+          <ons-list class="todo-list js-todo-list">
+            <ons-list-item class="todo-item" data-key="1566658474566">
+                <input id="1566658474566" type="checkbox">
+                <label for="1566658474566" class="tick js-tick"></label>
+                <span>洗濯をまわす</span>
+                <span class="todo-itemComment">洗濯物まわしてもらえるかな？
+                    お願いします！</span>
+                <button class="openDetails" name="showmodalbutton" onclick="showModal(this)">
+                    詳細
+                </button>
+                <button class="delete-todo js-delete-todo">
+                  <svg><use href="#delete-icon"></use></svg>
+                </button>
+              </ons-list-item>
+             </ons-list>
+
+          <!-- <ul class="todo-list js-todo-list"> -->
+            <!-- <li class="todo-item" data-key="1566658474566">
+                <input id="1566658474566" type="checkbox">
+                <label for="1566658474566" class="tick js-tick"></label>
+                <span>temporary to do item</span>
+                <button class="openDetails">
+                    詳細
+                </button>
+                <button class="delete-todo js-delete-todo">
+                  <svg><use href="#delete-icon"></use></svg>
+                </button>
+              </li> -->
+          <!-- </ul> -->
+         
+         <!-- add the empty state here -->
+    <div class="empty-state">
+        <svg class="checklist-icon"><use href="#checklist-icon"></use></svg>
+        <h2 class="empty-state__title">リクエストがありません。</h2>
+        <!-- <p class="empty-state__description">What do you want to get done today?</p> -->
+      </div>
+      <!-- end -->
+
+          <!-- <form class="js-form">
+            <input
+              autofocus
+              type="text"
+              aria-label="Enter a new todo item"
+              placeholder="E.g. Build a web app"
+              class="js-todo-input"
+            />
+            <button type="submit" class="submitBtn">
+              submit
+            </button>
+          </form>
+        </div> -->
+      
+    
+
+        <ons-fab position="bottom right" onclick="loadPage('page1.html')">
+          <ons-icon icon="md-plus"></ons-icon>
+        </ons-fab>
+        <!-- <script src="js/todo.js"></script> -->
+        <script src="js/pull-hook.js"></script>
+
+        <ons-modal direction="up" class="taskDetailsModal">
+            <div style="text-align: center;">
+              <div style="text-align: center; background-color: #fff; height: 50vh; width:80vw; margin: 0 auto; padding: 10px;">
+
+              <p style=" z-index:50; color:#000;">
+                <!-- <ons-icon icon="md-spinner" size="28px" spin></ons-icon> --> 
+                <!-- Loading... -->
+                モーダルウィンドウで詳細を確認します。
+              </p>
+              <button class="doTaskBtn" onclick="doTask()" name="doTaskButton" >了解！</button>
+              <button class="closeBtn">保留にする</button>
+              </div>
+            </div>
+          </ons-modal>
+          <ons-modal direction="up" class="doTaskConfirmation">
+              <div style="text-align: center;">
+                <div style="text-align: center; background-color: #fff; height: 50vh; width:80vw; margin: 0 auto; padding: 10px;">
+  
+                <p style=" z-index:50; color:#000;">
+                  <!-- <ons-icon icon="md-spinner" size="28px" spin></ons-icon> --> 
+                  <!-- Loading... -->
+                  リクエストを完了しました
+                </p>
+                <p>パパありがとう！</p>
+                <button class="closeBtn2 button">閉じる</button>
+                </div>
+              </div>
+            </ons-modal>
+        <script>
+
+            function showModal(el) {
+              var elname = el.tagName ;
+              // get text of the item that was clicked
+              // console.log(elname);
+              // console.log(el.parentElement.parentElement.tagName);
+              var dataKey = el.parentElement.parentElement.getAttribute('data-key');
+              console.log(dataKey);
+
+              var todoTextLabel = el.parentElement.parentElement.querySelector('span').textContent;
+              // console.log(todoTextLabel);
+
+              var todoTextComment = el.parentElement.parentElement.querySelector('span.todo-itemComment').textContent;
+                var todoTextComment = todoTextComment.replace(/\s+/g, '');
+                // console.log(todoTextComment);
+              // display the modal
+
+            var modal = document.querySelector('ons-modal.taskDetailsModal');
+            modal.show();
+
+            var mText = modal.querySelector('p') ;
+
+            mText.innerHTML =  todoTextLabel;
+            mText.innerHTML =  "<div class='noDisplay'>" + dataKey+"</div>"+todoTextLabel;
+            mText.innerHTML += "<br><div class='todo-hLine'></div><br>"+todoTextComment;
+
+            var closeButton = document.querySelector('.closeBtn');
+            closeButton.onclick = function(){
+              // var modal = document.querySelector('ons-modal');
+              modal.hide();
+            };
+
+            
+          }
+          function doTask(event) {
+            // console.log(event.target);
+            var modal = document.querySelector('ons-modal.taskDetailsModal');
+            // var elname = modal.tagName ;
+              // get text of the item that was clicked
+              // console.log(elname);
+              var dataKey = modal.querySelector('div.noDisplay').innerHTML;
+              console.log(dataKey);
+              var checkString = document.querySelector('.todo-item');
+              console.log(checkString);
+              if (dataKey === checkString.getAttribute('data-key')) {
+                  console.log(checkString.getAttribute('data-key'))
+                // this.checkString.classList.add('done');
+              }  
+            
+
+
+       
+            modal.hide();
+            var modal = document.querySelector('ons-modal.doTaskConfirmation');
+            modal.show();
+        
+            var closeButton = document.querySelector('.closeBtn2');
+              closeButton.onclick = function(){
+              // var modal = document.querySelector('ons-modal');
+              // console.log(closeButton);
+              modal.hide();
+              toggleDone(itemKey);
+            };
+          }
+
+            </script>
+            
+      </ons-page>
+    </template>
+
+
+    <template id="completed.html">
+        <ons-page id="completed">
+            <script></script>
+          
+            <!-- <p>Completed Requests go here.</p> -->
+            <p>終わったリクエストはここに記載します。</p>
+          </ons-page>
+          
+      </template>
+      <template id="profile.html">
+          <ons-page id="profile">
+              <script></script>
+            
+              <!-- <p>Profile placeholder goes here.</p> -->
+              <p>プロフィール画像。</p>
+
+              <ons-input
+              id="pertnerEmail"
+              placeholder="pertnerEmail"
+              modifier="underbar"
+              class="loginInput"
+            ></ons-input>
+
+          <p>
+            <ons-button onclick="renkei()" class="loginBtn">partner登録</ons-button>
+
+            </ons-page>
+            <script>
+
+
+            function renkei() {
+              const partnerEmail = document.querySelector("#pertnerEmail").value;
+              console.log(partnerEmail);
+              // firebase.database().ref("usertable").on("value", function(snapshot){
+              //   console.log(snapshot.key);
+              // })
+              // var ref = db.ref("usertable");
+                firebase.database().ref("usertable").orderByChild("email").equalTo(partnerEmail).on("child_added", function(snapshot) {
+                  let partnerKey =snapshot.key;
+                    console.log(partnerKey);
+
+                  firebase.database().ref("usertable").orderByChild("userUID").equalTo(UID).on("child_added", function(snapshot) {
+                    myKey = snapshot.key;
+                    console.log(myKey);
+
+                          firebase.database().ref('usertable/' + myKey )
+                          .update({
+                          partnerID: myKey,
+                          });
+                          firebase.database().ref('usertable/' + partnerKey )
+                          .update({
+                          partnerID: myKey,
+                          });
+                  });
+
+
+                });
+
+
+            }
+            </script>
+            </ons-page>
+            
+        </template>
+
+        <template id="page1.html">
+            <ons-page id="page1">
+                <link rel="stylesheet" href="css/categorystyle.css">
+
+                
+              <ons-toolbar>
+                <div class="left"><ons-back-button>リクエスト</ons-back-button></div>
+                <div class="center">リクエスト作成</div>
+              </ons-toolbar>
+
+              <p>新しいリクエストをここに作る.</p>
+
+              
+
+        <div class="container">
+            <!-- <h1 class="app-title">リクエスト作成</h1> -->
+            <p>リクエスト</p>
+
+         
+          <form class="js-form">
+
+            <ons-list class="toggle" id="clickthis" >
+                <ons-list-item tappable modifier="chevron" id="changethis" class="js-todo-selector"
+                  >タスクを選ぶ</ons-list-item
+                >
+
+              </ons-list>
+
+            <ul class="menu1"><div class="overlay overlay-a"></div>
+              <li class="toggle2-a "><span class="toggle2-inner closeMenu">Close Menu</span>
+              <li class="toggle2 toggle2-a"><span class="toggle2-inner">料理</span>
+                <ul class="menu2" id="category1">
+                  <div class="overlay"></div>
+                  <li  class="toggle3"><a href="#" class="backToMenu1">Back</a></li>
+                  <li class="toggle3"><a href="#" class="selectMenu">食器を洗う</a></li>
+                  <li class="toggle3"><a href="#" class="selectMenu">食器を拭く</a></li>
+                  <li class="toggle3"><a href="#" class="selectMenu">食器を片付ける</a></li>
+                  <li class="toggle3"><a href="#" class="selectMenu">朝食を作る</a></li>
+                  <li class="toggle3"><a href="#" class="selectMenu">昼食を作る</a></li>
+                  <li class="toggle3"><a href="#" class="selectMenu">夕食を作る</a></li>
+                  
+                </ul>
+              </li>
+              <li class="toggle2 toggle2-a"><span class="toggle2-inner">掃除</span>
+                <ul class="menu2" id="category2">
+                    <div class="overlay"></div>
+                  <li  class="toggle3"><a href="#" class="backToMenu1">Back</a></li>
+                  <li class="toggle3"><a href="#" class="selectMenu">テーブルを拭く</a></li>
+                  <li class="toggle3"><a href="#" class="selectMenu">掃除機をかける</a></li>
+                  <li class="toggle3"><a href="#" class="selectMenu">トイレを掃除する</a></li>
+                  <li class="toggle3"><a href="#" class="selectMenu">お風呂を掃</a></li>
+
+                </ul>
+              </li>
+              <li class="toggle2 toggle2-a"><span class="toggle2-inner">洗濯</span>
+                <ul class="menu2" id="category3">
+                    <div class="overlay"></div>
+                    <li  class="toggle3"><a href="#" class="backToMenu1">Back</a></li>
+                    <li class="toggle3"><a href="#" class="selectMenu">洗濯物を洗う</a></li>
+                    <li class="toggle3"><a href="#" class="selectMenu">洗濯物を干す</a></li>
+                    <li class="toggle3"><a href="#" class="selectMenu">洗濯物をたたむ</a></li>
+                    <li class="toggle3"><a href="#" class="selectMenu">洗濯物をしまう</a></li>
+                </ul>
+              </li>
+              <li class="toggle2 toggle2-a"><span class="toggle2-inner">育児</span>
+                <ul class="menu2" id="category4">
+                    <div class="overlay"></div>
+                    <li  class="toggle3"><a href="#" class="backToMenu1">Back</a></li>
+                    <li class="toggle3"><a href="#" class="selectMenu">おむつを替える</a></li>
+                  <li class="toggle3"><a href="#" class="selectMenu">子供の歯磨きをする</a></li>
+                  <li class="toggle3"><a href="#" class="selectMenu">子供の着替えをする</a></li>
+                  <li class="toggle3"><a href="#" class="selectMenu">子供</a></li>
+                </ul>
+              </li>
+              <li class="toggle2 toggle2-a"><span class="toggle2-inner">買い物</span>
+                <ul class="menu2" id="category5">
+                    <div class="overlay"></div>
+                    <li  class="toggle3"><a href="#" class="backToMenu1">Back</a></li>
+                    <li class="toggle3"><a href="#" class="selectMenu">夕食の買い物をする</a></li>
+                  <li class="toggle3"><a href="#" class="selectMenu">おむつを買う</a></li>
+                  <li class="toggle3"><a href="#" class="selectMenu">トイレットペーパーを買う</a></li>
+                </ul>
+              </li>
+            </ul>
+            
+
+          <br>
+          <textarea 
+          autofocus
+          type="text"
+          aria-label="Enter a new todo item"
+          placeholder="ここにコメントを書きます" 
+          class="js-todo-input" 
+          name="request-details" 
+          rows="10"></textarea>
+          <br>
+
+            <button type="submit" class="submitBtn">
+              submit
+            </button>
+            <div class="warningMsg"></div>
+          </form>
+
+        <script src="js/todo.js"></script>
+
+
+
+                  <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
+                  <script type="text/javascript" src="js/category.js"></script>
+            </ons-page>
+          </template>
+
+          <template id="page2.html">
+              <ons-page id="page2">
+                <ons-toolbar>
+                  <div class="left"><ons-back-button>Page 1</ons-back-button></div>
+                  <div class="center"></div>
+                </ons-toolbar>
+          
+                <p>This is the second page.</p>
+              </ons-page>
+            </template>
+                      
+
+  <template id="category-1.html">
+      <ons-page id="category-1">
+          <ons-toolbar>
+            <div class="left"><ons-back-button>New Request</ons-back-button></div>
+            <div class="center">Category</div>
+          </ons-toolbar>
+
+  
+        
+          <ons-list id="request-list">
+            <ons-list-item onclick="loadPage('category-souji.html')" tappable modifier="chevron"
+              >そうじ</ons-list-item
+            >
+            <ons-list-item onclick="loadPage('category-ikuji.html')" tappable modifier="chevron"
+              >いくじ</ons-list-item
+            >
+            <ons-list-item onclick="loadPage('category-kaimono.html')" tappable modifier="chevron"
+              >かいもの</ons-list-item
+            >
+            <ons-list-item onclick="loadPage('category-ryouri.html')" tappable modifier="chevron"
+              >りょうり
+            </ons-list-item>
+            <ons-list-item onclick="loadPage('category-sentaku.html')" tappable modifier="chevron"
+              >せんたく</ons-list-item
+            >
+          </ons-list>
+        </ons-page>
+  </template>
+
+  <!-- firebase -->
+  <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-auth.js"></script>
+  <script>
+
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyAROv7vfjwjisKxhe0rX0N5Q1_rbJB5fx0",
+        authDomain: "todoapp-a93bf.firebaseapp.com",
+        databaseURL: "https://todoapp-a93bf.firebaseio.com",
+        projectId: "todoapp-a93bf",
+        storageBucket: "todoapp-a93bf.appspot.com",
+        messagingSenderId: "922166981395",
+        appId: "1:922166981395:web:55378480a5150ca4"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+
+
+    </script>
+    <script src="js/login.js"></script>
+    <script src="js/myApp.js"></script>
+
+    
+    <!-- <script src="node_modules/vue/dist/vue.js"></script> -->
+     <!-- <script src="js/selector.vue"></script> -->
+      
+      <!-- <script src="https://unpkg.com/v-cascade/lib/v-cascade.min.js"></script> -->
+      <!-- <script src="node_modules/v-cascade/src/main.js"></script>  -->
+
+
+  </body>
+</html>
