@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css" />
     <link rel="stylesheet" href="css/main.css">
     <script src="lib/onsen/js/onsenui.min.js"></script>
-  
+
     
     <!-- Vue -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
@@ -58,11 +58,12 @@
 
           <p>
             <ons-input
-              id="username"
-              placeholder="Username"
-              modifier="underbar"
-              class="loginInput"
-            ></ons-input>
+            id="email"
+            placeholder="email"
+            modifier="underbar"
+            class="loginInput"
+            type="email"
+          ></ons-input>
           </p>
 
           <p>
@@ -78,8 +79,6 @@
 
           <p>
             <ons-button onclick="login()" class="loginBtn">ログイン</ons-button>
-            <!-- <ons-button class="loginBtn">ログイン</ons-button> -->
-
           </p>
           <p>
               <ons-button onclick="loadPage('signup.html')" class="newAccBtn">アカウントを作成する</ons-button>
@@ -116,18 +115,21 @@
           <div style="text-align: center; margin-top: 200px">
             <p>
               <ons-input
-                id="username"
-                placeholder="Username"
-                modifier="underbar"
+              id="newEmail"
+              placeholder="email"
+              modifier="underbar"
+              class="loginInput"
+              type="email"
               ></ons-input>
             </p>
   
             <p>
               <ons-input
-                id="password"
-                placeholder="Password"
-                type="password"
-                modifier="underbar"
+              id="newPassword"
+              placeholder="Password"
+              type="password"
+              modifier="underbar"
+              class="signUpInput"
               >
               </ons-input>
             </p>
@@ -143,17 +145,17 @@
               <p>
                   <div class="control">
                       <label class="radio">
-                        <input type="radio" name="answer">
+                        <input type="radio" name="answer" value="mama">
                         ママ
                       </label>
                       <label class="radio">
-                        <input type="radio" name="answer">
+                        <input type="radio" name="answer" value="papa">
                         パパ
                       </label>
                     </div>
               </p>
             <p>
-              <ons-button onclick="login()">登録</ons-button>
+              <ons-button onclick="signUp()">登録</ons-button>
             </p>
           </div>
         </ons-page>
@@ -216,7 +218,7 @@
                 <li v-for="item in list">{{item.taskName}} {{item.taskComment}} </li>
               </ul> -->
             </div>
-
+     
               <script>
 
 const firebaseTodoRef = firebase.database().ref('todolist/cooking' ).orderByChild('checked').equalTo(false) ;
@@ -272,10 +274,8 @@ var valueofTodo = [];
             // console.log(inputTag.tagName);
             var dataKey = inputTag.getAttribute('id');
             console.log(inputTag.getAttribute('id'));
-
             var todoTextLabel = el.parentElement.querySelector('span.todo-itemName').textContent;
             console.log(todoTextLabel);
-
             var todoTextComment = el.parentElement.querySelector('span.todo-itemComment').textContent;
               var todoTextComment = todoTextComment.replace(/\s+/g, '');
               if (todoTextComment != "") {
@@ -287,15 +287,28 @@ var valueofTodo = [];
               console.log(todoTextComment);
             // display the modal
 
+                 // var elname = el.tagName ;
+              // // get text of the item that was clicked
+              // // console.log(elname);
+              // // console.log(el.parentElement.parentElement.tagName);
+              // var dataKey = el.parentElement.parentElement.getAttribute('data-key');
+              // console.log(dataKey);
+
+              // var todoTextLabel = el.parentElement.parentElement.querySelector('span').textContent;
+              // // console.log(todoTextLabel);
+
+              // var todoTextComment = el.parentElement.parentElement.querySelector('span.todo-itemComment').textContent;
+              //   var todoTextComment = todoTextComment.replace(/\s+/g, '');
+                // console.log(todoTextComment);
+              // display the modal
+
           var modal = document.querySelector('ons-modal.taskDetailsModal');
           modal.show();
                  
           var mText = modal.querySelector('p') ;
-
           mText.innerHTML =  todoTextLabel;
           mText.innerHTML =  "<div class='noDisplay'>" + dataKey+"</div>"+todoTextLabel;
           mText.innerHTML += "<br><div class='todo-hLine'></div><br>"+todoTextComment;
-
           var closeButton = document.querySelector('.closeBtn');
           closeButton.onclick = function(){
             // var modal = document.querySelector('ons-modal');
@@ -303,8 +316,6 @@ var valueofTodo = [];
           };   
                    
         }
-
-
         function doTask(el) {
           // console.log(event.target);
           var modal = document.querySelector('ons-modal.taskDetailsModal');
@@ -333,7 +344,6 @@ var valueofTodo = [];
               });
               console.log("Task ID "+ id + "has been updated successfully")
               console.log("Added Review variables")
-
           modal.hide();
      
           var modal = document.querySelector('ons-modal.doTaskConfirmation');
@@ -346,19 +356,15 @@ var valueofTodo = [];
           };
         }
    
-
   //      function deleteTodo(el) {
   //       this.el = el ;
   //       var target = this.el.tagName ;
   //       console.log(target);
   //       var id = this.el.nextElementSibling.textContent ;
   //       console.log(id);
-
   // let todoRef = firebase.database().ref('todolist/cooking' + id);
   //     todoRef.remove()
-
   // console.log("Finished updating")
-
   //     }
           </script>
 
@@ -385,8 +391,7 @@ var valueofTodo = [];
 
     <template id="completed.html">
         <ons-page id="completed">
-            <script></script>
-          
+            <script></script>          
             <!-- <p>Completed Requests go here.</p> -->
             <p>終わったリクエストはここに記載します。</p>
 <hr>
@@ -474,10 +479,8 @@ var valueofTodo = [];
               // console.log(inputTag.tagName);
               var dataKey = inputTag.getAttribute('id');
               console.log(inputTag.getAttribute('id'));
-
               var todoTextLabel = el.parentElement.querySelector('span.todo-itemName').textContent;
               console.log(todoTextLabel);
-
               var todoTextComment = el.parentElement.querySelector('span.todo-itemComment').textContent;
                 var todoTextComment = todoTextComment.replace(/\s+/g, '');
                 if (todoTextComment != "") {
@@ -488,16 +491,13 @@ var valueofTodo = [];
                 }
                 console.log(todoTextComment);
               // display the modal
-
             var modal = document.querySelector('ons-modal.taskDetailsModal2');
             modal.show();
                    
             var mText = modal.querySelector('p') ;
-
             mText.innerHTML =  todoTextLabel;
             mText.innerHTML =  "<div class='noDisplay'>" + dataKey+"</div>"+todoTextLabel;
             mText.innerHTML += "<br><div class='todo-hLine'></div><br>"+todoTextComment;
-
             var closeButton = document.querySelector('.closeBtn2');
             
             // closeButton.onclick = function(){
@@ -507,15 +507,13 @@ var valueofTodo = [];
            
             // };            
           }
-
           function closeModal2(el) {
             var modal = document.querySelector('ons-modal.taskDetailsModal2');
             modal.hide();
           }
 
                     
-        
-            </script>
+              </script>
             <hr>
             <p>評価済みタスク</p>
             <hr>
@@ -525,13 +523,59 @@ var valueofTodo = [];
       </template>
       <template id="profile.html">
           <ons-page id="profile">
-           
+       
             
-              <!-- <p>Profile placeholder goes here.</p> -->
+            <!-- <p>Profile placeholder goes here.</p> -->
               <p>プロフィール画像。</p>
+              <ons-input
+              id="pertnerEmail"
+              placeholder="pertnerEmail"
+              modifier="underbar"
+              class="loginInput"
+            ></ons-input>
+
+          <p>
+            <ons-button onclick="renkei()" class="loginBtn">partner登録</ons-button>
+
+            </ons-page>
+            <script>
+
+
+            function renkei() {
+              const partnerEmail = document.querySelector("#pertnerEmail").value;
+              console.log(partnerEmail);
+              // firebase.database().ref("usertable").on("value", function(snapshot){
+              //   console.log(snapshot.key);
+              // })
+              // var ref = db.ref("usertable");
+                firebase.database().ref("usertable").orderByChild("email").equalTo(partnerEmail).on("child_added", function(snapshot) {
+                  let partnerKey =snapshot.key;
+                    console.log(partnerKey);
+
+                  firebase.database().ref("usertable").orderByChild("userUID").equalTo(UID).on("child_added", function(snapshot) {
+                    myKey = snapshot.key;
+                    console.log(myKey);
+
+                          firebase.database().ref('usertable/' + myKey )
+                          .update({
+                          partnerID: myKey,
+                          });
+                          firebase.database().ref('usertable/' + partnerKey )
+                          .update({
+                          partnerID: myKey,
+                          });
+                  });
+
+
+                });
+
+
+            }
+            </script>
             </ons-page>
             
         </template>
+
 
         <template id="page1.html">
             <ons-page id="page1">
@@ -685,6 +729,8 @@ var valueofTodo = [];
   <!-- firebase -->
   <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-auth.js"></script>
   <script>
 
       // Your web app's Firebase configuration

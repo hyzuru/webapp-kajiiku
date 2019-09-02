@@ -28,17 +28,18 @@ html {
   box-sizing: border-box;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: inherit;
   margin: 0;
   padding: 0;
 }
 
 body {
- font-family:
- -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans,
-  Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
- line-height: 1.4;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  line-height: 1.4;
 }
 
 .container {
@@ -48,7 +49,7 @@ body {
   padding-left: 10px;
   padding-right: 10px;
   color: #333;
-  /* height: 90vh; */
+  height: 90vh;
   margin-top: 5vh;
   margin-bottom: 5vh;
   overflow-y: auto;
@@ -69,21 +70,28 @@ body {
 .todo-list {
   list-style: none;
   margin-bottom: 20px;
+  background: none;
 }
 
-.todo-item {
-  /* margin-bottom: 10px; */
-  width: 100%;
+.todo-item.list-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  padding: 0;
+  border: 1px solid rgb(201, 201, 201);
+  box-sizing: border-box;
+  margin: 20px auto;
+  background-color: #fff;
+  width: 90%;
 }
 
 .todo-item span {
   flex-grow: 1;
   margin-left: 10px;
   margin-right: 10px;
-  font-size: 22px;
+  /* font-size: 22px; */
+  font-size: 1rem;
 }
 
 .done span {
@@ -104,7 +112,6 @@ input[type="checkbox"] {
   align-items: center;
   cursor: pointer;
   /* background: url("../assets/icons8-unchecked-checkbox-32.png") no-repeat; */
-
 }
 
 .tick::before {
@@ -112,7 +119,7 @@ input[type="checkbox"] {
   /* width: 20px;
   height: 20px; */
   background-size: contain;
-  content: '✓';
+  content: "✓";
   font-size: 15px;
   display: none;
 }
@@ -155,7 +162,8 @@ form {
   margin-bottom: 20px;
 }
 
-.empty-state__title, .empty-state__description {
+.empty-state__title,
+.empty-state__description {
   margin-bottom: 20px;
 }
 
@@ -166,7 +174,9 @@ form {
 .todo-list:empty + .empty-state {
   display: flex;
 }
-
+.list-item__center {
+  background-image: none;
+}
 .list-item--chevron:before {
   z-index: 0;
 }
@@ -174,26 +184,152 @@ form {
 #taskComment {
   width: 100%;
 }
-.js-todo-input{
+.js-todo-input {
   width: 100%;
+  z-index: 0;
+}
+
+/* メニューの配置 */
+/* .gnav {
+	position: absolute;
+	top: 0;
+	left: 0;
+} */
+/* メニューの開閉　1段目　左の画面外からアニメーションで引き出し表示 */
+.toggle {
+  position: relative;
+}
+#inputTask {
+  width: 100%;
+}
+.menu1 {
+  position: absolute;
+  width: 180px;
+  left: 100%;
+  top: 0px;
+  text-align: left;
+  background-color: #fff;
+  overflow: visible;
+  transition: left 0.3s linear;
+  display: none;
+  padding: 0;
+  margin: 0;
+}
+.menu1.visible {
+  left: 0%;
+  transition: left 0.3s linear;
+  display: block;
+  width: 100vw;
+  z-index: 1;
+}
+/* メニューの開閉　2段目 */
+.toggle2-a {
+  box-sizing: border-box;
+  display: table;
+  position: relative;
+  height: 40px;
+  /* width: 100%; */
+  width: 280px;
+  width: 100vw;
+  /* padding: 0 4px; */
+  padding: 0;
+  border-bottom: 1px solid #654d44;
+  border-left: 1px solid #654d44;
+  border-right: 1px solid #654d44;
+}
+.toggle2-inner {
+  display: table-cell;
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: #fff;
+}
+.menu2 {
+  position: absolute;
+  left: -200%;
+  /* width: 100%; */
+  border-top: 1px solid #654d44;
+  display: none;
+  padding: 0;
+  z-index: 10;
+  width: 100vw;
+}
+.menu2 li {
+  display: table;
+  width: 100%;
+  height: 40px;
+}
+.menu2 li > a {
+  display: table-cell;
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
+  background-color: #fff;
+  border-bottom: 1px solid #654d44;
+  border-left: 1px solid #654d44;
+  border-right: 1px solid #654d44;
+  padding: 0 4px;
+  text-decoration: none;
+}
+.visible2 .menu2 {
+  left: 0px;
+  top: 0;
+  /* left: 100%; */
+  /* top: 50%; */
+
+  margin-top: -1px;
+  display: block;
+}
+.overlay {
+  position: absolute;
+  left: 0;
+  height: 100vh;
+  top: 0;
+  width: 100vw;
+  background-color: #efeff4;
+  z-index: -1;
+}
+.overlay-a {
+  z-index: 0;
+}
+#category1 {
+  position: absolute;
+  top: 0;
+}
+#category2 {
+  position: absolute;
+  top: -40px;
+}
+#category3 {
+  position: absolute;
+  top: -80px;
+}
+#category4 {
+  position: absolute;
+  top: -120px;
+}
+#category5 {
+  position: absolute;
+  top: -160px;
 }
 
 .submitBtn,
 .openDetails,
-.doTaskBtn{
+.doTaskBtn {
   padding: 2px 20px;
-  background-image: linear-gradient(160deg, #FFFFA9, #FF559A);
+  background-image: linear-gradient(160deg, #ffffa9, #ff559a);
   border-radius: 15px;
   border: transparent;
-  box-shadow: #707070 2PX 3px 5px;
+  box-shadow: #707070 2px 3px 5px;
   color: #fff;
 }
-.closeBtn{
+.closeBtn {
   padding: 2px 20px;
-  background-color: #EEEEEE;
+  background-color: #eeeeee;
   border-radius: 15px;
   border: transparent;
-  box-shadow: #707070 2PX 3px 5px;
+  box-shadow: #707070 2px 3px 5px;
   color: #707070;
 }
 
@@ -201,44 +337,42 @@ form {
   display: none;
 }
 
-.todo-hLine{
-  width:80%; 
-  height:1px; 
-  background: #9BD4FF;
+.todo-hLine {
+  width: 80%;
+  height: 1px;
+  background: #9bd4ff;
   margin: 0 auto;
-  
 }
 
-.closeBtn2{
+.closeBtn2 {
   width: 90%;
   margin: 10px auto 100px;
-  }
+}
 
 /* login page */
-.loginBtn{
-width: 90%;
-margin: 10px auto 100px;
+.loginBtn {
+  width: 90%;
+  margin: 10px auto 100px;
 }
-.newAccBtn{
+.newAccBtn {
   width: 60%;
   border-radius: 20px;
   border: #333 solid 1px;
   background-color: transparent;
   color: #333;
 }
-.loginInput{
+.loginInput {
   width: 90%;
-padding: 10px ;
-margin: 5px auto;
-background-color: #ffffff50
+  padding: 10px;
+  margin: 5px auto;
+  background-color: #ffffff50;
 }
 .noDisplay {
   display: none;
 }
-.warningMsg{
-color: red;
-text-align: center;
-font-size: 0.8rem;
-padding: 20px;
+.warningMsg {
+  color: red;
+  text-align: center;
+  font-size: 0.8rem;
+  padding: 20px;
 }
-
