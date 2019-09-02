@@ -3398,6 +3398,7 @@ h4, h5, h6 {
       linear-gradient(180deg, #ccc, #ccc 50%, transparent 50%);
   }
 }
+/*
 .list-item {
   position: relative;
   width: 100%;
@@ -3421,6 +3422,7 @@ h4, h5, h6 {
   color: #1f1f21;
   transition: background-color 0.2s linear;
 }
+*/
 /*~
   name: Expandable List
   category: List
