@@ -34,10 +34,18 @@ $(function(){
     var taskCategory = $(this).parent().parent().siblings().text();
     // console.log($(this).parent().parent().siblings().text());
     
+    // get category number to add to class
+    // var categoryImg = $(this).parent().parent().siblings().text();
+    var categoryName = $(this).prev("div").attr('class');
+    console.log(categoryName);
+
+    
     var taskName = this.textContent ;
     // console.log(taskName);
+    // var taskLabel = "<div class=" + categoryName + "></div><p class='taskLabel'>" + taskName +"</p>" ;
     // console.log(taskCategory + " > " + taskName );
     var taskLabel = taskCategory + " > " + taskName ;
+
 
     // put text from menu in to the input field
     // document.selectTask.inputTask.value = taskLabel; 

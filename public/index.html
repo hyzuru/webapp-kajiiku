@@ -439,35 +439,35 @@ var valueofTodo = [];
                 <script>
 
      // vue_firebase
-                    var app = new Vue({
-                  el: '#appFin1',
-                  data () {
-                    return {
-                      list: [], // 最新状態はここにコピーされる
-                      todo: [],
-                      id: null,
-                      reviewed: null
-                    }
-                  },
-                  
-                  created: function() {
-                    firebase.database().ref('todolist/cooking').orderByChild('checked').equalTo(true).on("value",  snapshot => {
-                      if (snapshot) {
-                          const rootList = snapshot.val()
-                          const id = snapshot.key;
-                          console.log(id);
-                          let list = []
-                          // データオブジェクトを配列に変更する
-                          Object.keys(rootList).forEach((val, key) => {
-                            rootList[val].id = val
-                            list.push(rootList[val])
-                          })
-                          // vueのdataに突っ込む
-                          this.list = list
-                  }
+          var app = new Vue({
+        el: '#appFin1',
+        data () {
+          return {
+            list: [], // 最新状態はここにコピーされる
+            todo: [],
+            id: null,
+            reviewed: null
+          }
+        },
+        
+        created: function() {
+          firebase.database().ref('todolist/cooking').orderByChild('checked').equalTo(true).on("value",  snapshot => {
+            if (snapshot) {
+                const rootList = snapshot.val()
+                const id = snapshot.key;
+                console.log(id);
+                let list = []
+                // データオブジェクトを配列に変更する
+                Object.keys(rootList).forEach((val, key) => {
+                  rootList[val].id = val
+                  list.push(rootList[val])
                 })
-              },
-            })
+                // vueのdataに突っ込む
+                this.list = list
+        }
+      })
+    },
+  })
 
 
               function showModal2(el) {
@@ -600,7 +600,9 @@ var valueofTodo = [];
 
             <ons-list class="toggle" id="clickthis" >
                 <ons-list-item tappable modifier="chevron" id="changethis" class="js-todo-selector"
-                  >タスクを選ぶ</ons-list-item
+                  ><div class="categoryHatena"></div>
+                  <p class="taskLabel">タスクを選ぶ</p>
+                  </ons-list-item
                 >
               </ons-list>
 
@@ -610,12 +612,12 @@ var valueofTodo = [];
                 <ul class="menu2" id="category1">
                   <div class="overlay"></div>
                   <li  class="toggle3"><a href="#" class="backToMenu1">Back</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">食器を洗う</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">食器を拭く</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">食器を片付ける</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">朝食を作る</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">昼食を作る</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">夕食を作る</a></li>
+                  <li class="toggle3"><div class="category1"></div><a href="#" class="selectMenu">食器を洗う</a></li>
+                  <li class="toggle3"><div class="category1"></div><a href="#" class="selectMenu">食器を拭く</a></li>
+                  <li class="toggle3"><div class="category1"></div><a href="#" class="selectMenu">食器を片付ける</a></li>
+                  <li class="toggle3"><div class="category1"></div><a href="#" class="selectMenu">朝食を作る</a></li>
+                  <li class="toggle3"><div class="category1"></div><a href="#" class="selectMenu">昼食を作る</a></li>
+                  <li class="toggle3"><div class="category1"></div><a href="#" class="selectMenu">夕食を作る</a></li>
                   
                 </ul>
               </li>
@@ -623,10 +625,10 @@ var valueofTodo = [];
                 <ul class="menu2" id="category2">
                     <div class="overlay"></div>
                   <li  class="toggle3"><a href="#" class="backToMenu1">Back</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">テーブルを拭く</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">掃除機をかける</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">トイレを掃除する</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">お風呂を掃</a></li>
+                  <li class="toggle3"><div class="category2"></div><a href="#" class="selectMenu">テーブルを拭く</a></li>
+                  <li class="toggle3"><div class="category2"></div><a href="#" class="selectMenu">掃除機をかける</a></li>
+                  <li class="toggle3"><div class="category2"></div><a href="#" class="selectMenu">トイレを掃除する</a></li>
+                  <li class="toggle3"><div class="category2"></div><a href="#" class="selectMenu">お風呂を掃</a></li>
 
                 </ul>
               </li>
@@ -634,29 +636,29 @@ var valueofTodo = [];
                 <ul class="menu2" id="category3">
                     <div class="overlay"></div>
                     <li  class="toggle3"><a href="#" class="backToMenu1">Back</a></li>
-                    <li class="toggle3"><a href="#" class="selectMenu">洗濯物を洗う</a></li>
-                    <li class="toggle3"><a href="#" class="selectMenu">洗濯物を干す</a></li>
-                    <li class="toggle3"><a href="#" class="selectMenu">洗濯物をたたむ</a></li>
-                    <li class="toggle3"><a href="#" class="selectMenu">洗濯物をしまう</a></li>
+                    <li class="toggle3"><div class="category3"></div><a href="#" class="selectMenu">洗濯物を洗う</a></li>
+                    <li class="toggle3"><div class="category3"></div><a href="#" class="selectMenu">洗濯物を干す</a></li>
+                    <li class="toggle3"><div class="category3"></div><a href="#" class="selectMenu">洗濯物をたたむ</a></li>
+                    <li class="toggle3"><div class="category3"></div><a href="#" class="selectMenu">洗濯物をしまう</a></li>
                 </ul>
               </li>
               <li class="toggle2 toggle2-a"><img src="assets/c-ikuji.png" alt="育児のアイコン"><span class="toggle2-inner">育児</span>
                 <ul class="menu2" id="category4">
                     <div class="overlay"></div>
                     <li  class="toggle3"><a href="#" class="backToMenu1">Back</a></li>
-                    <li class="toggle3"><a href="#" class="selectMenu">おむつを替える</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">子供の歯磨きをする</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">子供の着替えをする</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">子供</a></li>
+                    <li class="toggle3"><div class="category5"></div><a href="#" class="selectMenu">おむつを替える</a></li>
+                  <li class="toggle3"><div class="category5"></div><a href="#" class="selectMenu">子供の歯磨きをする</a></li>
+                  <li class="toggle3"><div class="category5"></div><a href="#" class="selectMenu">子供の着替えをする</a></li>
+                  <li class="toggle3"><div class="category5"></div><a href="#" class="selectMenu">子供</a></li>
                 </ul>
               </li>
               <li class="toggle2 toggle2-a"><img src="assets/c-kaimono.png" alt="買い物のアイコン"><span class="toggle2-inner">買い物</span>
                 <ul class="menu2" id="category5">
                     <div class="overlay"></div>
                     <li  class="toggle3"><a href="#" class="backToMenu1">Back</a></li>
-                    <li class="toggle3"><a href="#" class="selectMenu">夕食の買い物をする</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">おむつを買う</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">トイレットペーパーを買う</a></li>
+                    <li class="toggle3"><div class="category5"></div><a href="#" class="selectMenu">夕食の買い物をする</a></li>
+                  <li class="toggle3"><div class="category5"></div><a href="#" class="selectMenu">おむつを買う</a></li>
+                  <li class="toggle3"><div class="category5"></div><a href="#" class="selectMenu">トイレットペーパーを買う</a></li>
                 </ul>
               </li>
             </ul>
