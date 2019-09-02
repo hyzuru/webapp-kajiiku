@@ -52,7 +52,8 @@ console.log(a);
         email:myEmail,
         password:password,
         role:a,
-        userUID:UID
+        userUID:UID,
+        partnerID:""
       })
     });
   })
