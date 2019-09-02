@@ -94,12 +94,12 @@
   
   const list = document.querySelector('.js-todo-list');
   list.addEventListener('click', event => {
-    if (event.target.classList.contains('js-tick')) {
-      const itemKey = event.target.parentElement.parentElement.dataset.key;
-      console.log(event.target.parentElement.parentElement.tagName);
+    // if (event.target.classList.contains('js-tick')) {
+    //   const itemKey = event.target.parentElement.parentElement.dataset.key;
+    //   console.log(event.target.parentElement.parentElement.tagName);
 
-      toggleDone(itemKey);
-    }
+    //   toggleDone(itemKey);
+    // }
     
     if (event.target.classList.contains('js-delete-todo')) {
       const itemKey = event.target.parentElement.parentElement.dataset.key;

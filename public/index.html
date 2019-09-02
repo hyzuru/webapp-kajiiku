@@ -168,9 +168,9 @@
           
             <div id="app">
               <ons-list class="todo-list js-todo-list" :data-id="id" >
-                <ons-list-item v-for="item in list" class="todo-item">
-                    <input id="1566658474566"  type="checkbox" >
-                    <label for="1566658474566" class="tick js-tick"><span style="display: none">{{item.id}}</span></label>
+                <ons-list-item v-for="item in list"  class="todo-item">
+                    <input :id="item.id" onclick="markChecked(this)" type="checkbox">
+                    <label :for="item.id" class="tick js-tick"><span style="display: none">{{item.id}}</span></label>
                   <span class="todo-itemName">{{item.taskName}}</span>
                   <span class="todo-itemComment">{{item.taskComment}}</span>
                   
@@ -192,6 +192,9 @@
 
               <script>
 
+const firebaseTodoRef = firebase.database().ref('todolist/cooking' ).orderByChild('checked').equalTo(false) ;
+var valueofTodo = [];
+
                 
               // vue_firebase
                     var app = new Vue({
@@ -205,29 +208,38 @@
                   },
                   
                   created: function() {
-                    firebase.database().ref('todolist/cooking').orderByChild('checked').equalTo(false).on("value",  snapshot => {
+                    firebaseTodoRef.on("value",  snapshot => {
+                    // firebase.database().ref('todolist/cooking').orderByChild('checked').equalTo(false).on("value",  snapshot => {
+                     
+
                       if (snapshot) {
                           const rootList = snapshot.val()
                           const id = snapshot.key;
-                          console.log(id);
+                          // console.log(id);
                           let list = []
                           // データオブジェクトを配列に変更する
                           Object.keys(rootList).forEach((val, key) => {
                             rootList[val].id = val
+                            // console.log(rootList[val].id)
+                            // console.log(val)
                             list.push(rootList[val])
+                            valueofTodo.push(val)
                           })
                           // vueのdataに突っ込む
-                          this.list = list
+                          this.list = list;
                           // console.log(list);
-                          console.log(rootList);
-
+                        
                           
+
+
+                        
                     
                           
                   }
                 })
               },
-  //   
+
+        
   //             computed: {
   //   filteredTodos: function () {
   //     if (this.showTodoType == 'all') {
@@ -244,13 +256,13 @@
   //     }
   //   }
   // },
-  methods: {
-    updateIsCompleteTodo: function (item, key) {
-      item.checked = !item.checked
-      var updates = {};
-      updates['/todolist/cooking' + key] = item;
-      this.database.ref().update(updates);
-    },
+  // methods: {
+  //   updateIsCompleteTodo: function (item, key) {
+  //     item.checked = !item.checked
+  //     var updates = {};
+  //     updates['/todolist/cooking' + key] = item;
+  //     this.database.ref().update(updates);
+  //   },
     // deleteTodo() {
     //   // from(todolist).pipe(map(todo => f.key), tap(key => {
     //     // firebase.database().ref('todolist/cooking' + key).child('checked')
@@ -263,35 +275,54 @@
     //     console.log("Finished updating")
     // // });
     //   },
-  },
-  
-      
-           
-            })
+  // },
+  });
+
+  console.log(valueofTodo);
 
             function markChecked(el) {
-              this.el = el ;
-              var target = this.el.tagName ;
-              console.log(target);
-              var id = this.el.nextElementSibling.textContent ;
-              console.log(id);
+              // console.log(this)
+              // for(var t in list ){
+                 id = el.nextElementSibling.textContent ;
+                 console.log(id);
+              // }
+           
+              // firebaseTodoRef.on("value", snapshot => {
+              //     var cookingData = snapshot.val();
+              //        var cookingDataKeys = Object.values(cookingData);
+              //         for(var i = 0; i < cookingDataKeys.length; i++){
+              //           console.log(cookingDataKeys[i]);
+              //          }
+              //     })
 
+          // const firebaseTodoRef2 = firebase.database().ref('todolist/cooking/' + id ).orderByChild('checked').equalTo(false) ;
+          // console.log(firebaseTodoRef2);
 
+                    // Update checked false to true
+                  firebase.database().ref('todolist/cooking/'+id).update({
+                    checked: true
+                    
+                      });
+                }
+  
+          
+  
+              
 
-              firebase.database().ref('todolist/cooking'+id).child('checked').update({
-                checked: true,
-                  });
-              }
-
-    //          function deleteTodo(el) {
-    //  this = this.el ; 
+        
+        //      function deleteTodo(el) {
+        //       this.el = el ;
+        //       var target = this.el.tagName ;
+        //       console.log(target);
+        //       var id = this.el.nextElementSibling.textContent ;
+        //       console.log(id);
      
-    //     let todoRef = firebase.database().ref('todolist/cooking' + id);
-    //         todoRef.remove()
+        // let todoRef = firebase.database().ref('todolist/cooking' + id);
+        //     todoRef.remove()
 
-    //     console.log("Finished updating")
+        // console.log("Finished updating")
 
-    //         }
+        //     }
           </script>
 
   
@@ -381,37 +412,7 @@
             };            
           }
 
-          //   function showModal(el) {
-          //     var elname = el.tagName ;
-          //     // get text of the item that was clicked
-          //     // console.log(elname);
-          //     // console.log(el.parentElement.parentElement.tagName);
-          //     var dataKey = el.parentElement.parentElement.getAttribute('data-key');
-          //     console.log(dataKey);
 
-          //     var todoTextLabel = el.parentElement.parentElement.querySelector('span').textContent;
-          //     // console.log(todoTextLabel);
-
-          //     var todoTextComment = el.parentElement.parentElement.querySelector('span.todo-itemComment').textContent;
-              
-          //     // display the modal
-
-          //   var modal = document.querySelector('ons-modal.taskDetailsModal');
-          //   modal.show();
-                   
-          //   var mText = modal.querySelector('p') ;
-
-          //   mText.innerHTML =  todoTextLabel;
-          //   mText.innerHTML =  "<div class='noDisplay'>" + dataKey+"</div>"+todoTextLabel;
-          //   mText.innerHTML += "<br><div class='todo-hLine'></div><br>"+todoTextComment;
-
-          //   var closeButton = document.querySelector('.closeBtn');
-          //   closeButton.onclick = function(){
-          //     // var modal = document.querySelector('ons-modal');
-          //     modal.hide();
-          //   };
-          // }
-          
           function doTask(event) {
             // console.log(event.target);
             var modal = document.querySelector('ons-modal.taskDetailsModal');
