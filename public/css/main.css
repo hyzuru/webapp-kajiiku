@@ -69,27 +69,28 @@ body {
 .todo-list {
   list-style: none;
   margin-bottom: 20px;
+  background: none;
 }
 
-.todo-item {
-  /* margin-bottom: 10px; */
-  width: 100%;
+.todo-item.list-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* width: 90%; */
+
   padding: 0;
-  border: 1px solid grey;
+  border: 1px solid rgb(201, 201, 201);
   box-sizing: border-box;
-  /* font-size: 0rem; */
-  background-image: none;
+  margin: 20px auto;
+  background-color: #fff;
+  width: 90%;
 }
 
 .todo-item span {
   flex-grow: 1;
   margin-left: 10px;
   margin-right: 10px;
-  font-size: 22px;
+  /* font-size: 22px; */
+  font-size: 1rem;
 }
 
 .done span {
