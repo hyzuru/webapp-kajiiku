@@ -145,11 +145,11 @@
               <p>
                   <div class="control">
                       <label class="radio">
-                        <input type="radio" name="answer">
+                        <input type="radio" name="answer" value="mama">
                         ママ
                       </label>
                       <label class="radio">
-                        <input type="radio" name="answer">
+                        <input type="radio" name="answer" value="papa">
                         パパ
                       </label>
                     </div>
@@ -164,11 +164,11 @@
 
     <template id="requests.html">
       <ons-page id="requests">
-          
+
             <ons-pull-hook id="pull-hook">
               再読み込み
             </ons-pull-hook>
-          
+
             <div id="app">
                 <ons-list class="todo-list js-todo-list">
                   <ons-list-item v-for="item in list">
@@ -236,7 +236,7 @@
                         // console.log(MyTodoList);
                   }
                 })
-              
+
               </script>
 
         <div class="container">
@@ -354,7 +354,7 @@
 
             var modal = document.querySelector('ons-modal.taskDetailsModal');
             modal.show();
-                   
+
             var mText = modal.querySelector('p') ;
 
             mText.innerHTML =  todoTextLabel;
@@ -597,6 +597,8 @@
       };
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
+
+
 
     </script>
     <script src="js/login.js"></script>
