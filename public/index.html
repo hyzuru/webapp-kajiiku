@@ -175,6 +175,7 @@
                     <!-- <label :for="item.id" class="tick js-tick"><span style="display: none">{{item.id}}</span></label> -->
                   <span class="todo-itemName">{{item.taskName}}</span>
                   <span class="todo-itemComment">{{item.taskComment}}</span>
+                  
                     <button class="openDetails" name="showmodalbutton" onclick="showModal(this)">
                         詳細
                     </button>
@@ -217,7 +218,7 @@
                 <li v-for="item in list">{{item.taskName}} {{item.taskComment}} </li>
               </ul> -->
             </div>
-
+     
               <script>
 
 const firebaseTodoRef = firebase.database().ref('todolist/cooking' ).orderByChild('checked').equalTo(false) ;
@@ -243,13 +244,13 @@ var valueofTodo = [];
         if (snapshot) {
             const rootList = snapshot.val()
             const id = snapshot.key;
-            // console.log(id);
+            console.log(id);
             let list = []
             // データオブジェクトを配列に変更する
             Object.keys(rootList).forEach((val, key) => {
               rootList[val].id = val
               // console.log(rootList[val].id)
-              // console.log(val)
+              console.log(val)
               list.push(rootList[val])
               valueofTodo.push(val)
             })
@@ -397,12 +398,15 @@ var valueofTodo = [];
             <h2>評価待ちタスク</h2>
             <div id="appFin1">
                 <ons-list class="todo-list js-todo-list">
-                  <ons-list-item v-for="item in list" class="todo-item" :class="item.reviewed" :data-modal-id="item.id">
-                      <input id="1566658474566" type="checkbox">
-                      <label for="1566658474566" class="tick js-tick"></label>
+                  
+                    <!-- <template v-for="item in list">
+                        <div>{{ item.id }}</div>
+                      </template> -->
+
+                  <ons-list-item v-for="item in list" class="todo-item" :data-rev-status="item.reviewed ? 'true' : 'false'" :data-modal-id="item.id" >
                     <span class="todo-itemName">{{item.taskName}}</span>
                     <span class="todo-itemComment">{{item.taskComment}}</span>
-                    <span>{{item.id}}</span>
+                    <!-- <span>{{item.id}}</span> -->
                     <span>{{item.reviewed}}</span>
                       <button class="openDetails" name="showmodalbutton" onclick="showModal2(this)">
                           詳細
