@@ -184,6 +184,10 @@ form {
 #taskComment {
   width: 100%;
 }
+p.taskLabel{
+  /* text-align: center; */
+  padding-left: 10px;
+}
 .js-todo-input {
   width: 100%;
   z-index: 0;
@@ -293,6 +297,7 @@ form {
 .overlay-a {
   z-index: 0;
 }
+/* Category Picker - offset heights for menu */
 #category1 {
   position: absolute;
   top: 0;
@@ -312,6 +317,44 @@ form {
 #category5 {
   position: absolute;
   top: -160px;
+}
+/* Divs for adding category icons */
+.category1 {
+  background-image: url('../assets/c-ryouri.png') ;
+  background-size: contain;
+  width: 33px;
+  height: 33px;
+}
+.category2 {
+  background-image: url('../assets/c-souji.png') ;
+  background-size: contain;
+  width: 33px;
+  height: 33px;
+}
+.category3 {
+  background-image: url('../assets/c-sentaku.png') ;
+  background-size: contain;
+  width: 33px;
+  height: 33px;
+}
+.category4 {
+  background-image: url('../assets/c-ikuji.png') ;
+  background-size: contain;
+  width: 33px;
+  height: 33px;
+}
+.category5 {
+  background-image: url('../assets/c-kaimono.png') ;
+  background-size: contain;
+  width: 33px;
+  height: 33px;
+}
+.categoryHatena {
+  background-image: url('../assets/c-hatena.png') ;
+  background-size: contain;
+  width: 33px;
+  height: 33px;
+  background-color: #333;
 }
 
 .submitBtn,
