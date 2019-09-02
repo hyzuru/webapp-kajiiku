@@ -7,7 +7,7 @@ $(function(){
 
   $('.toggle2').click(function(){
 	$(this).toggleClass('visible2');
-	$(this).siblings().removeClass('visible2');
+  $(this).siblings().removeClass('visible2');
   });
 
   $('.closeMenu').click(function(){
@@ -25,7 +25,9 @@ $(function(){
   $('.selectMenu').click(function(){
     // Close the menu
     var firstToggle = $(this).parent().parent().parent().parent();
-    // console.log(firstToggle.attr('class'));
+    // var check = $(this).parent().parent();
+    // console.log($(this).children());
+
     firstToggle.removeClass('visible');
  
     // Get task name and category from text in menus
