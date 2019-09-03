@@ -42,27 +42,27 @@
     
   }
   
-  function toggleDone(key) {
-    const index = todoItems.findIndex(item => item.id === Number(key));
-    todoItems[index].checked = !todoItems[index].checked;
+  // function toggleDone(key) {
+  //   const index = todoItems.findIndex(item => item.id === Number(key));
+  //   todoItems[index].checked = !todoItems[index].checked;
   
-    const item = document.querySelector(`[data-key='${key}']`);
-    if (todoItems[index].checked) {
-      item.classList.add('done');
-      // document.querySelector
-    } else {
-      item.classList.remove('done');
-    }
-  }
+  //   const item = document.querySelector(`[data-key='${key}']`);
+  //   if (todoItems[index].checked) {
+  //     item.classList.add('done');
+  //     // document.querySelector
+  //   } else {
+  //     item.classList.remove('done');
+  //   }
+  // }
   
-  function deleteTodo(key) {
-    todoItems = todoItems.filter(item => item.id !== Number(key));
-    const item = document.querySelector(`[data-key='${key}']`);
-    item.remove();
+  // function deleteTodo(key) {
+  //   todoItems = todoItems.filter(item => item.id !== Number(key));
+  //   const item = document.querySelector(`[data-key='${key}']`);
+  //   item.remove();
     
-    const list = document.querySelector('.js-todo-list');
-    if (todoItems.length === 0) list.innerHTML = '';
-  }
+  //   const list = document.querySelector('.js-todo-list');
+  //   if (todoItems.length === 0) list.innerHTML = '';
+  // }
   
   const form = document.querySelector('.js-form');
   form.addEventListener('submit', event => {

@@ -8,28 +8,18 @@ const login = () => {
   .then(function() {
   firebase.auth().signInWithEmailAndPassword(myEmail, password)
   .then(function() {
-    console.log('サインアップしました。');
+    console.log('ログインしました。');
     const navigator = document.querySelector("#navigator");
     navigator.resetToPage("home.html");
   })
   .catch(function(error) {
-    console.log('サインアップできませんでした。');
+    console.log('ログインできませんでした。');
+        // 登録に失敗した時の処理
+
+        ons.notification.alert('ログインできません（' + error.message + '）');
   });
-}).catch(function(error) {
-  // Handle Errors here.
-  var errorCode = error.code;
-  var errorMessage = error.message;
-});
-  //   .catch(function(error) {
-// // 登録に失敗した時の処理
-//     alert('登録できません（' + error.message + '）');
-// });
-  // if (myEmail === "" && password === "") {
-  //   const navigator = document.querySelector("#navigator");
-  //   navigator.resetToPage("home.html");
-  // } else {
-  //   ons.notification.alert("Wrong username/password combination");
-  // }
+})
+
 };
 const signUp = () => {
   const myEmail = document.querySelector("#newEmail").value;
@@ -68,11 +58,10 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
   })
   .catch(function(error) {
     console.log('サインアップできませんでした。');
+        // 登録に失敗した時の処理
+
+        ons.notification.alert('登録できません（' + error.message + '）');
   });
 })
-.catch(function(error) {
-  // Handle Errors here.
-  var errorCode = error.code;
-  var errorMessage = error.message;
-});
+
 };
