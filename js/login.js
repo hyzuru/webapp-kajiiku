@@ -60,7 +60,9 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
         password:password,
         role:a,
         userUID:UID,
-        partnerID:""
+        partnerID:"",
+        point:0
+
       })
     });
   })
