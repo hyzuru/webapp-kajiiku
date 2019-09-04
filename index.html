@@ -172,7 +172,8 @@
                 <ons-list-item v-for="item in list"  class="todo-item">
        <!-- <input :id="item.id" onclick="markChecked(this)" type="checkbox"> -->
                     <!-- <label :for="item.id" class="tick js-tick"><span style="display: none">{{item.id}}</span></label> -->
-                    <span class="todo-itemName">{{item.taskName}}</span>
+                    <div :class="item.taskCategory"></div>
+                    <p class="todo-itemName">{{item.taskName}}</p>
                     <span class="todo-itemComment">{{item.taskComment}}</span>
                       <button class="openDetails" name="showmodalbutton" onclick="showModal(this)">
                           詳細
@@ -627,57 +628,57 @@ var valueofTodo = [];
 
             <ul class="menu1"><div class="overlay overlay-a"></div>
               <li class="toggle2-a "><span class="toggle2-inner closeMenu">Close Menu</span>
-                <li class="toggle2 toggle2-a"><img src="assets/c-ryouri.png" alt="料理のアイコン"><span class="toggle2-inner">料理</span>
-                  <ul class="menu2" id="category1">
+                <li class="toggle2 toggle2-a"><div class="cRyouri"></div><span class="toggle2-inner">料理</span>
+                  <ul class="menu2" id="cRyouri">
                   <div class="overlay"></div>
                   <li  class="toggle3"><a href="#" class="backToMenu1">Back</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">食器を洗う</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">食器を拭く</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">食器を片付ける</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">朝食を作る</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">昼食を作る</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">夕食を作る</a></li>
+                  <li class="toggle3"><div class="cRyouri"></div><a href="#" class="selectMenu">食器を洗う</a></li>
+                  <li class="toggle3"><div class="cRyouri"></div><a href="#" class="selectMenu">食器を拭く</a></li>
+                  <li class="toggle3"><div class="cRyouri"></div><a href="#" class="selectMenu">食器を片付ける</a></li>
+                  <li class="toggle3"><div class="cRyouri"></div><a href="#" class="selectMenu">朝食を作る</a></li>
+                  <li class="toggle3"><div class="cRyouri"></div><a href="#" class="selectMenu">昼食を作る</a></li>
+                  <li class="toggle3"><div class="cRyouri"></div><a href="#" class="selectMenu">夕食を作る</a></li>
                   
                 </ul>
               </li>
-              <li class="toggle2 toggle2-a"><img src="assets/c-souji.png" alt="掃除のアイコン"><span class="toggle2-inner">掃除</span>
-                <ul class="menu2" id="category2">
+              <li class="toggle2 toggle2-a"><div class="cSouji"></div><span class="toggle2-inner">掃除</span>
+                <ul class="menu2" id="cSouji">
                     <div class="overlay"></div>
                   <li  class="toggle3"><a href="#" class="backToMenu1">Back</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">テーブルを拭く</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">掃除機をかける</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">トイレを掃除する</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">お風呂を掃</a></li>
+                  <li class="toggle3"><div class="cSouji"></div><a href="#" class="selectMenu">テーブルを拭く</a></li>
+                  <li class="toggle3"><div class="cSouji"></div><a href="#" class="selectMenu">掃除機をかける</a></li>
+                  <li class="toggle3"><div class="cSouji"></div><a href="#" class="selectMenu">トイレを掃除する</a></li>
+                  <li class="toggle3"><div class="cSouji"></div><a href="#" class="selectMenu">お風呂を掃</a></li>
 
                 </ul>
               </li>
-              <li class="toggle2 toggle2-a"><img src="assets/c-sentaku.png" alt="洗濯のアイコン"><span class="toggle2-inner">洗濯</span>
-                <ul class="menu2" id="category3">
+              <li class="toggle2 toggle2-a"><div class="cSentaku"></div><span class="toggle2-inner">洗濯</span>
+                <ul class="menu2" id="cSentaku">
                     <div class="overlay"></div>
                     <li  class="toggle3"><a href="#" class="backToMenu1">Back</a></li>
-                    <li class="toggle3"><a href="#" class="selectMenu">洗濯物を洗う</a></li>
-                    <li class="toggle3"><a href="#" class="selectMenu">洗濯物を干す</a></li>
-                    <li class="toggle3"><a href="#" class="selectMenu">洗濯物をたたむ</a></li>
-                    <li class="toggle3"><a href="#" class="selectMenu">洗濯物をしまう</a></li>
+                    <li class="toggle3"><div class="cSentaku"></div><a href="#" class="selectMenu">洗濯物を洗う</a></li>
+                    <li class="toggle3"><div class="cSentaku"></div><a href="#" class="selectMenu">洗濯物を干す</a></li>
+                    <li class="toggle3"><div class="cSentaku"></div><a href="#" class="selectMenu">洗濯物をたたむ</a></li>
+                    <li class="toggle3"><div class="cSentaku"></div><a href="#" class="selectMenu">洗濯物をしまう</a></li>
                 </ul>
               </li>
-              <li class="toggle2 toggle2-a"><img src="assets/c-ikuji.png" alt="育児のアイコン"><span class="toggle2-inner">育児</span>
-                <ul class="menu2" id="category4">
+              <li class="toggle2 toggle2-a"><div class="cIkuji"></div><span class="toggle2-inner">育児</span>
+                <ul class="menu2" id="cIkuji">
                     <div class="overlay"></div>
                     <li  class="toggle3"><a href="#" class="backToMenu1">Back</a></li>
-                    <li class="toggle3"><a href="#" class="selectMenu">おむつを替える</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">子供の歯磨きをする</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">子供の着替えをする</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">子供</a></li>
+                  <li class="toggle3"><div class="cIkuji"></div><a href="#" class="selectMenu">おむつを替える</a></li>
+                  <li class="toggle3"><div class="cIkuji"></div><a href="#" class="selectMenu">子供の歯磨きをする</a></li>
+                  <li class="toggle3"><div class="cIkuji"></div><a href="#" class="selectMenu">子供の着替えをする</a></li>
+                  <li class="toggle3"><div class="cIkuji"></div><a href="#" class="selectMenu">子供</a></li>
                 </ul>
               </li>
-              <li class="toggle2 toggle2-a"><img src="assets/c-kaimono.png" alt="買い物のアイコン"><span class="toggle2-inner">買い物</span>
-                <ul class="menu2" id="category5">
+              <li class="toggle2 toggle2-a"><div class="cKaimono"></div><span class="toggle2-inner">買い物</span>
+                <ul class="menu2" id="cKaimono">
                     <div class="overlay"></div>
                     <li  class="toggle3"><a href="#" class="backToMenu1">Back</a></li>
-                    <li class="toggle3"><a href="#" class="selectMenu">夕食の買い物をする</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">おむつを買う</a></li>
-                  <li class="toggle3"><a href="#" class="selectMenu">トイレットペーパーを買う</a></li>
+                  <li class="toggle3"><div class="cKaimono"></div><a href="#" class="selectMenu">夕食の買い物をする</a></li>
+                  <li class="toggle3"><div class="cKaimono"></div><a href="#" class="selectMenu">おむつを買う</a></li>
+                  <li class="toggle3"><div class="cKaimono"></div><a href="#" class="selectMenu">トイレットペーパーを買う</a></li>
                 </ul>
               </li>
             </ul>
