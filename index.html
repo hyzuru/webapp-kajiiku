@@ -571,7 +571,7 @@ var valueofTodo = [];
             </ons-page>
             <script>
 
-
+var myUID =[];
             function renkei() {
               const partnerEmail = document.querySelector("#pertnerEmail").value;
               console.log(partnerEmail);
@@ -582,7 +582,11 @@ var valueofTodo = [];
                 firebase.database().ref("usertable").orderByChild("email").equalTo(partnerEmail).on("child_added", function(snapshot) {
                   let partnerKey =snapshot.key;
                     console.log(partnerKey);
+                    var user = firebase.auth().currentUser;
+                      user.providerData.forEach(function (profile) {
+                        const UID = user.uid;
 
+                        myUID.push(UID)
                   firebase.database().ref("usertable").orderByChild("userUID").equalTo(UID).on("child_added", function(snapshot) {
                     myKey = snapshot.key;
                     console.log(myKey);
@@ -596,7 +600,7 @@ var valueofTodo = [];
                           partnerID: myKey,
                           });
                   });
-
+                });
 
                 });
 

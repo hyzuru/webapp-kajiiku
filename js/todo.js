@@ -39,6 +39,7 @@ function toggleDone(key) {
   } else {
     item.classList.remove("done");
   }
+
 }
 
 function deleteTodo(key) {
@@ -106,3 +107,4 @@ list.addEventListener("click", event => {
     deleteTodo(itemKey);
   }
 });
+

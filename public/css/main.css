@@ -184,6 +184,10 @@ form {
 #taskComment {
   width: 100%;
 }
+p.taskLabel{
+  /* text-align: center; */
+  padding-left: 10px;
+}
 .js-todo-input {
   width: 100%;
   z-index: 0;
@@ -293,6 +297,7 @@ form {
 .overlay-a {
   z-index: 0;
 }
+
 #cRyouri {
   position: absolute;
   top: 0;
@@ -313,6 +318,7 @@ form {
   position: absolute;
   top: -160px;
 }
+
 .cRyouri {
   background-image: url("../assets/c-ryouri.png");
   background-repeat: no-repeat;
@@ -347,6 +353,14 @@ form {
   background-size: contain;
   height: 33px;
   width: 33px;
+}
+
+.categoryHatena {
+  background-image: url('../assets/c-hatena.png') ;
+  background-size: contain;
+  width: 33px;
+  height: 33px;
+  background-color: #333;
 }
 
 .submitBtn,

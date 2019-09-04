@@ -53,6 +53,7 @@
     <ons-template id="login.html">
       <ons-page id="login">
 
+
         <div style="text-align: center; margin-top: 200px">
             <h1 class="app-title">かじいく</h1>
 
@@ -112,6 +113,14 @@
 
     <ons-template id="signup.html">
         <ons-page id="signup">
+
+            <ons-toolbar>
+                <div class="left"><ons-back-button>ログインに戻る</ons-back-button></div>
+            </ons-toolbar>
+   
+            <h1 class="app-title">サインアップ</h1>
+
+
           <div style="text-align: center; margin-top: 200px">
             <p>
               <ons-input
@@ -399,7 +408,7 @@ var valueofTodo = [];
             <script></script>          
             <!-- <p>Completed Requests go here.</p> -->
             <p>終わったリクエストはここに記載します。</p>
-<hr>
+<!-- <hr> -->
             <h2>評価待ちタスク</h2>
             <div id="appFin1">
                 <ons-list class="todo-list js-todo-list">
@@ -440,40 +449,113 @@ var valueofTodo = [];
                     </div>
                   </div>
                 </ons-modal>
-  
+                <hr>
+                <p>評価済みタスク</p>
+
+                <div id="appFin1">
+                    <ons-list class="todo-list js-todo-list">
+                      
+                        <!-- <template v-for="item in list">
+                            <div>{{ item.id }}</div>
+                          </template> -->
+    
+                      <ons-list-item v-for="item in list" class="todo-item" :data-rev-status="item.reviewed ? 'true' : 'false'" :data-modal-id="item.id" >
+                        <span class="todo-itemName">{{item.taskName}}</span>
+                        <span class="todo-itemComment">{{item.taskComment}}</span>
+                        <!-- <span>{{item.id}}</span> -->
+                        <span>{{item.reviewed}}</span>
+                          <button class="openDetails" name="showmodalbutton" onclick="showModal2(this)">
+                              詳細
+                          </button>
+                          <button class="delete-todo js-delete-todo">
+                            <svg><use href="#delete-icon"></use></svg>
+                          </button>
+                      </ons-list-item>
+                    </ons-list>
+                    <!-- <ul>
+                      <li v-for="item in list">{{item.taskName}} {{item.taskComment}} </li>
+                    </ul> -->
+    
+                  </div>
+                  <ons-modal direction="up" class="taskDetailsModal2">
+                      <div style="text-align: center;">
+                        <div style="text-align: center; background-color: #fff; height: 50vh; width:80vw; margin: 0 auto; padding: 10px;">
+          
+                        <p style=" z-index:50; color:#000;">
+                          <!-- <ons-icon icon="md-spinner" size="28px" spin></ons-icon> --> 
+                          <!-- Loading... -->
+                          モーダルウィンドウで詳細を確認します。
+                        </p>
+                        <!-- <button class="doTaskBtn" onclick="doTask()" name="doTaskButton" >了解！</button> -->
+                        <button class="closeBtn" onclick="closeModal2()">保留にする</button>
+                        </div>
+                      </div>
+
+                <!-- <hr> -->
+                <!-- <p>やめたタスク</p> -->
+
+
                 <script>
 
      // vue_firebase
-                    var app = new Vue({
-                  el: '#appFin1',
-                  data () {
-                    return {
-                      list: [], // 最新状態はここにコピーされる
-                      todo: [],
-                      id: null,
-                      reviewed: null
-                    }
-                  },
-                  
-                  created: function() {
-                    firebase.database().ref('todolist/cooking').orderByChild('checked').equalTo(true).on("value",  snapshot => {
-                      if (snapshot) {
-                          const rootList = snapshot.val()
-                          const id = snapshot.key;
-                          console.log(id);
-                          let list = []
-                          // データオブジェクトを配列に変更する
-                          Object.keys(rootList).forEach((val, key) => {
-                            rootList[val].id = val
-                            list.push(rootList[val])
-                          })
-                          // vueのdataに突っ込む
-                          this.list = list
-                  }
-                })
-              },
-            })
-
+var app = new Vue({
+  el: '#appFin1',
+  data () {
+    return {
+      list: [], // 最新状態はここにコピーされる
+      todo: [],
+      id: null,
+      reviewed: null,
+      score: 0,
+    }
+  },
+  created: function() {
+    firebase.database().ref('todolist/cooking').orderByChild('reviewed').equalTo(false).on("value",  snapshot => {
+      if (snapshot) {
+          const rootList = snapshot.val()
+          const id = snapshot.key;
+          console.log(id);
+          let list = []
+          // データオブジェクトを配列に変更する
+          Object.keys(rootList).forEach((val, key) => {
+            rootList[val].id = val
+            list.push(rootList[val])
+          })
+          // vueのdataに突っ込む
+          this.list = list
+      }
+    })
+  },
+})
+var app2 = new Vue({
+  el: '#appFin2',
+  data () {
+    return {
+      list: [], // 最新状態はここにコピーされる
+      todo: [],
+      id: null,
+      reviewed: null,
+      score: 0,
+    }
+  },
+  created: function() {
+    firebase.database().ref('todolist/cooking').orderByChild('reviewed').equalTo(true).on("value",  snapshot => {
+      if (snapshot) {
+          const rootList = snapshot.val()
+          const id = snapshot.key;
+          console.log(id);
+          let list = []
+          // データオブジェクトを配列に変更する
+          Object.keys(rootList).forEach((val, key) => {
+            rootList[val].id = val
+            list.push(rootList[val])
+          })
+          // vueのdataに突っ込む
+          this.list = list
+      }
+    })
+  },
+})
 
               function showModal2(el) {
             
@@ -519,10 +601,7 @@ var valueofTodo = [];
 
                     
               </script>
-            <hr>
-            <p>評価済みタスク</p>
-            <hr>
-            <p>やめたタスク</p>
+
           </ons-page>
           
       </template>
@@ -530,8 +609,9 @@ var valueofTodo = [];
           <ons-page id="profile">
        
             
-            <!-- <p>Profile placeholder goes here.</p> -->
-              <p>プロフィール画像。</p>
+           <h1>パパのポイント</h1>
+           <p id="points"></p>
+
               <ons-input
               id="pertnerEmail"
               placeholder="pertnerEmail"
@@ -605,9 +685,12 @@ var valueofTodo = [];
 
             <ons-list class="toggle" id="clickthis" >
                 <ons-list-item tappable modifier="chevron" id="changethis" class="js-todo-selector"
-                  >タスクを選ぶ</ons-list-item
+                  ><div class="categoryHatena"></div>
+                  <p class="taskLabel">タスクを選ぶ</p>
+                  </ons-list-item
                 >
               </ons-list>
+
 
               <ul class="menu1"><div class="overlay overlay-a"></div>
                 <li class="toggle2-a "><span class="toggle2-inner closeMenu">Close Menu</span>
@@ -665,6 +748,7 @@ var valueofTodo = [];
                   </ul>
                 </li>
               </ul>
+
             
 
           <br>
