@@ -168,8 +168,8 @@
             </ons-pull-hook>
 
             <div id="app">
-              <ons-list class="todo-list js-todo-list" :data-id="id" >
-                <ons-list-item v-for="item in list"  class="todo-item">
+              <ons-list class="todo-list js-todo-list"  >
+                 <ons-list-item v-for="item in list"  class="todo-item" :data-id="item.id">
        <!-- <input :id="item.id" onclick="markChecked(this)" type="checkbox"> -->
                     <!-- <label :for="item.id" class="tick js-tick"><span style="display: none">{{item.id}}</span></label> -->
                     <div :class="item.taskCategory"></div>
@@ -183,40 +183,43 @@
                         <svg><use href="#delete-icon"></use></svg>
                       </button>
                       
-                      <ons-modal direction="up" class="taskDetailsModal" :data-modal-id="item.id" >
-                          <div style="text-align: center;">
-                              <div style="text-align: center; background-color: #fff; height: 50vh; width:80vw; margin: 0 auto; padding: 10px;">
-                
-                              <p style=" z-index:50; color:#000;">
-                                <!-- <ons-icon icon="md-spinner" size="28px" spin></ons-icon> --> 
-                                <!-- Loading... -->
-                                モーダルウィンドウで詳細を確認します。
-                              </p>
-                              <button class="doTaskBtn" onclick="doTask(this)" name="doTaskButton" >了解！</button>
-                              <button class="closeBtn">保留にする</button>
-                              </div>
-                            </div>
-                          </ons-modal>
-                          <ons-modal direction="up" class="doTaskConfirmation">
-                              <div style="text-align: center;">
-                                <div style="text-align: center; background-color: #fff; height: 50vh; width:80vw; margin: 0 auto; padding: 10px;">
-                  
-                                <p style=" z-index:50; color:#000;">
-                                  <!-- <ons-icon icon="md-spinner" size="28px" spin></ons-icon> --> 
-                                  <!-- Loading... -->
-                                  リクエストを完了しました
-                                </p>
-                                <p>パパありがとう！</p>
-                                <button class="closeBtn2 button">閉じる</button>
-                                </div>
-                              </div>
-                            </ons-modal>
+             
     
                     </ons-list-item>
                 </ons-list>
+                
               <!-- <ul>
                 <li v-for="item in list">{{item.taskName}} {{item.taskComment}} </li>
               </ul> -->
+
+              <ons-modal direction="up" class="taskDetailsModal" v-for="item in list"  :data-modal-id="item.id" >
+                  <div style="text-align: center;">
+                      <div style="text-align: center; background-color: #fff; height: 50vh; width:80vw; margin: 0 auto; padding: 10px;">
+        
+                      <p style=" z-index:50; color:#000;">
+                        <!-- <ons-icon icon="md-spinner" size="28px" spin></ons-icon> --> 
+                        <!-- Loading... -->
+                        モーダルウィンドウで詳細を確認します。
+                      </p>
+                      <button class="doTaskBtn" onclick="doTask(this)" name="doTaskButton" >了解！</button>
+                      <button class="closeBtn">保留にする</button>
+                      </div>
+                    </div>
+                  </ons-modal>
+                  <ons-modal direction="up" class="doTaskConfirmation">
+                      <div style="text-align: center;">
+                        <div style="text-align: center; background-color: #fff; height: 50vh; width:80vw; margin: 0 auto; padding: 10px;">
+          
+                        <p style=" z-index:50; color:#000;">
+                          <!-- <ons-icon icon="md-spinner" size="28px" spin></ons-icon> --> 
+                          <!-- Loading... -->
+                          リクエストを完了しました
+                        </p>
+                        <p>パパありがとう！</p>
+                        <button class="closeBtn2 button">閉じる</button>
+                        </div>
+                      </div>
+                    </ons-modal>
             </div>
 
               <script>
@@ -260,14 +263,14 @@ var valueofTodo = [];
                   var elname = el.tagName ;
             // get text of the item that was clicked
             console.log(elname);
-            var inputTag = el.parentNode.firstChild;
-            // console.log(inputTag.tagName);
-            var dataKey = inputTag.getAttribute('id');
-            console.log(inputTag.getAttribute('id'));
-
-            var todoTextLabel = el.parentElement.querySelector('span.todo-itemName').textContent;
+            var listItem = el.parentElement.parentElement;
+            // console.log(listItem.outerHTML);
+            var dataKey = listItem.getAttribute('data-id');
+            console.log(listItem.getAttribute('data-id'));
+            // var todoTextLabel = el.parentElement.querySelector('div.todo-itemName').textContent;
+            var todoTextLabel = el.parentElement.querySelector("div").nextElementSibling.textContent;
             console.log(todoTextLabel);
-
+            // var todoTextComment = el.parentElement.querySelector('div.todo-itemComment').textContent;
             var todoTextComment = el.parentElement.querySelector('span.todo-itemComment').textContent;
               var todoTextComment = todoTextComment.replace(/\s+/g, '');
               if (todoTextComment != "") {
@@ -294,8 +297,14 @@ var valueofTodo = [];
                 // console.log(todoTextComment);
               // display the modal
 
+ 
             var modal = document.querySelector('ons-modal.taskDetailsModal');
+          var checkModKey = modal.getAttribute("data-modal-id");
+          console.log(checkModKey);
+          console.log(dataKey);
+          if (checkModKey === dataKey) { 
             modal.show();
+          }
 
             var mText = modal.querySelector('p') ;
 

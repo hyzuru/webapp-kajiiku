@@ -293,25 +293,60 @@ form {
 .overlay-a {
   z-index: 0;
 }
-#category1 {
+#cRyouri {
   position: absolute;
   top: 0;
 }
-#category2 {
+#cSouji {
   position: absolute;
   top: -40px;
 }
-#category3 {
+#cSentaku {
   position: absolute;
   top: -80px;
 }
-#category4 {
+#cIkuji {
   position: absolute;
   top: -120px;
 }
-#category5 {
+#cKaimono {
   position: absolute;
   top: -160px;
+}
+.cRyouri {
+  background-image: url("../assets/c-ryouri.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 33px;
+  width: 33px;
+}
+.cSouji {
+  background-image: url("../assets/c-souji.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 33px;
+  width: 33px;
+}
+.cSentaku {
+  background-image: url("../assets/c-sentaku.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 33px;
+  width: 33px;
+}
+.cIkuji {
+  background-image: url("../assets/c-ikuji.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 33px;
+  width: 33px;
+}
+.cKaimono {
+  background-image: url("../assets/c-kaimono.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 33px;
+  width: 33px;
 }
 
 .submitBtn,
