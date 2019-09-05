@@ -1,3 +1,12 @@
+// firebase.auth().onAuthStateChanged(function(user) {
+//   if (user) {
+//     // User is signed in.
+//    } else {
+//     // No user is signed in.
+//     // window.location = '/login.html';
+//   }
+// });
+
 // Login Page
 const login = () => {
   const myEmail = document.querySelector("#email").value;

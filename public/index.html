@@ -179,9 +179,10 @@
           
             <div id="app">
               <ons-list class="todo-list js-todo-list" :data-id="id" >
-                <ons-list-item v-for="item in list"  class="todo-item">
+                <ons-list-item v-for="item in list"  class="todo-item" :data-modal-id="item.id">
                     <!-- <input :id="item.id" onclick="markChecked(this)" type="checkbox"> -->
                     <!-- <label :for="item.id" class="tick js-tick"><span style="display: none">{{item.id}}</span></label> -->
+                  <span id="item-id" style="display: none">{{item.id}}</span>
                   <span class="todo-itemName">{{item.taskName}}</span>
                   <span class="todo-itemComment">{{item.taskComment}}</span>
                   
@@ -192,7 +193,7 @@
                       <svg><use href="#delete-icon"></use></svg>
                     </button>
          
-                    <ons-modal direction="up" class="taskDetailsModal" :data-modal-id="item.id" >
+                    <ons-modal direction="up" class="taskDetailsModal" :data-modal-id="item.id" :class="item.id">
                         <div style="text-align: center;">
                           <div style="text-align: center; background-color: #fff; height: 50vh; width:80vw; margin: 0 auto; padding: 10px;">
             
@@ -227,7 +228,34 @@
                 <li v-for="item in list">{{item.taskName}} {{item.taskComment}} </li>
               </ul> -->
             </div>
-     
+            <ons-modal direction="up" class="taskDetailsModal" >
+                <div style="text-align: center;">
+                  <div style="text-align: center; background-color: #fff; height: 50vh; width:80vw; margin: 0 auto; padding: 10px;">
+    
+                  <p style=" z-index:50; color:#000;">
+                    <!-- <ons-icon icon="md-spinner" size="28px" spin></ons-icon> --> 
+                    <!-- Loading... -->
+                    モーダルウィンドウで詳細を確認します。
+                  </p>
+                  <button class="doTaskBtn" onclick="doTask(this)" name="doTaskButton" >了解！</button>
+                  <button class="closeBtn">保留にする</button>
+                  </div>
+                </div>
+              </ons-modal>
+              <ons-modal direction="up" class="doTaskConfirmation">
+                  <div style="text-align: center;">
+                    <div style="text-align: center; background-color: #fff; height: 50vh; width:80vw; margin: 0 auto; padding: 10px;">
+      
+                    <p style=" z-index:50; color:#000;">
+                      <!-- <ons-icon icon="md-spinner" size="28px" spin></ons-icon> --> 
+                      <!-- Loading... -->
+                      リクエストを完了しました
+                    </p>
+                    <p>パパありがとう！</p>
+                    <button class="closeBtn2 button">閉じる</button>
+                    </div>
+                  </div>
+                </ons-modal>
               <script>
 
 const firebaseTodoRef = firebase.database().ref('todolist/cooking' ).orderByChild('checked').equalTo(false) ;
@@ -279,12 +307,16 @@ var valueofTodo = [];
             var elname = el.tagName ;
             // get text of the item that was clicked
             console.log(elname);
-            var inputTag = el.parentNode.firstChild;
+  
+            var inputTag = el.parentNode.parentNode;
             // console.log(inputTag.tagName);
-            var dataKey = inputTag.getAttribute('id');
-            console.log(inputTag.getAttribute('id'));
+            var thisTodoKey = inputTag.getAttribute("data-modal-id") ;
+            console.log(thisTodoKey);
+
+            // var dataKey = inputTag.getAttribute('id');
+            // console.log(inputTag.getAttribute('id'));
             var todoTextLabel = el.parentElement.querySelector('span.todo-itemName').textContent;
-            console.log(todoTextLabel);
+            // console.log(todoTextLabel);
             var todoTextComment = el.parentElement.querySelector('span.todo-itemComment').textContent;
               var todoTextComment = todoTextComment.replace(/\s+/g, '');
               if (todoTextComment != "") {
@@ -293,30 +325,25 @@ var valueofTodo = [];
                 // console.log(todoTextComment);
                 todoTextComment = "コメントなし"
               }
-              console.log(todoTextComment);
-            // display the modal
+              // console.log(todoTextComment);
+     
 
-                 // var elname = el.tagName ;
-              // // get text of the item that was clicked
-              // // console.log(elname);
-              // // console.log(el.parentElement.parentElement.tagName);
-              // var dataKey = el.parentElement.parentElement.getAttribute('data-key');
-              // console.log(dataKey);
+          var modal = document.querySelector('ons-modal.'+thisTodoKey);
 
-              // var todoTextLabel = el.parentElement.parentElement.querySelector('span').textContent;
-              // // console.log(todoTextLabel);
-
-              // var todoTextComment = el.parentElement.parentElement.querySelector('span.todo-itemComment').textContent;
-              //   var todoTextComment = todoTextComment.replace(/\s+/g, '');
-                // console.log(todoTextComment);
-              // display the modal
-
-          var modal = document.querySelector('ons-modal.taskDetailsModal');
-          modal.show();
+          var thisModalKey = modal.getAttribute("data-modal-id");
+          console.log(thisModalKey);
+          if (thisModalKey == thisTodoKey) {
+            console.log("match");
+            modal.show();
+          } else {
+            console.log("not match")
+          }
+          
+          
                  
           var mText = modal.querySelector('p') ;
           mText.innerHTML =  todoTextLabel;
-          mText.innerHTML =  "<div class='noDisplay'>" + dataKey+"</div>"+todoTextLabel;
+          mText.innerHTML =  "<div class='noDisplay'>" + thisTodoKey +"</div>"+todoTextLabel;
           mText.innerHTML += "<br><div class='todo-hLine'></div><br>"+todoTextComment;
           var closeButton = document.querySelector('.closeBtn');
           closeButton.onclick = function(){
@@ -418,7 +445,7 @@ var valueofTodo = [];
                     <!-- <span>{{item.id}}</span> -->
                     <span>{{item.reviewed}}</span>
                       <button class="openDetails" name="showmodalbutton" onclick="showModal2(this)">
-                          詳細
+                          評価をする
                       </button>
                       <button class="delete-todo js-delete-todo">
                         <svg><use href="#delete-icon"></use></svg>
@@ -430,15 +457,53 @@ var valueofTodo = [];
                 </ul> -->
 
               </div>
-              <ons-modal direction="up" class="taskDetailsModal2">
+              <ons-modal direction="up" class="taskDetailsModal2" id="test">
                   <div style="text-align: center;">
                     <div style="text-align: center; background-color: #fff; height: 50vh; width:80vw; margin: 0 auto; padding: 10px;">
       
-                    <p style=" z-index:50; color:#000;">
+                    <p style=" z-index:50; color:#000;"  class="inserttext">
                       <!-- <ons-icon icon="md-spinner" size="28px" spin></ons-icon> --> 
                       <!-- Loading... -->
                       モーダルウィンドウで詳細を確認します。
                     </p>
+
+                    <form class="rating">
+                        <label>
+                          <input type="radio" name="stars" value="1" />
+                          <span class="icon">★</span>
+                        </label>
+                        <label>
+                          <input type="radio" name="stars" value="2" />
+                          <span class="icon">★</span>
+                          <span class="icon">★</span>
+                        </label>
+                        <label>
+                          <input type="radio" name="stars" value="3" />
+                          <span class="icon">★</span>
+                          <span class="icon">★</span>
+                          <span class="icon">★</span>   
+                        </label>
+                        <label>
+                          <input type="radio" name="stars" value="4" />
+                          <span class="icon">★</span>
+                          <span class="icon">★</span>
+                          <span class="icon">★</span>
+                          <span class="icon">★</span>
+                        </label>
+                        <label>
+                          <input type="radio" name="stars" value="5" />
+                          <span class="icon">★</span>
+                          <span class="icon">★</span>
+                          <span class="icon">★</span>
+                          <span class="icon">★</span>
+                          <span class="icon">★</span>
+                        </label>
+                        <button type="submit" class="submitBtn">
+                            評価
+                          </button>
+                      </form>
+
+
                     <!-- <button class="doTaskBtn" onclick="doTask()" name="doTaskButton" >了解！</button> -->
                     <button class="closeBtn" onclick="closeModal2()">保留にする</button>
                     </div>
@@ -447,7 +512,7 @@ var valueofTodo = [];
                 <hr>
                 <p>評価済みタスク</p>
 
-                <div id="appFin1">
+                <div id="appFin2">
                     <ons-list class="todo-list js-todo-list">
                       
                         <!-- <template v-for="item in list">
@@ -476,7 +541,7 @@ var valueofTodo = [];
                       <div style="text-align: center;">
                         <div style="text-align: center; background-color: #fff; height: 50vh; width:80vw; margin: 0 auto; padding: 10px;">
           
-                        <p style=" z-index:50; color:#000;">
+                        <p style=" z-index:50; color:#000;" class="inserttext">
                           <!-- <ons-icon icon="md-spinner" size="28px" spin></ons-icon> --> 
                           <!-- Loading... -->
                           モーダルウィンドウで詳細を確認します。
@@ -489,7 +554,11 @@ var valueofTodo = [];
                 <!-- <hr> -->
                 <!-- <p>やめたタスク</p> -->
 
-
+<script>
+$(':radio').change(function() {
+  console.log('New star rating: ' + this.value);
+});
+</script>
                 <script>
 
      // vue_firebase
@@ -552,6 +621,55 @@ var app2 = new Vue({
   },
 })
 
+let points = [];
+
+function addScore(point) {
+  const todo = {
+    text,
+    comment,
+    reviewed: true,
+
+  };
+
+  points.push(score);
+
+   firebase.database().ref('todolist/cooking').update({
+      revScore:points,
+      taskComment:comment,
+      reviewed: true,
+    })
+  loadPage('home.html'); 
+}
+
+
+const formRating = document.querySelector('.rating');
+formRating.addEventListener('submit', event => {
+  event.preventDefault();
+
+  const input = document.querySelector('.rating');
+  console.log(input);
+  const point = input.value.trim();
+  console.log(point);
+
+  const selector = document.querySelector('.js-todo-selector div');
+  console.log(selector);
+  const text = selector.textContent.trim();
+  console.log(text);
+
+  
+  if (text !== 'タスクを選ぶ') {
+    addTodo(text,comment);
+    selector.textContent = 'タスクを選ぶ';
+    input.value = '';
+  } 
+  else {
+    var msg = "タスクは選択されていません。";
+    var d1 = document.querySelector(".js-form div.warningMsg");
+    d1.innerHTML = msg;
+  }
+
+});
+
               function showModal2(el) {
             
               var elname = el.tagName ;
@@ -576,10 +694,10 @@ var app2 = new Vue({
             var modal = document.querySelector('ons-modal.taskDetailsModal2');
             modal.show();
                    
-            var mText = modal.querySelector('p') ;
+            var mText = modal.querySelector('p.inserttext') ;
             mText.innerHTML =  todoTextLabel;
             mText.innerHTML =  "<div class='noDisplay'>" + dataKey+"</div>"+todoTextLabel;
-            mText.innerHTML += "<br><div class='todo-hLine'></div><br>"+todoTextComment;
+            mText.innerHTML += "<br>";
             var closeButton = document.querySelector('.closeBtn2');
             
             // closeButton.onclick = function(){
@@ -605,7 +723,9 @@ var app2 = new Vue({
        
             
            <h1>パパのポイント</h1>
-           <p id="points"></p>
+           <p id="points" class="text-points"
+           onclick="getPoints()">Click</p>
+           <p id=point--after>ポイント</p>
 
               <ons-input
               id="pertnerEmail"
@@ -645,12 +765,30 @@ var app2 = new Vue({
                           partnerID: myKey,
                           });
                   });
-
-
                 });
-
-
             }
+
+            function getPoints() {
+            const pointContainer = document.querySelector("#points");
+              console.log(pointContainer);
+              const partnerID = "-LnodyBqf2-pW2DmkIer" ;
+
+              firebase.database().ref('usertable/'+partnerID).on("value", snapshot => {
+                myPoints = snapshot.val().point;
+                console.log(snapshot.key + " has " + snapshot.val().point + " points");
+                pointContainer.textContent = myPoints; 
+              })
+            }
+
+        // in case the document is already rendered
+        if (document.readyState!='loading') getPoints();
+        // modern browsers
+        else if (document.addEventListener) document.addEventListener('DOMContentLoaded', run);
+        // IE <= 8
+        else document.attachEvent('onreadystatechange', function(){
+            if (document.readyState=='complete') getPoints();
+        });
+
             </script>
             </ons-page>
             

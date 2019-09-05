@@ -36,7 +36,7 @@ $(function(){
     
     // get category number to add to class
     // var categoryImg = $(this).parent().parent().siblings().text();
-    var categoryName = $(this).prev("div").attr('class');
+    var categoryName = $(this).prev("div").attr('class');   
     console.log(categoryName);
 
     
