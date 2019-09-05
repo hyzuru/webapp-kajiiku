@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="css/main.css">
     <script src="lib/onsen/js/onsenui.min.js"></script>
 
-    
     <!-- Vue -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
     <script>
@@ -52,7 +51,6 @@
 
     <ons-template id="login.html">
       <ons-page id="login">
-
 
         <div style="text-align: center; margin-top: 200px">
             <h1 class="app-title">かじいく</h1>
@@ -120,7 +118,6 @@
    
             <h1 class="app-title">サインアップ</h1>
 
-
           <div style="text-align: center; margin-top: 200px">
             <p>
               <ons-input
@@ -178,14 +175,13 @@
             </ons-pull-hook>
           
             <div id="app">
-              <ons-list class="todo-list js-todo-list" :data-id="id" >
-                <ons-list-item v-for="item in list"  class="todo-item" :data-modal-id="item.id">
-                    <!-- <input :id="item.id" onclick="markChecked(this)" type="checkbox"> -->
+              <ons-list class="todo-list js-todo-list">
+                  <ons-list-item v-for="item in list"  class="todo-item" :data-id="item.id">                    <!-- <input :id="item.id" onclick="markChecked(this)" type="checkbox"> -->
+       <!-- <input :id="item.id" onclick="markChecked(this)" type="checkbox"> -->
                     <!-- <label :for="item.id" class="tick js-tick"><span style="display: none">{{item.id}}</span></label> -->
-                  <span id="item-id" style="display: none">{{item.id}}</span>
-                  <span class="todo-itemName">{{item.taskName}}</span>
-                  <span class="todo-itemComment">{{item.taskComment}}</span>
-                  
+                    <div :class="item.taskCategory"></div>
+                    <p class="todo-itemName">{{item.taskName}}</p>
+                  <span class="todo-itemComment">{{item.taskComment}}</span>               
                     <button class="openDetails" name="showmodalbutton" onclick="showModal(this)">
                         詳細
                     </button>
@@ -193,48 +189,17 @@
                       <svg><use href="#delete-icon"></use></svg>
                     </button>
          
-                    <ons-modal direction="up" class="taskDetailsModal" :data-modal-id="item.id" :class="item.id">
-                        <div style="text-align: center;">
-                          <div style="text-align: center; background-color: #fff; height: 50vh; width:80vw; margin: 0 auto; padding: 10px;">
-            
-                          <p style=" z-index:50; color:#000;">
-                            <!-- <ons-icon icon="md-spinner" size="28px" spin></ons-icon> --> 
-                            <!-- Loading... -->
-                            モーダルウィンドウで詳細を確認します。
-                          </p>
-                          <button class="doTaskBtn" onclick="doTask(this)" name="doTaskButton" >了解！</button>
-                          <button class="closeBtn">保留にする</button>
-                          </div>
-                        </div>
-                      </ons-modal>
-                      <ons-modal direction="up" class="doTaskConfirmation">
-                          <div style="text-align: center;">
-                            <div style="text-align: center; background-color: #fff; height: 50vh; width:80vw; margin: 0 auto; padding: 10px;">
-              
-                            <p style=" z-index:50; color:#000;">
-                              <!-- <ons-icon icon="md-spinner" size="28px" spin></ons-icon> --> 
-                              <!-- Loading... -->
-                              リクエストを完了しました
-                            </p>
-                            <p>パパありがとう！</p>
-                            <button class="closeBtn2 button">閉じる</button>
-                            </div>
-                          </div>
-                        </ons-modal>
-
                 </ons-list-item>
               </ons-list>
               <!-- <ul>
                 <li v-for="item in list">{{item.taskName}} {{item.taskComment}} </li>
               </ul> -->
-            </div>
-            <ons-modal direction="up" class="taskDetailsModal" >
+
+            <ons-modal direction="up" class="taskDetailsModal" v-for="item in list"  :data-modal-id="item.id" >
                 <div style="text-align: center;">
                   <div style="text-align: center; background-color: #fff; height: 50vh; width:80vw; margin: 0 auto; padding: 10px;">
     
                   <p style=" z-index:50; color:#000;">
-                    <!-- <ons-icon icon="md-spinner" size="28px" spin></ons-icon> --> 
-                    <!-- Loading... -->
                     モーダルウィンドウで詳細を確認します。
                   </p>
                   <button class="doTaskBtn" onclick="doTask(this)" name="doTaskButton" >了解！</button>
@@ -242,13 +207,11 @@
                   </div>
                 </div>
               </ons-modal>
-              <ons-modal direction="up" class="doTaskConfirmation">
+              <ons-modal direction="up" class="doTaskConfirmation"  v-for="item in list" >
                   <div style="text-align: center;">
                     <div style="text-align: center; background-color: #fff; height: 50vh; width:80vw; margin: 0 auto; padding: 10px;">
       
                     <p style=" z-index:50; color:#000;">
-                      <!-- <ons-icon icon="md-spinner" size="28px" spin></ons-icon> --> 
-                      <!-- Loading... -->
                       リクエストを完了しました
                     </p>
                     <p>パパありがとう！</p>
@@ -256,6 +219,7 @@
                     </div>
                   </div>
                 </ons-modal>
+              </div>
               <script>
 
 const firebaseTodoRef = firebase.database().ref('todolist/cooking' ).orderByChild('checked').equalTo(false) ;
@@ -281,7 +245,7 @@ var valueofTodo = [];
         if (snapshot) {
             const rootList = snapshot.val()
             const id = snapshot.key;
-            console.log(id);
+            // console.log(id);
             let list = []
             // データオブジェクトを配列に変更する
             Object.keys(rootList).forEach((val, key) => {
@@ -293,24 +257,25 @@ var valueofTodo = [];
             })
             // vueのdataに突っ込む
             this.list = list;
-            // console.log(list);
-            
-    }
-  })
-},
+            // console.log(list);  
+              }
+            })
+          },
+         
   });
-
-  console.log(valueofTodo);
-       
+  console.log(valueofTodo);  
   function showModal(el) {
-            
             var elname = el.tagName ;
             // get text of the item that was clicked
             console.log(elname);
-            var listItem = el.parentNode;
-            // console.log(inputTag.tagName);
-            var dataKey = listItem.getAttribute('data-modal-id');
-            console.log(listItem.getAttribute('data-modal-id'));
+            // var listItem = el.parentNode;
+            // // console.log(inputTag.tagName);
+            // var dataKey = listItem.getAttribute('data-modal-id');
+            // console.log(listItem.getAttribute('data-modal-id'));
+            var listItem = el.parentElement.parentElement;
+            // console.log(listItem.outerHTML);
+            var dataKey = listItem.getAttribute('data-id');
+            console.log(listItem.getAttribute('data-id'));
             // var todoTextLabel = el.parentElement.querySelector('div.todo-itemName').textContent;
             var todoTextLabel = el.parentElement.querySelector("div").nextElementSibling.textContent;
             console.log(todoTextLabel);
@@ -323,26 +288,36 @@ var valueofTodo = [];
                 // console.log(todoTextComment);
                 todoTextComment = "コメントなし"
               }
-              // console.log(todoTextComment);
+              console.log(todoTextComment);
      
 
-          var modal = document.querySelector('ons-modal.'+thisTodoKey);
 
-          var thisModalKey = modal.getAttribute("data-modal-id");
-          console.log(thisModalKey);
-          if (thisModalKey == thisTodoKey) {
-            console.log("match");
-            modal.show();
-          } else {
-            console.log("not match")
+
+          // var modal = document.querySelector('ons-modal.'+thisTodoKey);
+          // var thisModalKey = modal.getAttribute("data-modal-id");
+          // console.log(thisModalKey);
+          // if (thisModalKey == thisTodoKey) {
+          //   console.log("match");
+          //   modal.show();
+          // } else {
+          //   console.log("not match")
+          // }
+          var modal = document.querySelector('ons-modal.taskDetailsModal');
+          console.log( modal );
+          var modal = document.querySelector("[data-modal-id=" + CSS.escape(dataKey) + "]");
+          var checkModKey = modal.getAttribute("data-modal-id");
+          console.log("Get the item.key of modal "+checkModKey);
+          console.log("Get the item.key of button clicked "+dataKey);
+          if (checkModKey === dataKey) { 
+            modal.show();       
           }
-          
-          
-                 
-          var mText = modal.querySelector('p') ;
+            var mText = modal.querySelector('p') ;
+
           mText.innerHTML =  todoTextLabel;
-          mText.innerHTML =  "<div class='noDisplay'>" + thisTodoKey +"</div>"+todoTextLabel;
+          // mText.innerHTML =  "<div class='noDisplay'>" + thisTodoKey +"</div>"+todoTextLabel;
+          mText.innerHTML =  "<div class='noDisplay'>" + dataKey+"</div>"+todoTextLabel;
           mText.innerHTML += "<br><div class='todo-hLine'></div><br>"+todoTextComment;
+
           var closeButton = document.querySelector('.closeBtn');
           closeButton.onclick = function(){
             // var modal = document.querySelector('ons-modal');
@@ -424,19 +399,13 @@ var valueofTodo = [];
 
 
     <template id="completed.html">
-        <ons-page id="completed">
-            <script></script>          
+        <ons-page id="completed">     
             <!-- <p>Completed Requests go here.</p> -->
             <p>終わったリクエストはここに記載します。</p>
-<!-- <hr> -->
+
             <h2>評価待ちタスク</h2>
             <div id="appFin1">
                 <ons-list class="todo-list js-todo-list">
-                  
-                    <!-- <template v-for="item in list">
-                        <div>{{ item.id }}</div>
-                      </template> -->
-
                   <ons-list-item v-for="item in list" class="todo-item" :data-rev-status="item.reviewed ? 'true' : 'false'" :data-modal-id="item.id" >
                     <div class="todo-itemName">{{item.taskName}}</div>
                     <div class="todo-itemComment">{{item.taskComment}}</div>

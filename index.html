@@ -111,6 +111,13 @@
 
     <ons-template id="signup.html">
         <ons-page id="signup">
+
+            <ons-toolbar>
+                <div class="left"><ons-back-button>ログインに戻る</ons-back-button></div>
+            </ons-toolbar>
+   
+            <h1 class="app-title">サインアップ</h1>
+            
           <div style="text-align: center; margin-top: 200px">
             <p>
               <ons-input
@@ -188,38 +195,40 @@
                     </ons-list-item>
                 </ons-list>
                 
-              <!-- <ul>
-                <li v-for="item in list">{{item.taskName}} {{item.taskComment}} </li>
-              </ul> -->
+                <div class="empty-state">
+                    <svg class="checklist-icon"><use href="#checklist-icon"></use></svg>
+                    <h2 class="empty-state__title">タスクはありません。</h2>
+                    <p class="empty-state__description">「＋」ボタンを押してタスクを作ります。</p>
+                  </div>
 
-              <ons-modal direction="up" class="taskDetailsModal" v-for="item in list"  :data-modal-id="item.id" >
-                  <div style="text-align: center;">
-                      <div style="text-align: center; background-color: #fff; height: 50vh; width:80vw; margin: 0 auto; padding: 10px;">
-        
-                      <p style=" z-index:50; color:#000;">
-                        <!-- <ons-icon icon="md-spinner" size="28px" spin></ons-icon> --> 
-                        <!-- Loading... -->
-                        モーダルウィンドウで詳細を確認します。
-                      </p>
-                      <button class="doTaskBtn" onclick="doTask(this)" name="doTaskButton" >了解！</button>
-                      <button class="closeBtn">保留にする</button>
-                      </div>
-                    </div>
-                  </ons-modal>
-                  <ons-modal direction="up" class="doTaskConfirmation">
+                  <ons-modal direction="up" class="taskDetailsModal" v-for="(item,id) in list"  :data-modal-id="item.id" >
                       <div style="text-align: center;">
-                        <div style="text-align: center; background-color: #fff; height: 50vh; width:80vw; margin: 0 auto; padding: 10px;">
-          
-                        <p style=" z-index:50; color:#000;">
-                          <!-- <ons-icon icon="md-spinner" size="28px" spin></ons-icon> --> 
-                          <!-- Loading... -->
-                          リクエストを完了しました
-                        </p>
-                        <p>パパありがとう！</p>
-                        <button class="closeBtn2 button">閉じる</button>
+                          <div style="text-align: center; background-color: #fff; height: 50vh; width:80vw; margin: 0 auto; padding: 10px;">
+            
+                          <p style=" z-index:50; color:#000;">
+                            <!-- <ons-icon icon="md-spinner" size="28px" spin></ons-icon> --> 
+                            <!-- Loading... -->
+                            モーダルウィンドウで詳細を確認します。
+                          </p>
+                          <button class="doTaskBtn" onclick="doTask(this)" name="doTaskButton" >了解！</button>
+                          <button v-if="item.id" onclick="closeFirstModal(this)" class="closeBtn">保留にする</button>
+                          </div>
                         </div>
-                      </div>
-                    </ons-modal>
+                      </ons-modal>
+                      <ons-modal direction="up" class="doTaskConfirmation" v-for="item in list" :data-modal-id="item.id" :id="item.id">
+                          <div style="text-align: center;">
+                            <div style="text-align: center; background-color: #fff; height: 50vh; width:80vw; margin: 0 auto; padding: 10px;">
+              
+                            <p style=" z-index:50; color:#000;">
+                              <!-- <ons-icon icon="md-spinner" size="28px" spin></ons-icon> --> 
+                              <!-- Loading... -->
+                              リクエストを完了しました
+                            </p>
+                            <p>パパありがとう！</p>
+                            <button class="closeBtn2 button">閉じる</button>
+                            </div>
+                          </div>
+                        </ons-modal>
             </div>
 
               <script>
@@ -259,67 +268,81 @@ var valueofTodo = [];
                   },
                 });
                 console.log(valueofTodo);
-                function showModal(el) {
-                  var elname = el.tagName ;
-            // get text of the item that was clicked
-            console.log(elname);
-            var listItem = el.parentElement.parentElement;
-            // console.log(listItem.outerHTML);
-            var dataKey = listItem.getAttribute('data-id');
-            console.log(listItem.getAttribute('data-id'));
-            // var todoTextLabel = el.parentElement.querySelector('div.todo-itemName').textContent;
-            var todoTextLabel = el.parentElement.querySelector("div").nextElementSibling.textContent;
-            console.log(todoTextLabel);
-            // var todoTextComment = el.parentElement.querySelector('div.todo-itemComment').textContent;
-            var todoTextComment = el.parentElement.querySelector('span.todo-itemComment').textContent;
-              var todoTextComment = todoTextComment.replace(/\s+/g, '');
-              if (todoTextComment != "") {
-                todoTextComment = todoTextComment.replace(/\s+/g, '');
-              } else {
-                // console.log(todoTextComment);
-                todoTextComment = "コメントなし"
-              }
-              console.log(todoTextComment);
-            // display the modal
 
-              // var elname = el.tagName ;
-              // // get text of the item that was clicked
-              // // console.log(elname);
-              // // console.log(el.parentElement.parentElement.tagName);
-              // var dataKey = el.parentElement.parentElement.getAttribute('data-key');
-              // console.log(dataKey);
+                
 
-              // var todoTextLabel = el.parentElement.parentElement.querySelector('span').textContent;
-              // // console.log(todoTextLabel);
+    function showModal(el) {
+      var elname = el.tagName ;
+      // get text of the item that was clicked
+      console.log(elname);
+      var listItem = el.parentElement.parentElement;
+      // console.log(listItem.outerHTML);
+      var dataKey = listItem.getAttribute('data-id');
+      console.log(listItem.getAttribute('data-id'));
+      // var todoTextLabel = el.parentElement.querySelector('div.todo-itemName').textContent;
+      var todoTextLabel = el.parentElement.querySelector("div").nextElementSibling.textContent;
+      console.log(todoTextLabel);
+      // var todoTextComment = el.parentElement.querySelector('div.todo-itemComment').textContent;
+      var todoTextComment = el.parentElement.querySelector('span.todo-itemComment').textContent;
+        var todoTextComment = todoTextComment.replace(/\s+/g, '');
+        if (todoTextComment != "") {
+          todoTextComment = todoTextComment.replace(/\s+/g, '');
+        } else {
+          // console.log(todoTextComment);
+          todoTextComment = "コメントなし"
+        }
+        console.log(todoTextComment);
 
-              // var todoTextComment = el.parentElement.parentElement.querySelector('span.todo-itemComment').textContent;
-              //   var todoTextComment = todoTextComment.replace(/\s+/g, '');
-                // console.log(todoTextComment);
-              // display the modal
 
- 
-            var modal = document.querySelector('ons-modal.taskDetailsModal');
-          var checkModKey = modal.getAttribute("data-modal-id");
-          console.log(checkModKey);
-          console.log(dataKey);
-          if (checkModKey === dataKey) { 
-            modal.show();
-          }
+      var modal = document.querySelector('ons-modal.taskDetailsModal');
+      var modal = document.querySelector("[data-modal-id=" + CSS.escape(dataKey) + "]");
+      console.log(modal);
+      var checkModKey = modal.getAttribute("data-modal-id");
+      console.log(checkModKey);
+      console.log(dataKey);
+      if (checkModKey === dataKey) { 
+        modal.show();
+      }
 
-            var mText = modal.querySelector('p') ;
+      var mText = modal.querySelector('p') ;
 
-            mText.innerHTML =  todoTextLabel;
-            mText.innerHTML =  "<div class='noDisplay'>" + dataKey+"</div>"+todoTextLabel;
-            mText.innerHTML += "<br><div class='todo-hLine'></div><br>"+todoTextComment;
+      mText.innerHTML =  todoTextLabel;
+      mText.innerHTML =  "<div class='noDisplay'>" + dataKey+"</div>"+todoTextLabel;
+      mText.innerHTML += "<br><div class='todo-hLine'></div><br>"+todoTextComment;
 
-            var closeButton = document.querySelector('.closeBtn');
-            closeButton.onclick = function(){
-              // var modal = document.querySelector('ons-modal');
-              modal.hide();
-            };
+   
 
-          }
 
+    }
+
+
+    function closeFirstModal(event) {
+
+      var closeButton = document.querySelector('.closeBtn');
+      // var modal = document.querySelector('ons-modal');
+      // console.log(modal);
+      var elname = event.tagName ;
+      // get text of the item that was clicked
+      // console.log(elname);
+      // var listItem = event.parentElement.parentElement;
+
+      // var dataKey = listItem.getAttribute('data-id');
+      // console.log("dataKey: "+dataKey);
+      var checkModKey = modal.getAttribute("data-modal-id");
+      console.log("checkModKey: "+checkModKey);
+
+
+      var modal = document.querySelector('ons-modal.taskDetailsModal');
+            // modal.hide();
+
+      // var modal = document.querySelector("[data-modal-id=" + CSS.escape(dataKey) + "]");
+      console.log(modal)
+        // if (checkModKey === dataKey) { 
+          modal.hide();
+          // };
+    }
+
+   
 
           // function doTask(event) {
           //   // console.log(event.target);
@@ -359,7 +382,7 @@ var valueofTodo = [];
                 firebase.database().ref('todolist/cooking/'+id).update({
             checked: true,
             reviewed:false,
-            revScore: "0"
+            revScore: 0
               });
               console.log("Task ID "+ id + "has been updated successfully")
               console.log("Added Review variables")
@@ -371,6 +394,7 @@ var valueofTodo = [];
             modal.show();
         
             var closeButton = document.querySelector('.closeBtn2');
+            console.log(closeButton)
               closeButton.onclick = function(){
               modal.hide();
             };
@@ -390,6 +414,8 @@ var valueofTodo = [];
   // console.log("Finished updating")
 
   //     }
+
+
           </script>
 
 
@@ -454,6 +480,47 @@ var valueofTodo = [];
                       モーダルウィンドウで詳細を確認します。
                     </p>
                     <!-- <button class="doTaskBtn" onclick="doTask()" name="doTaskButton" >了解！</button> -->
+                    <form class="rating" style="color: black">
+                        <label>
+                          <input type="radio" name="stars" value="1" />
+                          <span>1</span>
+                          <!-- <span class="icon">★</span> -->
+                        </label>
+                        <label>
+                          <input type="radio" name="stars" value="2" />
+                          <span>2</span>
+                          <!-- <span class="icon">★</span>
+                          <span class="icon">★</span> -->
+                        </label>
+                        <label>
+                          <input type="radio" name="stars" value="3" />
+                          <span>3</span>
+                          <!-- <span class="icon">★</span>
+                          <span class="icon">★</span>
+                          <span class="icon">★</span>    -->
+                        </label>
+                        <label>
+                          <input type="radio" name="stars" value="4" />
+                          <span>4</span>
+                          <!-- <span class="icon">★</span>
+                          <span class="icon">★</span>
+                          <span class="icon">★</span>
+                          <span class="icon">★</span> -->
+                        </label>
+                        <label>
+                          <input type="radio" name="stars" value="5" />
+                          <span>5</span>
+                          <!-- <span class="icon">★</span>
+                          <span class="icon">★</span>
+                          <span class="icon">★</span>
+                          <span class="icon">★</span>
+                          <span class="icon">★</span> -->
+                        </label>
+                        <button class="doTaskBtn" onclick="reviewTask(this)" name="reviewTaskButton" >ADD REVIEW</button>
+                      </form>
+                      
+
+                   
                     <button class="closeBtn" onclick="closeModal2()">保留にする</button>
                     </div>
                   </div>
@@ -494,14 +561,20 @@ var valueofTodo = [];
 
 
               function showModal2(el) {
-            
-              var elname = el.tagName ;
+                var elname = el.tagName ;
               // get text of the item that was clicked
               console.log(elname);
-              var inputTag = el.parentNode.firstChild;
-              // console.log(inputTag.tagName);
-              var dataKey = inputTag.getAttribute('id');
-              console.log(inputTag.getAttribute('id'));
+              var listItem = el.parentElement.parentElement;
+              // console.log(listItem.outerHTML);
+              var dataKey = listItem.getAttribute('data-modal-id');
+              console.log(listItem.getAttribute('data-modal-id'));
+              // var elname = el.tagName ;
+              // // get text of the item that was clicked
+              // console.log(elname);
+              // var inputTag = el.parentNode.firstChild;
+              // // console.log(inputTag.tagName);
+              // var dataKey = inputTag.getAttribute('id');
+              // console.log(inputTag.getAttribute('id'));
 
               var todoTextLabel = el.parentElement.querySelector('span.todo-itemName').textContent;
               console.log(todoTextLabel);
@@ -535,7 +608,69 @@ var valueofTodo = [];
            
             // };            
           }
+  
 
+          function reviewTask(el) {
+
+            event.preventDefault();
+            
+            
+            // function getScore(){
+              // Get the selected score (assuming one was selected)
+                var score = document.querySelector('input[name="stars"]:checked').value;
+                alert(score + ' was selected!');
+               score = parseInt(score, 10);
+            // }
+            // getScore()
+
+
+          var modal = document.querySelector('ons-modal.taskDetailsModal2');
+          var elname = modal.tagName ;
+            // get text of the item that was clicked
+            console.log(elname);
+            var dataKey = modal.querySelector('.noDisplay').innerHTML;
+            console.log(dataKey);
+      
+            var id = dataKey
+            // Update checked false to true and add score to database
+                firebase.database().ref('todolist/cooking/'+id).update({
+            reviewed:true,
+            revScore: score
+              });
+              console.log("Task ID "+ id + "has been updated successfully")
+              console.log("Review has been added")
+
+              // // Update papa's points
+              const partnerID = "-LnodyBqf2-pW2DmkIer" ; //set user's partnerID to this for testing purposes
+              // find users with this partnerID このpartnerIDが持っているユーザーを探して、ポイント情報を更新する。
+
+              firebase.database().ref('usertable/'+partnerID).on("value", snapshot => {
+                myPoints = snapshot.val().point; // total points
+                console.log(snapshot.key + " had " + snapshot.val().point + " points");
+
+                myPoints += score ; //add the current score to total
+                console.log(snapshot.key + " now has " + myPoints + " points");
+                // pointContainer.textContent = myPoints; 
+              })
+              firebase.database().ref('usertable/'+partnerID).update({
+                point: myPoints,
+              });
+            // }
+            
+            modal.hide();
+
+            // var modal = document.querySelector('ons-modal.doTaskConfirmation');
+
+            // modal.show();
+        
+            // var closeButton = document.querySelector('.closeBtn2');
+            // console.log(closeButton)
+            //   closeButton.onclick = function(){
+            //   modal.hide();
+            // };
+          }
+
+          
           function closeModal2(el) {
             var modal = document.querySelector('ons-modal.taskDetailsModal2');
             modal.hide();
@@ -555,8 +690,11 @@ var valueofTodo = [];
           <ons-page id="profile">
               <script></script>
             
-              <!-- <p>Profile placeholder goes here.</p> -->
-              <p>プロフィール画像。</p>
+              <h1>パパのポイント</h1>
+              <p id="points" class="text-points"
+              onclick="getPoints()">Click</p>
+              <p id=point--after>ポイント</p>
+
 
               <ons-input
               id="pertnerEmail"
@@ -606,6 +744,28 @@ var myUID =[];
 
 
             }
+
+            function getPoints() {
+            const pointContainer = document.querySelector("#points");
+              console.log(pointContainer);
+              const partnerID = "-LnodyBqf2-pW2DmkIer" ;
+
+              firebase.database().ref('usertable/'+partnerID).on("value", snapshot => {
+                myPoints = snapshot.val().point;
+                console.log(snapshot.key + " has " + snapshot.val().point + " points");
+                pointContainer.textContent = myPoints; 
+              })
+            }
+
+        // in case the document is already rendered
+        if (document.readyState!='loading') getPoints();
+        // modern browsers
+        else if (document.addEventListener) document.addEventListener('DOMContentLoaded', run);
+        // IE <= 8
+        else document.attachEvent('onreadystatechange', function(){
+            if (document.readyState=='complete') getPoints();
+        });
+
             </script>
             </ons-page>
             

@@ -411,3 +411,9 @@ form {
   font-size: 0.8rem;
   padding: 20px;
 }
+
+p#points.text-points {
+  text-align: center;
+  margin: 0 auto;
+  font-size: 5rem;
+}
