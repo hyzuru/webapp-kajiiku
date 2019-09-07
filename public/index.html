@@ -30,6 +30,12 @@
               <div class="center">設定</div>
           </ons-toolbar>
           <ons-list>
+              <ons-list-item onclick="loadPage('changeMail.html')">
+                  メールを変更
+                </ons-list-item>
+                <ons-list-item onclick="logOut()">
+                    パパ・ママと連携する
+                  </ons-list-item>
             <ons-list-item onclick="logOut()">
               ログアウト
             </ons-list-item>
@@ -69,6 +75,21 @@
               </script>
           </ons-page>
         </ons-template>
+
+        <ons-template id="changeMail.html">
+            <ons-page id="changeMail">
+                <ons-toolbar>
+                    <div class="left"><ons-back-button>Change Mail</ons-back-button></div>
+                </ons-toolbar>
+                <div style="margin: 20px auto; width: 320px;">
+                    
+                  </div>
+            
+                <script>
+            
+            </script>
+            </ons-page>
+          </ons-template>
 
 <ons-template id="login.html">
   <ons-page id="login">

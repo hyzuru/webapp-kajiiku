@@ -29,14 +29,18 @@
               <!-- <div class="left"><ons-back-button>Page1</ons-back-button></div> -->
               <div class="center">設定</div>
           </ons-toolbar>
-          <ons-list>
-            <ons-list-item onclick="logOut()">
+           
+          <ons-list> 
+            <ons-list-item onclick="loadPage('changeMail.html')" tappable modifier="chevron">
+              メール変更
+            </ons-list-item>
+            <ons-list-item onclick="loadPage('connect.html')" tappable modifier="chevron">
+                連携する
+              </ons-list-item>
+            <ons-list-item onclick="logOut()" tappable modifier="chevron">
               ログアウト
             </ons-list-item>
-            <!-- <ons-list-item onclick="loadPage('page2.html')">
-              Page 2
-            </ons-list-item> -->
-            </ons-list>
+          </ons-list>
         </ons-page>
       </ons-splitter-side>
     <!-- Everything not in the side menu -->
@@ -69,6 +73,52 @@
               </script>
           </ons-page>
         </ons-template>
+
+        <ons-template id="changeMail.html">
+            <ons-page id="changeMail">
+                <ons-toolbar>
+                    <div class="left"><ons-back-button>Change Mail</ons-back-button></div>
+                </ons-toolbar>
+                <div style="margin: 20px auto; width: 320px;">
+                  
+                        <ons-input
+                        id="changeUserMail"
+                        placeholder="あなたのメールアドレス"
+                        modifier="underbar"
+                        class="loginInput"
+                      ></ons-input>
+                    <ons-button onclick="changeMail()" class="loginBtn">自分のメールを変更する</ons-button>
+                       
+                  </div>
+            
+                <script>
+            
+            </script>
+            </ons-page>
+          </ons-template>
+
+
+          <ons-template id="connect.html">
+              <ons-page id="connect">
+                  <ons-toolbar>
+                      <div class="left"><ons-back-button>Change Mail</ons-back-button></div>
+                  </ons-toolbar>
+                  <div style="margin: 20px auto; width: 320px;">
+                      <ons-input
+                      id="partnerEmail"
+                      placeholder="partnerEmail"
+                      modifier="underbar"
+                      class="loginInput"
+                    ></ons-input>
+                    <ons-button onclick="renkei()" class="loginBtn">partner登録</ons-button>
+                  
+                  </div>
+              
+                  <script>
+              
+              </script>
+              </ons-page>
+            </ons-template>
 
 <ons-template id="login.html">
   <ons-page id="login">
