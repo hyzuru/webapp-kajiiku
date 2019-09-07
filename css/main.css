@@ -67,6 +67,10 @@ body {
   height: 64px;
 } */
 
+button {
+  font-size: 0.9rem;
+  margin: 0 2px;
+}
 .todo-list {
   list-style: none;
   margin-bottom: 20px;
@@ -77,8 +81,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  padding: 0;
+  padding:  15px 25px ;
+  /* padding-left: 20px; */
   border: 1px solid rgb(201, 201, 201);
   box-sizing: border-box;
   margin: 20px auto;

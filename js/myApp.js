@@ -25,3 +25,4 @@ const loadPage = page => {
  // //  Reset the whole stack instead of popping 1 page
   // document.querySelector('ons-navigator').resetToPage('home.html');
 // };
+

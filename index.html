@@ -70,45 +70,43 @@
           </ons-page>
         </ons-template>
 
-    <ons-template id="login.html">
-      <ons-page id="login">
+<ons-template id="login.html">
+  <ons-page id="login">
 
+    <div style="text-align: center; margin-top: 200px">
+      <h1 class="app-title">かじいく</h1>
+      <div style="margin: 20px auto; width: 320px;">
+        <p>
+          <ons-input
+            id="email"
+            placeholder="email"
+            modifier="underbar"
+            class="loginInput"
+            type="email"
+          ></ons-input>
+        </p>
 
-    
+        <p>
+          <ons-input
+            id="password"
+            placeholder="Password"
+            type="password"
+            modifier="underbar"
+            class="loginInput"
+          >
+          </ons-input>
+        </p>
 
-        <div style="text-align: center; margin-top: 200px">
-            <h1 class="app-title">かじいく</h1>
-
-          <p>
-            <ons-input
-              id="email"
-              placeholder="email"
-              modifier="underbar"
-              class="loginInput"
-              type="email"
-            ></ons-input>
+        <p>
+          <ons-button onclick="login()" class="loginBtn">ログイン</ons-button>
+        </p>
+        <p>
+            <ons-button onclick="loadPage('signup.html')" class="newAccBtn">アカウントを作成する</ons-button>
           </p>
-
-          <p>
-            <ons-input
-              id="password"
-              placeholder="Password"
-              type="password"
-              modifier="underbar"
-              class="loginInput"
-            >
-            </ons-input>
-          </p>
-
-          <p>
-            <ons-button onclick="login()" class="loginBtn">ログイン</ons-button>
-          </p>
-          <p>
-              <ons-button onclick="loadPage('signup.html')" class="newAccBtn">アカウントを作成する</ons-button>
-            </p>
         </div>
-      </ons-page>
-    </ons-template> 
+      </div>
+    </ons-page>
+  </ons-template> 
 
 <ons-template id="home.html">
   <ons-page id="home">
@@ -200,10 +198,11 @@
 
             <div id="app">
               <ons-list class="todo-list js-todo-list">
-                <!-- <div v-if="!loaded"> -->
-                    <!-- <p>Loading...</p>
-                </div> -->
-                <!-- <div v-if="loaded"> -->
+  
+                <div v-if="!loaded" style="text-align: center; margin-top: 200px">
+                     Loading...
+                  </div>
+                <div v-if="loaded">
                     <div v-if="isEmpty">
                         <div class="empty-state">
                             <svg class="checklist-icon"><use href="#checklist-icon"></use></svg>
@@ -223,12 +222,12 @@
                       <button class="openDetails" name="showmodalbutton" onclick="showModal(this)">
                           詳細
                       </button>
-                      <button class="delete-todo js-delete-todo">
+                      <button class="delete-todo js-delete-todo" onclick="deleteTodo(this)">
                           <svg><use href="#delete-icon"></use></svg>
                         </button>
                         <!-- <button type="submit" onclick="deleteTodo()" class="delete-todo js-delete-todo"> -->                      
                           </ons-list-item>
-                <!-- </div> -->
+                </div>
               </ons-list>
              
                     </div>
@@ -238,12 +237,11 @@
                           <div style="text-align: center; background-color: #fff; height: 50vh; width:80vw; margin: 0 auto; padding: 10px;">
             
                           <p style=" z-index:50; color:#000;">
-                            <!-- <ons-icon icon="md-spinner" size="28px" spin></ons-icon> --> 
-                            <!-- Loading... -->
+                            <ons-icon icon="md-spinner" size="28px" spin></ons-icon> 
+                            Loading...
                             モーダルウィンドウで詳細を確認します。
                           </p>
                           <button class="doTaskBtn" onclick="doTask(this)" name="doTaskButton" >了解！</button>
-                          <!-- <button  onclick="closeFirstModal()" class="closeBtn">保留にする</button> -->
                           <button class="closeBtn" onclick="closeModal1()">保留にする</button>
                           </div>
                         </div>
@@ -308,6 +306,7 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
             el: '#app',
             data () {
               return {
+                loaded: false,
                 list: [], // 最新状態はここにコピーされる
                 todo:[],
               id: null,
@@ -340,6 +339,7 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
             })
       
             this.list = list;
+            this.loaded = true;
             }
           })
         },
@@ -404,54 +404,14 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
     }
 
     function closeModal1(el) {
-            var modal1 = document.querySelector('ons-modal.taskDetailsModal');
-
-            modal1.hide();
-          }
-
-
-    function closeFirstModal(event) {
-
-      var closeButton = document.querySelector('.closeBtn');
-      var modal = document.querySelector('ons-modal');
-      // console.log(modal);
-      var elname = event.tagName ;
-      // get text of the item that was clicked
-      // console.log(elname);
-      // var listItem = event.parentElement.parentElement;
-
-      // var dataKey = listItem.getAttribute('data-id');
-      // console.log("dataKey: "+dataKey);
-      var checkModKey = modal.getAttribute("data-modal-id");
-      console.log("checkModKey: "+checkModKey);
-
-
-      var modal = document.querySelector('ons-modal.taskDetailsModal');
-            // modal.hide();
-
-      // var modal = document.querySelector("[data-modal-id=" + CSS.escape(dataKey) + "]");
-      console.log(modal)
-        // if (checkModKey === dataKey) { 
-          modal.hide();
-          // };
+      var modal1 = document.querySelector('ons-modal.taskDetailsModal');
+      modal1.hide();
     }
 
-   
 
-          // function doTask(event) {
-          //   // console.log(event.target);
-          //   var modal = document.querySelector('ons-modal.taskDetailsModal');
-          //   // var elname = modal.tagName ;
-          //     // get text of the item that was clicked
-          //     // console.log(elname);
-          //     var dataKey = modal.querySelector('div.noDisplay').innerHTML;
-          //     console.log(dataKey);
-          //     var checkString = document.querySelector('.todo-item');
-          //     console.log(checkString);
-          //     if (dataKey === checkString.getAttribute('data-key')) {
-          //         console.log(checkString.getAttribute('data-key'))
-          //       // this.checkString.classList.add('done');
-          //     }  
+
+
+
           function doTask(el) {
           // console.log(event.target);
           var modal = document.querySelector('ons-modal.taskDetailsModal');
@@ -462,18 +422,7 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
             console.log(elname);
             var dataKey = modal.querySelector("div.noDisplay").innerHTML;
             console.log(dataKey);
-            // console.log(partnerID);
-              // var checkString = document.querySelector('.todo-item');
-            // console.log(checkString);
-            // if (dataKey === checkString.getAttribute('id')) {
-                // console.log(checkString.getAttribute('id'))
-              // this.checkString.classList.add('done');
-              // console.log("Mark this task as done: " +dataKey)
-              // console.log(this.parentElement.parentElement);
-            // }  else {
-              // console.log("error")
-              // console.log(dataKey)
-            // }
+   
             var id = dataKey
             // Update checked false to true
                 firebase.database().ref('todolist/'+partnerID +'/'+id).update({
@@ -498,19 +447,15 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
           }
 
 
-  //      function deleteTodo(el) {
-  //       this.el = el ;
-  //       var target = this.el.tagName ;
-  //       console.log(target);
-  //       var id = this.el.nextElementSibling.textContent ;
-  //       console.log(id);
+       function deleteTodo(el) {
+        var target = el.parentElement.parentElement.getAttribute("data-modal-id");
 
-  // let todoRef = firebase.database().ref('todolist/cooking' + id);
-  //     todoRef.remove()
-
-  // console.log("Finished updating")
-
-  //     }
+        console.log(target);
+        let partnerID = "-LnodyBqf2-pW2DmkIer" ; 
+        let todoRef = firebase.database().ref('todolist/' + partnerID +'/' + target);
+            todoRef.remove()
+        console.log("Finished deleting")
+      }
 
 
           </script>
@@ -557,22 +502,15 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
                       <label for="1566658474566" class="noDisplay"></label>
                     <span class="todo-itemName">{{item.taskName}}</span>
                     <span class="todo-itemComment">{{item.taskComment}}</span>
-                    <!-- <span>{{item.id}}</span>
-                    <span>{{item.reviewed}}</span> -->
                       <button class="openDetails" name="showmodalbutton" onclick="showModal2(this)">
                           詳細
                       </button>
-                      <!-- <button class="openDetails" name="showmodalbutton" onclick="showRatingModal(this)">
-                          詳細
-                      </button> -->
-                      <button class="delete-todo js-delete-todo">
+                      <button class="delete-todo js-delete-todo" onclick="deleteTodo(this)">
                         <svg><use href="#delete-icon"></use></svg>
                       </button>
                   </ons-list-item>
                 </ons-list>
-                <!-- <ul>
-                  <li v-for="item in list">{{item.taskName}} {{item.taskComment}} </li>
-                </ul> -->
+
 
               </div>
               <ons-modal direction="up" class="taskDetailsModal2">
@@ -654,7 +592,7 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
                           <button class="openDetails" name="showmodalbutton" onclick="showModal2(this)">
                               詳細
                           </button>
-                          <button class="delete-todo js-delete-todo">
+                          <button class="delete-todo js-delete-todo" onclick="deleteTodo(this)">
                             <svg><use href="#delete-icon"></use></svg>
                           </button>
                       </ons-list-item>
@@ -764,13 +702,6 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
               // console.log(listItem.outerHTML);
               var dataKey = listItem.getAttribute('data-modal-id');
               console.log(listItem.getAttribute('data-modal-id'));
-              // var elname = el.tagName ;
-              // // get text of the item that was clicked
-              // console.log(elname);
-              // var inputTag = el.parentNode.firstChild;
-              // // console.log(inputTag.tagName);
-              // var dataKey = inputTag.getAttribute('id');
-              // console.log(inputTag.getAttribute('id'));
 
               var todoTextLabel = el.parentElement.querySelector('span.todo-itemName').textContent;
               console.log(todoTextLabel);
@@ -796,53 +727,8 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
             mText.innerHTML += "<br><div class='todo-hLine'></div><br>"+todoTextComment;
 
             var closeButton = document.querySelector('.closeBtn2');
-            
-            // closeButton.onclick = function(){
-            //   console.log("clicked")
-            //   // var modal = document.querySelector('ons-modal');
-            //   modal.hide();
-           
-            // };            
+                  
           }
-
-          
-          // function showModal3(el) {
-          //       var elname = el.tagName ;
-          //     // get text of the item that was clicked
-          //     console.log(elname);
-          //     var listItem = el.parentElement.parentElement;
-          //     // console.log(listItem.outerHTML);
-          //     var dataKey = listItem.getAttribute('data-modal-id');
-          //     console.log(listItem.getAttribute('data-modal-id'));
- 
-
-          //     var todoTextLabel = el.parentElement.querySelector('span.todo-itemName').textContent;
-          //     console.log(todoTextLabel);
-
-          //     var todoTextComment = el.parentElement.querySelector('span.todo-itemComment').textContent;
-          //       var todoTextComment = todoTextComment.replace(/\s+/g, '');
-          //       if (todoTextComment != "") {
-          //         todoTextComment = todoTextComment.replace(/\s+/g, '');
-          //       } else {
-          //         // console.log(todoTextComment);
-          //         todoTextComment = "コメントなし"
-          //       }
-          //       console.log(todoTextComment);
-          //     // display the modal
-
-          //   var modal = document.querySelector('ons-modal.taskDetailsModal2');
-          //   modal.show();
-                   
-          //   var mText = modal.querySelector('p') ;
-
-          //   mText.innerHTML =  todoTextLabel;
-          //   mText.innerHTML =  "<div class='noDisplay'>" + dataKey+"</div>"+todoTextLabel;
-          //   mText.innerHTML += "<br><div class='todo-hLine'></div><br>"+todoTextComment;
-
-          //   var closeButton = document.querySelector('.closeBtn2');
-                 
-          // }
-  
 
           function reviewTask(el) {
 
@@ -921,6 +807,16 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
           }
 
                     
+       function deleteTodo(el) {
+        var target = el.parentElement.parentElement.getAttribute("data-modal-id");
+
+        console.log(target);
+        let partnerID = "-LnodyBqf2-pW2DmkIer" ; 
+        let todoRef = firebase.database().ref('todolist/' + partnerID +'/' + target);
+            todoRef.remove()
+        console.log("Finished deleting")
+      }
+
         
             </script>
          
@@ -930,34 +826,32 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
       <template id="profile.html">
           <ons-page id="profile">
               <script></script>
-            
+               <div style="text-align: center;">
               <h1>パパのポイント</h1>
               <p id="points" class="text-points"
-              onclick="getPoints()">Click</p>
+              onclick="getPoints()">0</p>
               <p id=point--after>ポイント</p>
+            </div>
 
-
-              <ons-input
-              id="partnerEmail"
-              placeholder="partnerEmail"
-              modifier="underbar"
-              class="loginInput"
-            ></ons-input>
-
-          <p>
-            <ons-button onclick="renkei()" class="loginBtn">partner登録</ons-button>
-
-            <ons-input
-            id="changeUserMail"
-            placeholder="あなたのメールアドレス"
-            modifier="underbar"
-            class="loginInput"
-          ></ons-input>
-
-        <p>
-          <ons-button onclick="changeMail()" class="loginBtn">自分のメールを変更する</ons-button>
-
-            </ons-page>
+            <div style="margin: 20px auto; width: 320px;">
+                <ons-input
+                id="partnerEmail"
+                placeholder="partnerEmail"
+                modifier="underbar"
+                class="loginInput"
+              ></ons-input>
+              <ons-button onclick="renkei()" class="loginBtn">partner登録</ons-button>
+            
+            </div>
+            <div style="margin: 20px auto; width: 320px;">
+                  <ons-input
+                  id="changeUserMail"
+                  placeholder="あなたのメールアドレス"
+                  modifier="underbar"
+                  class="loginInput"
+                ></ons-input>
+              <ons-button onclick="changeMail()" class="loginBtn">自分のメールを変更する</ons-button>
+            </div>
             <script>
 
 var myUID =[];
