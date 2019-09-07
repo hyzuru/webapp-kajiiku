@@ -1,10 +1,11 @@
-// Detecting Connection State
 
+
+// Detecting Connection State
 var connectedRef = firebase.database().ref(".info/connected");
 connectedRef.on("value", function(snap) {
   if (snap.val() === true) {
     // alert("connected");
-    console.log("Connected to Database")
+    // console.log("Connected to Database")
     
   } else {
     // alert("not connected");
@@ -17,7 +18,26 @@ var presenceRef = firebase.database().ref("disconnectmessage");
 // Write a string when this client loses connection
 presenceRef.onDisconnect().set("I disconnected!");
 
+// var getPartnerID  = [];
 
+// function init() {
+//   var user = firebase.auth().currentUser;
+
+//   user.providerData.forEach(function (profile) {
+//     const UID = user.uid;
+//     console.log(UID);
+
+//       firebase.database().ref("usertable").orderByChild("userUID").equalTo(UID).on("child_added", function(snapshot) {
+//         myKey = snapshot.key;
+//         console.log(myKey);
+//         getPartnerID.push(myKey) ;        
+//       });
+//       console.log(getPartnerID);
+//     }); 
+// }
+// console.log(getPartnerID[0]);
+// var partnerID1 = getPartnerID[0];
+// console.log(partnerID1)
 
 window.onload = function(e){ 
   firebase.auth().onAuthStateChanged((user) => {
@@ -28,8 +48,7 @@ window.onload = function(e){
       console.log(currentUser)
       const navigator = document.querySelector("#navigator");
       navigator.resetToPage("home.html");
-  
-      //  put the data into local storage  
+      // init();
     } else {
       console.log("user not found")
       const navigator = document.querySelector("#navigator");
@@ -64,27 +83,6 @@ const login = () => {
 
         ons.notification.alert('ログインできません（' + error.message + '）');
   });
-
-  // Save in local storage
-
-//   if (window.localStorage.getItem("rememberMe") == "true") {
-//     $scope.userEmail = window.localStorage.getItem("userName");
-//     $scope.userPassword = window.localStorage.getItem("password");
-//     document.getElementById("rememberMe").checked = true;
-// }
-// else {
-//    document.getElementById("rememberMe").checked = false;
-// }
-// if (document.getElementById("rememberMe").checked == true) {
-//    window.localStorage.setItem("rememberMe", "true");
-//    window.localStorage.setItem("userName", $scope.userEmail);
-//    window.localStorage.setItem("password", $scope.userPassword);
-// }
-// else if (document.getElementById("rememberMe").checked == false) {
-//  window.localStorage.setItem("rememberMe", "false");
-//  window.localStorage.setItem("userName", "");
-//  window.localStorage.setItem("password", "");
-// }
 })
 
 
@@ -146,6 +144,11 @@ const logOut = () => {
   });
 }
 
+
+function newFunction(partnerkey) {
+  console.log(myKey);
+  console.log(partnerkey());
+}
 // edit user settings ユーザ設定を変更　（Eメール）
 
 // var user = firebase.auth().currentUser;
@@ -159,3 +162,5 @@ const logOut = () => {
 //     // An error happened.
 //   });
 // }
+
+

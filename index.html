@@ -76,6 +76,7 @@
     <div style="text-align: center; margin-top: 200px">
       <h1 class="app-title">かじいく</h1>
       <div style="margin: 20px auto; width: 320px;">
+        <form id="loginForm">
         <p>
           <ons-input
             id="email"
@@ -100,9 +101,10 @@
         <p>
           <ons-button onclick="login()" class="loginBtn">ログイン</ons-button>
         </p>
-        <p>
-            <ons-button onclick="loadPage('signup.html')" class="newAccBtn">アカウントを作成する</ons-button>
-          </p>
+      </form>
+      <p>
+          <ons-button onclick="loadPage('signup.html')" class="newAccBtn">アカウントを作成する</ons-button>
+        </p>
         </div>
       </div>
     </ons-page>
@@ -328,8 +330,8 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
           // console.log(snapshot.child.key );
             const rootList = snapshot.val()
             const id = snapshot.key;
-            console.log("Rootlist: "+rootList);
-            console.log("Snapshot key: "+id);
+            // console.log("Rootlist: "+rootList);
+            // console.log("Snapshot key: "+id);
             let list = []
       
               Object.keys(rootList).forEach((val, key) => {
@@ -361,14 +363,14 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
     function showModal(el) {
       var elname = el.tagName ;
       // get text of the item that was clicked
-      console.log(elname);
+      // console.log(elname);
       var listItem = el.parentElement.parentElement;
       // console.log(listItem.outerHTML);
       var dataKey = listItem.getAttribute('data-modal-id');
-      console.log(listItem.getAttribute('data-modal-id'));
+      // console.log(listItem.getAttribute('data-modal-id'));
       // var todoTextLabel = el.parentElement.querySelector('div.todo-itemName').textContent;
       var todoTextLabel = el.parentElement.querySelector("div").nextElementSibling.textContent;
-      console.log(todoTextLabel);
+      // console.log(todoTextLabel);
       // var todoTextComment = el.parentElement.querySelector('div.todo-itemComment').textContent;
       var todoTextComment = el.parentElement.querySelector('span.todo-itemComment').textContent;
         var todoTextComment = todoTextComment.replace(/\s+/g, '');
@@ -378,12 +380,12 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
           // console.log(todoTextComment);
           todoTextComment = "コメントなし"
         }
-        console.log(todoTextComment);
+        // console.log(todoTextComment);
 
 
       var modal = document.querySelector('ons-modal.taskDetailsModal');
       // var modal = document.querySelector("[data-modal-id=" + CSS.escape(dataKey) + "]");
-      console.log(modal);
+      // console.log(modal);
       // var checkModKey = modal.getAttribute("data-modal-id");
       // console.log(checkModKey);
       // console.log(dataKey);
@@ -392,7 +394,7 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
       // }
 
       var mText = modal.querySelector('p') ;
-      console.log(mText);
+      // console.log(mText);
 
       mText.innerHTML =  todoTextLabel;
       mText.innerHTML =  "<div class='noDisplay'>" + dataKey+"</div>"+todoTextLabel;
@@ -416,12 +418,12 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
           // console.log(event.target);
           var modal = document.querySelector('ons-modal.taskDetailsModal');
           
-          console.log(modal)
+          // console.log(modal)
           var elname = modal.tagName ;
             // get text of the item that was clicked
-            console.log(elname);
+            // console.log(elname);
             var dataKey = modal.querySelector("div.noDisplay").innerHTML;
-            console.log(dataKey);
+            // console.log(dataKey);
    
             var id = dataKey
             // Update checked false to true
@@ -430,8 +432,8 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
             reviewed:false,
             revScore: 0
               });
-              console.log("Task ID "+ id + "has been updated successfully")
-              console.log("Added Review variables")
+              // console.log("Task ID "+ id + "has been updated successfully")
+              // console.log("Added Review variables")
             
             modal.hide();
 
@@ -440,7 +442,7 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
             modal.show();
         
             var closeButton = document.querySelector('.closeBtn2');
-            console.log(closeButton)
+            // console.log(closeButton)
               closeButton.onclick = function(){
               modal.hide();
             };
@@ -450,11 +452,11 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
        function deleteTodo(el) {
         var target = el.parentElement.parentElement.getAttribute("data-modal-id");
 
-        console.log(target);
+        // console.log(target);
         let partnerID = "-LnodyBqf2-pW2DmkIer" ; 
         let todoRef = firebase.database().ref('todolist/' + partnerID +'/' + target);
             todoRef.remove()
-        console.log("Finished deleting")
+        // console.log("Finished deleting")
       }
 
 
@@ -631,7 +633,7 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
           
           created: function() {
             // partnerID = this.partnerID;
-            console.log(partnerID);
+            // console.log(partnerID);
             firebase.database().ref('todolist/'+partnerID).orderByChild('reviewed').equalTo(false).on("value",  snapshot => {
               if (snapshot) {
                   const rootList = snapshot.val()
@@ -674,7 +676,7 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
               if (snapshot) {
                   const rootList = snapshot.val()
                   const id = snapshot.key;
-                  console.log(id);
+                  // console.log(id);
                   let list = []
                   // データオブジェクトを配列に変更する
                   Object.keys(rootList).forEach((val, key) => {
@@ -697,14 +699,14 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
               function showModal2(el) {
                 var elname = el.tagName ;
               // get text of the item that was clicked
-              console.log(elname);
+              // console.log(elname);
               var listItem = el.parentElement.parentElement;
               // console.log(listItem.outerHTML);
               var dataKey = listItem.getAttribute('data-modal-id');
-              console.log(listItem.getAttribute('data-modal-id'));
+              // console.log(listItem.getAttribute('data-modal-id'));
 
               var todoTextLabel = el.parentElement.querySelector('span.todo-itemName').textContent;
-              console.log(todoTextLabel);
+              // console.log(todoTextLabel);
 
               var todoTextComment = el.parentElement.querySelector('span.todo-itemComment').textContent;
                 var todoTextComment = todoTextComment.replace(/\s+/g, '');
@@ -714,7 +716,7 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
                   // console.log(todoTextComment);
                   todoTextComment = "コメントなし"
                 }
-                console.log(todoTextComment);
+                // console.log(todoTextComment);
               // display the modal
 
             var modal = document.querySelector('ons-modal.taskDetailsModal2');
@@ -748,9 +750,9 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
           var modal = document.querySelector('ons-modal.taskDetailsModal2');
           var elname = modal.tagName ;
             // get text of the item that was clicked
-            console.log(elname);
+            // console.log(elname);
             var dataKey = modal.querySelector('.noDisplay').innerHTML;
-            console.log(dataKey);
+            // console.log(dataKey);
       
             var id = dataKey
             // Update checked false to true and add score to database
@@ -759,8 +761,8 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
             reviewed:true,
             revScore: score
               });
-              console.log("Task ID "+ id + "has been updated successfully")
-              console.log("Review has been added")
+              // console.log("Task ID "+ id + "has been updated successfully")
+              // console.log("Review has been added")
 
               // // Update papa's points
              partnerID = "-LnodyBqf2-pW2DmkIer" ; 
@@ -972,13 +974,37 @@ var myUID =[];
 
               var user = firebase.auth().currentUser;
 
-              user.updateEmail(userEmail).then(function() {
-                // Update successful.
-                ons.notification.alert('メールを「'+userEmail+'」に変更しました。');
+              var currentEmail = firebase.auth().currentUser.email;
+              console.log(currentEmail)
+              
+              // user.updateEmail(userEmail).then(function() {
+              //   // Update successful.
+              //   ons.notification.alert('メールを「'+userEmail+'」に変更しました。');
 
-              }).catch(function(error) {
-                // An error happened.
-              });
+              // }).catch(function(error) {
+              //   // An error happened.
+              // });
+
+              // Also update the database entry in Usertable
+              var newPostKey = firebase.database().ref('usertable/').orderByChild("email").equalTo(currentEmail).key;
+                console.log(newPostKey);
+
+      return firebase.database().ref('usertable/').orderByChild("email").equalTo(currentEmail).once('value').then(function(snapshot) {
+        var email = (snapshot.val().email);
+        console.log(email);
+      });
+
+              firebase.database().ref('usertable/').orderByChild("email").equalTo(currentEmail).on("child_added", function(snapshot) {
+                    var key = snapshot.key;
+                    // console.log(key);
+                    // myKey.push(key);
+                    console.log(snapshot.key)
+               });
+            
+
+              //  firebase.database().ref('usertable/' + myKey ).update({
+              //         email: currentEmail
+              //       });
             };
 
 
@@ -988,21 +1014,21 @@ var myUID =[];
 
               user.providerData.forEach(function (profile) {
                 const UID = user.uid;
-                console.log(UID);
+                // console.log(UID);
 
-                  firebase.database().ref("usertable").orderByChild("userUID").equalTo(UID).on("value", function(snapshot) {
+                  firebase.database().ref("usertable").orderByChild("userUID").equalTo(UID).on("child_added", function(snapshot) {
                     myKey = snapshot.key;
                     console.log(myKey);
                   });
                 }); 
               
             const pointContainer = document.querySelector("#points");
-              console.log(pointContainer);
+              // console.log(pointContainer);
                partnerID = "-LnodyBqf2-pW2DmkIer" ;
 
               firebase.database().ref('usertable/'+partnerID).on("value", snapshot => {
                 myPoints = snapshot.val().point;
-                console.log(snapshot.key + " has " + snapshot.val().point + " points");
+                // console.log(snapshot.key + " has " + snapshot.val().point + " points");
                 pointContainer.textContent = myPoints; 
               })
             }
