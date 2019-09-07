@@ -155,8 +155,9 @@ form {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  display: none;
+  display: flex;
 }
+
 
 .checklist-icon {
   margin-bottom: 20px;
@@ -416,4 +417,13 @@ p#points.text-points {
   text-align: center;
   margin: 0 auto;
   font-size: 5rem;
+}
+ons-progress-circular.loading {
+  position: absolute;
+  top: 35%;
+  /* bottom: 50%; */
+  left: 50;
+  right: 50%;
+  justify-content: center;
+
 }

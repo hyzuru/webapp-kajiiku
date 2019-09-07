@@ -11,10 +11,10 @@ function addTodo(text, comment, category) {
   };
 
   todoItems.push(todo);
-
+  const partnerID = "-LnodyBqf2-pW2DmkIer" ; 
   firebase
     .database()
-    .ref("todolist/cooking")
+    .ref('todolist/'+partnerID )
     .push({
       taskName: text,
       taskComment: comment,

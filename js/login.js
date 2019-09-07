@@ -1,25 +1,91 @@
+// Detecting Connection State
+
+var connectedRef = firebase.database().ref(".info/connected");
+connectedRef.on("value", function(snap) {
+  if (snap.val() === true) {
+    // alert("connected");
+    console.log("Connected to Database")
+    
+  } else {
+    // alert("not connected");
+  }
+});
+
+// Managing Presence
+
+var presenceRef = firebase.database().ref("disconnectmessage");
+// Write a string when this client loses connection
+presenceRef.onDisconnect().set("I disconnected!");
+
+
+
+window.onload = function(e){ 
+  firebase.auth().onAuthStateChanged((user) => {
+    
+    if (user) {
+      console.log('user is logged');
+      const currentUser = firebase.auth().currentUser;
+      console.log(currentUser)
+      const navigator = document.querySelector("#navigator");
+      navigator.resetToPage("home.html");
+  
+      //  put the data into local storage  
+    } else {
+      console.log("user not found")
+      const navigator = document.querySelector("#navigator");
+      navigator.loadPage("login.html");
+    }
+    // onUserStatusChanged(status)   Login shiteiru ka douka  user.uid
+  });
+}
+
+
+
+
+
 // Login Page
 const login = () => {
 
-  // const myEmail = document.querySelector("#email").value;
-  // const password = document.querySelector("#password").value;
-  // console.log(myEmail);
-  // console.log(password);
-  // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-  // .then(function() {
-  // firebase.auth().signInWithEmailAndPassword(myEmail, password)
-  // .then(function() {
-  //   console.log('ログインしました。');
+  const myEmail = document.querySelector("#email").value;
+  const password = document.querySelector("#password").value;
+  console.log(myEmail);
+  console.log(password);
+  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+  .then(function() {
+  firebase.auth().signInWithEmailAndPassword(myEmail, password)
+  .then(function() {
+    console.log('ログインしました。');
     const navigator = document.querySelector("#navigator");
     navigator.resetToPage("home.html");
-  // })
-  // .catch(function(error) {
-  //   console.log('ログインできませんでした。');
-  //       // 登録に失敗した時の処理
+  })
+  .catch(function(error) {
+    console.log('ログインできませんでした。');
+        // 登録に失敗した時の処理
 
-  //       ons.notification.alert('ログインできません（' + error.message + '）');
-  // });
-// })
+        ons.notification.alert('ログインできません（' + error.message + '）');
+  });
+
+  // Save in local storage
+
+//   if (window.localStorage.getItem("rememberMe") == "true") {
+//     $scope.userEmail = window.localStorage.getItem("userName");
+//     $scope.userPassword = window.localStorage.getItem("password");
+//     document.getElementById("rememberMe").checked = true;
+// }
+// else {
+//    document.getElementById("rememberMe").checked = false;
+// }
+// if (document.getElementById("rememberMe").checked == true) {
+//    window.localStorage.setItem("rememberMe", "true");
+//    window.localStorage.setItem("userName", $scope.userEmail);
+//    window.localStorage.setItem("password", $scope.userPassword);
+// }
+// else if (document.getElementById("rememberMe").checked == false) {
+//  window.localStorage.setItem("rememberMe", "false");
+//  window.localStorage.setItem("userName", "");
+//  window.localStorage.setItem("password", "");
+// }
+})
 
 
 };
@@ -68,3 +134,28 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
 })
 
 };
+
+// ログアウトをする
+
+const logOut = () => {
+  firebase.auth().signOut().then(function() {
+    // Sign-out successful.
+    location.reload();
+  }).catch(function(error) {
+    // An error happened.
+  });
+}
+
+// edit user settings ユーザ設定を変更　（Eメール）
+
+// var user = firebase.auth().currentUser;
+
+// const changeEmail = () => {
+
+
+//   user.updateEmail("aaa@aaa.com").then(function() {
+//     // Update successful.
+//   }).catch(function(error) {
+//     // An error happened.
+//   });
+// }

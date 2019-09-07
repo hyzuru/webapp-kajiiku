@@ -588,54 +588,54 @@ var app2 = new Vue({
   },
 })
 
-let points = [];
+// let points = [];
 
-function addScore(point) {
-  const todo = {
-    text,
-    comment,
-    reviewed: true,
+// function addScore(point) {
+//   const todo = {
+//     text,
+//     comment,
+//     reviewed: true,
 
-  };
+//   };
 
-  points.push(score);
+//   points.push(score);
 
-   firebase.database().ref('todolist/cooking').update({
-      revScore:points,
-      taskComment:comment,
-      reviewed: true,
-    })
-  loadPage('home.html'); 
-}
+//    firebase.database().ref('todolist/cooking').update({
+//       revScore:points,
+//       taskComment:comment,
+//       reviewed: true,
+//     })
+//   loadPage('home.html'); 
+// }
 
 
-const formRating = document.querySelector('.rating');
-formRating.addEventListener('submit', event => {
-  event.preventDefault();
+// const formRating = document.querySelector('.rating');
+// formRating.addEventListener('submit', event => {
+//   event.preventDefault();
 
-  const input = document.querySelector('.rating');
-  console.log(input);
-  const point = input.value.trim();
-  console.log(point);
+//   const input = document.querySelector('.rating');
+//   console.log(input);
+//   const point = input.value.trim();
+//   console.log(point);
 
-  const selector = document.querySelector('.js-todo-selector div');
-  console.log(selector);
-  const text = selector.textContent.trim();
-  console.log(text);
+//   const selector = document.querySelector('.js-todo-selector div');
+//   console.log(selector);
+//   const text = selector.textContent.trim();
+//   console.log(text);
 
   
-  if (text !== 'タスクを選ぶ') {
-    addTodo(text,comment);
-    selector.textContent = 'タスクを選ぶ';
-    input.value = '';
-  } 
-  else {
-    var msg = "タスクは選択されていません。";
-    var d1 = document.querySelector(".js-form div.warningMsg");
-    d1.innerHTML = msg;
-  }
+//   if (text !== 'タスクを選ぶ') {
+//     addTodo(text,comment);
+//     selector.textContent = 'タスクを選ぶ';
+//     input.value = '';
+//   } 
+//   else {
+//     var msg = "タスクは選択されていません。";
+//     var d1 = document.querySelector(".js-form div.warningMsg");
+//     d1.innerHTML = msg;
+//   }
 
-});
+// });
 
               function showModal2(el) {
             

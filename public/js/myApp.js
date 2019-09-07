@@ -13,7 +13,6 @@ document.addEventListener("prechange", ({ target, tabItem }) => {
 });
 
 
-
 const loadPage = page => {
   document.querySelector("#menu").close();
   document
@@ -21,7 +20,8 @@ const loadPage = page => {
     .bringPageTop(page, { animation: "fade" });
 };
 
-document.querySelector('ons-back-button').onClick = function(event) {
-  // Reset the whole stack instead of popping 1 page
-  document.querySelector('ons-navigator').resetToPage('home.html');
-};
+// document.querySelector('ons-back-button').onClick = function(event) {
+//   // Reset the whole stack instead of popping 1 page
+//   document.querySelector('ons-navigator').resetToPage('home.html');
+// };
+
