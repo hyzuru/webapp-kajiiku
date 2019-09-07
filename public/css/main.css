@@ -67,6 +67,10 @@ body {
   height: 64px;
 } */
 
+button {
+  font-size: 0.9rem;
+  margin: 0 2px;
+}
 .todo-list {
   list-style: none;
   margin-bottom: 20px;
@@ -77,8 +81,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  padding: 0;
+  padding:  15px 25px ;
+  /* padding-left: 20px; */
   border: 1px solid rgb(201, 201, 201);
   box-sizing: border-box;
   margin: 20px auto;
@@ -155,8 +159,9 @@ form {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  display: none;
+  display: flex;
 }
+
 
 .checklist-icon {
   margin-bottom: 20px;
@@ -183,10 +188,6 @@ form {
 
 #taskComment {
   width: 100%;
-}
-p.taskLabel{
-  /* text-align: center; */
-  padding-left: 10px;
 }
 .js-todo-input {
   width: 100%;
@@ -297,7 +298,6 @@ p.taskLabel{
 .overlay-a {
   z-index: 0;
 }
-
 #cRyouri {
   position: absolute;
   top: 0;
@@ -318,7 +318,6 @@ p.taskLabel{
   position: absolute;
   top: -160px;
 }
-
 .cRyouri {
   background-image: url("../assets/c-ryouri.png");
   background-repeat: no-repeat;
@@ -353,14 +352,6 @@ p.taskLabel{
   background-size: contain;
   height: 33px;
   width: 33px;
-}
-
-.categoryHatena {
-  background-image: url('../assets/c-hatena.png') ;
-  background-size: contain;
-  width: 33px;
-  height: 33px;
-  background-color: #333;
 }
 
 .submitBtn,
@@ -431,72 +422,12 @@ p#points.text-points {
   margin: 0 auto;
   font-size: 5rem;
 }
-
-/* Review / Rating Modal CSS */
-
-.rating {
-  display: inline-block;
-  position: relative;
-  height: 50px;
-  line-height: 50px;
-  font-size: 50px;
-}
-
-.rating label {
+ons-progress-circular.loading {
   position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  cursor: pointer;
-}
+  top: 35%;
+  /* bottom: 50%; */
+  left: 50;
+  right: 50%;
+  justify-content: center;
 
-.rating label:last-child {
-  position: static;
 }
-
-.rating label:nth-child(1) {
-  z-index: 5;
-}
-
-.rating label:nth-child(2) {
-  z-index: 4;
-}
-
-.rating label:nth-child(3) {
-  z-index: 3;
-}
-
-.rating label:nth-child(4) {
-  z-index: 2;
-}
-
-.rating label:nth-child(5) {
-  z-index: 1;
-}
-
-.rating label input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-}
-
-.rating label .icon {
-  float: left;
-  color: transparent;
-}
-
-.rating label:last-child .icon {
-  color: #000;
-}
-
-.rating:not(:hover) label input:checked ~ .icon,
-.rating:hover label:hover input ~ .icon {
-  color: #09f;
-}
-
- .rating label input:focus:not(:checked) ~ .icon:last-child {
-  color: #000;
-  text-shadow: 0 0 5px #09f;
-}
-
