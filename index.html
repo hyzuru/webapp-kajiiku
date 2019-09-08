@@ -929,7 +929,7 @@ var myUID =[];
                       user.providerData.forEach(function (profile) {
                         const UID = user.uid;
 
-                        myUID.push(UID)
+                 
                         
                   firebase.database().ref("usertable").orderByChild("userUID").equalTo(UID).on("child_added", function(snapshot) {
                     myKey = snapshot.key;
@@ -960,6 +960,8 @@ var myUID =[];
                             partnerID: partnerKey,
                             });
                         }
+                        ons.notification.alert('ユーザーを連携しました。');
+
                     });
                   });    
                 });
@@ -988,7 +990,15 @@ var myUID =[];
 
             // Get points and profile details
             function getPoints() {
-
+              myKey ;
+              myRole;
+              partnerID;
+            getUserDetails(); 
+            console.log("In getPoints"+myKey);
+            console.log("In getPoints"+myrole);
+            console.log("In getPoints"+partnerID);
+            // partnerID = "-LnodyBqf2-pW2DmkIer" ; 
+            // console.log("In getPoints"+partnerID);
               partnerID = document.querySelector("div#partnerID").innerHTML ;
               console.log("Partnerid from document"+partnerID)
             const pointContainer = document.querySelector("#points");

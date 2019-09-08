@@ -37,7 +37,7 @@ user.providerData.forEach(function (profile) {
   firebase.database().ref('usertable/'+ myKey).on("value", snapshot => {
       myRole = snapshot.val().role; // total points
       console.log(snapshot.key + " is " + snapshot.val().role );
-      myRole = snapshot.val().partnerID; // get partnerID
+      partnerID = snapshot.val().partnerID; // get partnerID
       console.log(snapshot.key + " is " + snapshot.val().partnerID );
     })
   });
