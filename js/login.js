@@ -13,42 +13,62 @@ connectedRef.on("value", function(snap) {
 });
 
 // Managing Presence
-
 var presenceRef = firebase.database().ref("disconnectmessage");
-// Write a string when this client loses connection
+// // Write a string when this client loses connection
 presenceRef.onDisconnect().set("I disconnected!");
 
-// var getPartnerID  = [];
+var userKey;
 
-// function init() {
-//   var user = firebase.auth().currentUser;
+function init() {
+var user = firebase.auth().currentUser;
 
-//   user.providerData.forEach(function (profile) {
-//     const UID = user.uid;
-//     console.log(UID);
+var currentUID ;
+user.providerData.forEach(function (profile) {
+  const UID = user.uid;
+  console.log(UID);
+  currentUID = UID ;
+});
+// var userKey ;
+firebase.database().ref("usertable").orderByChild("userUID").equalTo(currentUID).on("child_added", function(snapshot) {
+console.log(snapshot);
+    // var key = snapshot.key;
+    console.log(key);
+    userKey = key;
+    document.querySelector("div#myUserKey").innerText = userKey;
+  });
+  userKey = document.querySelector("div#myUserKey").innerText ;
+    console.log(userKey) ;
+  firebase.database().ref("usertable/"+userKey ).on("child_added", function(snapshot) {
+    // console.log(snapshot.hasChildren.val());
+        var key = snapshot.key;
+        console.log(key);
 
-//       firebase.database().ref("usertable").orderByChild("userUID").equalTo(UID).on("child_added", function(snapshot) {
-//         myKey = snapshot.key;
-//         console.log(myKey);
-//         getPartnerID.push(myKey) ;        
-//       });
-//       console.log(getPartnerID);
-//     }); 
-// }
-// console.log(getPartnerID[0]);
-// var partnerID1 = getPartnerID[0];
-// console.log(partnerID1)
+      var changedPost = snapshot.val();
+      console.log("The updated post title is " + changedPost.partnerID);
+
+        // userKey = key;
+        // document.querySelector("div#myUserKey").innerText = userKey;
+  });
+    // if (snapshot.hasChild("partnerID")) {
+    //   console.log(snapshot);
+    //   };
+  
+    // var partner = snapshot.child('partnerID').val();
+    // console.log(partner);
+    // document.querySelector("div#partnerID").innerText = partnerID;
+  
+}
+
 
 window.onload = function(e){ 
   firebase.auth().onAuthStateChanged((user) => {
-    
     if (user) {
       console.log('user is logged');
       const currentUser = firebase.auth().currentUser;
       console.log(currentUser)
       const navigator = document.querySelector("#navigator");
       navigator.resetToPage("home.html");
-      // init();
+      init();
     } else {
       console.log("user not found")
       const navigator = document.querySelector("#navigator");
@@ -57,9 +77,6 @@ window.onload = function(e){
     // onUserStatusChanged(status)   Login shiteiru ka douka  user.uid
   });
 }
-
-
-
 
 
 // Login Page
@@ -100,13 +117,14 @@ const signUp = () => {
       break;
     }
   }
+  console.log(a);
 
-console.log(a);
-firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
-.then(function() {
+  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+  .then(function() {
   firebase.auth().createUserWithEmailAndPassword(myEmail, password)
   .then(function() {
     console.log('サインアップしました。');
+    if (a === "papa") {
     const navigator = document.querySelector("#navigator");
     navigator.resetToPage("home.html");
     var user = firebase.auth().currentUser;
@@ -114,14 +132,44 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
       const UID = user.uid;
       firebase.database().ref('usertable').push({
         email:myEmail,
-        password:password,
+        // password:password,
         role:a,
         userUID:UID,
         partnerID:"",
         point:0
+      }).then((snap) => {
+        const key = snap.key ;
+        console.log("role: "+ a)
+        console.log("snapshotKey: "+ key)
+        if (a === "papa") {
+          firebase.database().ref('usertable/'+ key ).update({
+          partnerID:key, 
+        });
 
-      })
+      } 
+     })
+      
+        
     });
+  } else if (a === "mama") {
+    const navigator = document.querySelector("#navigator");
+    navigator.resetToPage("connect.html");
+    var user = firebase.auth().currentUser;
+    user.providerData.forEach(function (profile) {
+      const UID = user.uid;
+      firebase.database().ref('usertable').push({
+        email:myEmail,
+        // password:password,
+        role:a,
+        userUID:UID,
+        partnerID:"",
+        point:0
+      }).then((snap) => {
+        const key = snap.key ;
+        console.log("role: "+ a)
+        })
+    });
+  }
   })
   .catch(function(error) {
     console.log('サインアップできませんでした。');

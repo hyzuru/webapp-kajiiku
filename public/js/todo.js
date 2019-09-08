@@ -12,6 +12,8 @@ function addTodo(text, comment, category) {
 
   todoItems.push(todo);
   const partnerID = "-LnodyBqf2-pW2DmkIer" ; 
+  // var currPartnerID = document.querySelector("div#myUserKey").textContent;
+  // var partnerID = currPartnerID ; 
   firebase
     .database()
     .ref('todolist/'+partnerID )

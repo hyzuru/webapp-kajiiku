@@ -321,36 +321,40 @@ var valueofTodo = [];
 
 
 // const firebaseTodoRef = firebase.database().ref('todolist/'+partnerID ).orderByChild('checked').equalTo(false) ;
-var partnerID = "-LnodyBqf2-pW2DmkIer" ; 
+// var partnerID = "-LnodyBqf2-pW2DmkIer" ; 
+// var currPartnerID = document.querySelector("div#myPartnerID").textContent;
+// var partnerID = currPartnerID ; 
 
-
-// Vue.mixin({
-//   data: function() {
-//     return {
-//       get partnerID() {
-//         return partnerID;
-//       }
-//     }
-//   },
-//   created: function() {
-//     this.partnerID;
-//   },
-//   methods: {
-//     partnerID: function() {
-//       var user = firebase.auth().currentUser;
-//       if (user != null) {
-//         const UID = user.uid;
+Vue.mixin({
+  data: function() {
+    return {
+      get partnerID() {
+        return partnerID;
+      }
+    }
+  },
+  created: function() {
+    this.partnerID;
+  },
+  methods: {
+    partnerID: function() {
+      var user = firebase.auth().currentUser;
+      if (user != null) {
+        // const UID = user.uid;
    
-//         firebase.database().ref("usertable").orderByChild("userUID").equalTo(UID).on("value", function(snapshot) {
-//         let partnerKey = snapshot.key;
-//           console.log(partnerKey);
-//           return partnerID;
-       
-//         });
-//       }
-//     }
-//   }
-// })
+        // firebase.database().ref("usertable").orderByChild("userUID").equalTo(UID).on("value", function(snapshot) {
+        // let partnerKey = snapshot.key;
+        //   console.log(partnerKey);
+        //   return partnerID;
+
+        partnerID = document.querySelector("div#partnerID").innerHTML ;
+              // console.log("Partnerid from document"+partnerID)
+          return partnerID; 
+        // });
+      }
+    }
+  }
+})
 
 
         // vue_firebase
@@ -367,11 +371,12 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
       },
           
       created: function() {
-        // this.partnerID = "-LnodyBqf2-pW2DmkIer";
-        // partnerID = this.partnerID;
-        // firebaseTodoRef.on("value",  snapshot => {
-         partnerID = "-LnodyBqf2-pW2DmkIer" ; 
-          // console.log(partnerID);
+   
+        //  partnerID = "-LnodyBqf2-pW2DmkIer" ; 
+
+        // partnerID = document.querySelector("div#partnerID").innerHTML ;
+              console.log("Partnerid from document"+partnerID)
+
       firebase.database().ref('todolist/'+partnerID ).orderByChild('checked').equalTo(false).on("value",  snapshot => {
         if (snapshot) {
           // snapshot.forEach(function(child) {
@@ -392,7 +397,7 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
       
             this.list = list;
             this.loaded = true;
-            }
+            } 
           })
         },
         computed: {
@@ -683,7 +688,7 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
           
           created: function() {
             // partnerID = this.partnerID;
-            // console.log(partnerID);
+            console.log(partnerID);
             firebase.database().ref('todolist/'+partnerID).orderByChild('reviewed').equalTo(false).on("value",  snapshot => {
               if (snapshot) {
                   const rootList = snapshot.val()
@@ -884,6 +889,12 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
               onclick="getPoints()">0</p>
               <p id=point--after>ポイント</p>
             </div>
+<!-- 
+            <div class="noDisplay" id="myUserKey"></div>
+            <div class="noDisplay" id="partnerID"></div> -->
+            <div id="myUserKey"></div>
+            <div id="partnerID"></div>
+
 
             <div style="margin: 20px auto; width: 320px;">
                 <ons-input
@@ -904,180 +915,90 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
                 ></ons-input>
               <ons-button onclick="changeMail()" class="loginBtn">自分のメールを変更する</ons-button>
             </div>
+
+
             <script>
 
-var myUID =[];
+
+
+            var myUID =[];
             function renkei() {
               const partnerEmail = document.querySelector("#partnerEmail").value;
               console.log(partnerEmail);
-              // firebase.database().ref("usertable").on("value", function(snapshot){
-                console.log(snapshot.key);
-              // })
-              // var ref = db.ref("usertable");
-      
-              // ログインされたユーザーのUIDを取得する
-              var user = firebase.auth().currentUser;
-              if (user != null) {
-                const UID = user.uid;
-                  // console.log("  Name: " + profile.userUID);
-                  // const UID = profile.userUID;
-                  console.log("UID: "+ UID);
-
-                  if (myUID != [] ){
-                    myUID = [];
-                  } else {
-                    myUID.push(UID)    
-                  }
-                  
-                  
-                  // return firebase.database().ref('usertable').orderByChild("userUID").equalTo(myUID).on('value').then(function(snapshot) {
-                    // var userRole =  snapshot.val().role ;
-                    // ...
-                  // });
-
-                  firebase.database().ref("usertable").orderByChild("userUID").equalTo(UID).on("value", function(snapshot) {
-                    // find role 
-                    var child = snapshot.child("role").getValue();
-                    console.log(child);
-                    console.log("User's role: "+ snapshot.val().role) ; 
-                    // let partnerKey = snapshot.key;
-                        // console.log(partnerKey);
-                        // console.log(snapshot.role);
-                        // // do this if papa
-                        // partnerKey.push(partnerKey);
-
-                    });                  
-                }
-
-                // 連携したいユーザーのパートナーキー
-                firebase.database().ref("usertable/").orderByChild("email").equalTo(partnerEmail).on("value", function(snapshot) {
-                  let partnerKey =snapshot.key;
-                    console.log(partnerKey);
-                    console.log(snapshot.role);
-                    // do this if papa
-                    partnerKey.push(partnerKey);
-                });
-                // firebase.database().ref("usertable/"+partnerKey).orderByChild("role").equalTo("").on("value", function(snapshot) {
-                //   let partnerKey =snapshot.key;
-                //     console.log(partnerKey);
-                //     console.log(snapshot.role);
-                //     // do this if papa
-                //     partnerKey.push(partnerKey);
-                // });
-                // var myKey =[];
-                  console.log(myUID[0]);
-
-                  // get the role of this user, if user is father then get 
-                  var userIsPapa ;
-
-                  firebase.database().ref("usertable").orderByChild("role").equalTo("パパ").on("child_added", function(snapshot) {
-                    myKey = snapshot.key;
-                    console.log(myKey);
-                    userRole = true ;
-                  });
-                  
-                  // IFユーザーのroleがパパでしたら
-
-                  // IFユーザーのroleがママでしたら
-                  if (user === false ) {
-                      firebase.database().ref("usertable").orderByChild("role").equalTo("ママ").on("child_added", function(snapshot) {
-                      papaKey = partnerKey;
-                      console.log(papaKey);
-                    });
-                  }                 
-                    firebase.database().ref('usertable/' + myKey ).update({
-                      partnerID: myKey,
-                    });
-                    firebase.database().ref('usertable/' + partnerKey ).update({
-                      partnerID: myKey,
-                    });
-                ons.notification.alert('ユーザーを連携しました。');
-                console.log('新しいPartnerIDを連携しました: '+partnerID);
-             
-
-
-                  firebase.database().ref("usertable").orderByChild("userUID").equalTo(myUID[0]).on("child_added", function(snapshot) {
-                    myKey = snapshot.key;
-                    console.log(myKey);
-                    firebase.database().ref('usertable/' + myKey ).update({ 
-                      partnerID: myKey,
-                    });
-                    firebase.database().ref('usertable/' + partnerKey ).update({
-                      partnerID: myKey,
-                    });
-                ons.notification.alert('ユーザーを連携しました。');
-                console.log('新しいPartnerIDを連携しました: '+partnerID);
-                  });
-                };
-                // ons.notification.alert('ユーザーを連携しました。');
-                // console.log(partnerID);
+              // 連携したいユーザーのパートナーキー  get user key of partner from their email address
+                firebase.database().ref("usertable/").orderByChild("email").equalTo(partnerEmail).on("child_added", function(snapshot) {
+                  const partnerKey = snapshot.key;
+                  document.querySelector("div#partnerID").innerHTML = partnerKey ;
+                })
                 
-                // .catch(function(error) {
-                // // An error happened.
-                // console.log(error);
-                // }));
-          
+              newPartnerKey = document.querySelector("div#partnerID").innerHTML ;
+              console.log("PartnerKey: "+ newPartnerKey)
+
+              // ログインされたユーザーsnapshot.keyを取得する
+              userKey = document.querySelector("div#myUserKey").textContent;
+              console.log("PapaPartnerID: " +newPartnerKey);
+              // Update partnerID 
+                firebase.database().ref("usertable/" + userKey).update({
+                    partnerID:newPartnerKey, 
+                  }).catch(function(error) {
+                // An error happened.
+                ons.notification.alert('連携できませんでした。' + error.message + '）');
+              });
+  
+              firebase.database().ref("usertable").orderByChild("role").equalTo("papa").on("child_added", function(snapshot) {
+                myKey = snapshot.key;
+                console.log("If papa true, mykey "+ myKey);
+                userRole = true ;
+              });
+
+                ons.notification.alert('ユーザーを連携しました。');
+                console.log('新しいPartnerIDを連携しました: '+partnerID);
+                console.log('UserKey: '+userKey);
+             
+                };
+
 
             function changeMail() {
               const userEmail = document.querySelector("#changeUserMail").value;
               console.log(userEmail);
 
               var user = firebase.auth().currentUser;
+              var UID = user.uid 
 
               var currentEmail = firebase.auth().currentUser.email;
               console.log(currentEmail)
               
-              // user.updateEmail(userEmail).then(function() {
-              //   // Update successful.
-              //   ons.notification.alert('メールを「'+userEmail+'」に変更しました。');
+              user.updateEmail(userEmail).then(function() {
+                // Update successful.
+                ons.notification.alert('メールを「'+userEmail+'」に変更しました。');
 
-              // }).catch(function(error) {
-              //   // An error happened.
-              // });
+              }).catch(function(error) {
+                // An error happened.
+                ons.notification.alert('ユーザーメール変更できませんでした。' + error.message + '）');
+              });
 
               // Also update the database entry in Usertable
-              var newPostKey = firebase.database().ref('usertable/').orderByChild("email").equalTo(currentEmail).key;
-                console.log(newPostKey);
+              // userKey = document.querySelector("div#myUserKey").textContent;
+              
+              // firebase.database().ref('usertable/'+ userKey).update({
+              //   email:userEmail,
+              // });
 
-      return firebase.database().ref('usertable/').orderByChild("email").equalTo(currentEmail).once('value').then(function(snapshot) {
-        var email = (snapshot.val().email);
-        console.log(email);
-      });
-
-              firebase.database().ref('usertable/').orderByChild("email").equalTo(currentEmail).on("child_added", function(snapshot) {
-                    var key = snapshot.key;
-                    // console.log(key);
-                    // myKey.push(key);
-                    console.log(snapshot.key)
-               });
-            
-
-              //  firebase.database().ref('usertable/' + myKey ).update({
-              //         email: currentEmail
-              //       });
             };
 
-
+            // Get points and profile details
             function getPoints() {
 
-              var user = firebase.auth().currentUser;
-
-              user.providerData.forEach(function (profile) {
-                const UID = user.uid;
-                // console.log(UID);
-
-                  firebase.database().ref("usertable").orderByChild("userUID").equalTo(UID).on("child_added", function(snapshot) {
-                    myKey = snapshot.key;
-                    console.log(myKey);
-                  });
-                }); 
-              
+              partnerID = document.querySelector("div#partnerID").innerHTML ;
+              console.log("Partnerid from document"+partnerID)
             const pointContainer = document.querySelector("#points");
-              // console.log(pointContainer);
-               partnerID = "-LnodyBqf2-pW2DmkIer" ;
+              console.log(pointContainer);
 
               firebase.database().ref('usertable/'+partnerID).on("value", snapshot => {
                 myPoints = snapshot.val().point;
+                if (!myPoints) {
+                  myPoints = 0;
+                }
                 // console.log(snapshot.key + " has " + snapshot.val().point + " points");
                 pointContainer.textContent = myPoints; 
               })
@@ -1197,39 +1118,6 @@ var myUID =[];
             </ons-page>
           </template>
 
-     
-
-
-                      
-
-  <!-- <template id="category-1.html">
-      <ons-page id="category-1">
-          <ons-toolbar>
-            <div class="left"><ons-back-button>New Request</ons-back-button></div>
-            <div class="center">Category</div>
-          </ons-toolbar>
-
-  
-        
-          <ons-list id="request-list">
-            <ons-list-item onclick="loadPage('category-souji.html')" tappable modifier="chevron"
-              >そうじ</ons-list-item
-            >
-            <ons-list-item onclick="loadPage('category-ikuji.html')" tappable modifier="chevron"
-              >いくじ</ons-list-item
-            >
-            <ons-list-item onclick="loadPage('category-kaimono.html')" tappable modifier="chevron"
-              >かいもの</ons-list-item
-            >
-            <ons-list-item onclick="loadPage('category-ryouri.html')" tappable modifier="chevron"
-              >りょうり
-            </ons-list-item>
-            <ons-list-item onclick="loadPage('category-sentaku.html')" tappable modifier="chevron"
-              >せんたく</ons-list-item
-            >
-          </ons-list>
-        </ons-page>
-  </template> -->
 
   <!-- firebase -->
   <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-app.js"></script>
