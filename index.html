@@ -38,9 +38,9 @@
             <ons-list-item onclick="loadPage('changeMail.html')" tappable modifier="chevron">
               メール変更
             </ons-list-item>
-            <ons-list-item onclick="loadPage('connect.html')" tappable modifier="chevron">
+            <!-- <ons-list-item onclick="loadPage('connect.html')" tappable modifier="chevron">
                 連携する
-              </ons-list-item>
+              </ons-list-item> -->
             <ons-list-item onclick="logOut()" tappable modifier="chevron">
               ログアウト
             </ons-list-item>
@@ -81,17 +81,17 @@
         <ons-template id="changeMail.html">
             <ons-page id="changeMail">
                 <ons-toolbar>
-                    <div class="left"><ons-back-button>Change Mail</ons-back-button></div>
+                    <div class="left"><ons-back-button>戻る</ons-back-button></div>
                 </ons-toolbar>
+                <h2>自分のメールを変更する</h2>
                 <div style="margin: 20px auto; width: 320px;">
                   
                         <ons-input
                         id="changeUserMail"
                         placeholder="あなたのメールアドレス"
-                        modifier="underbar"
                         class="loginInput"
                       ></ons-input>
-                    <ons-button onclick="changeMail()" class="loginBtn">自分のメールを変更する</ons-button>
+                    <ons-button onclick="changeMail()" class="loginBtn">変更する</ons-button>
                        
                   </div>
             
@@ -105,16 +105,16 @@
           <ons-template id="connect.html">
               <ons-page id="connect">
                   <ons-toolbar>
-                      <div class="left"><ons-back-button>Change Mail</ons-back-button></div>
+                      <div class="left"><ons-back-button>戻る</ons-back-button></div>
                   </ons-toolbar>
+                  <h2>パートナー連携</h2>
                   <div style="margin: 20px auto; width: 320px;">
                       <ons-input
                       id="partnerEmail"
-                      placeholder="partnerEmail"
-                      modifier="underbar"
+                      placeholder="パートナーのメールアドレス"
                       class="loginInput"
                     ></ons-input>
-                    <ons-button onclick="renkei()" class="loginBtn">partner登録</ons-button>
+                    <ons-button onclick="renkei()" class="loginBtn">パートナー登録</ons-button>
                   
                   </div>
               
@@ -134,8 +134,7 @@
         <p>
           <ons-input
             id="email"
-            placeholder="email"
-            modifier="underbar"
+            placeholder="メールアドレス"
             class="loginInput"
             type="email"
           ></ons-input>
@@ -144,9 +143,8 @@
         <p>
           <ons-input
             id="password"
-            placeholder="Password"
+            placeholder="パスワード"
             type="password"
-            modifier="underbar"
             class="loginInput"
           >
           </ons-input>
@@ -176,7 +174,7 @@
       </div>
     </ons-toolbar>
   
-    <ons-tabbar id="tabbar">
+    <ons-tabbar id="tabbar" position="top">
       <ons-tab page="requests.html" label="リクエスト"></ons-tab>
       <ons-tab page="completed.html" label="終わったタスク"></ons-tab>
       <ons-tab page="profile.html" label="プロフィール"></ons-tab>
@@ -200,8 +198,7 @@
             <p>
               <ons-input
               id="newEmail"
-              placeholder="email"
-              modifier="underbar"
+              placeholder="メールアドレス"
               class="loginInput"
               type="email"
               ></ons-input>
@@ -210,9 +207,8 @@
             <p>
               <ons-input
               id="newPassword"
-              placeholder="Password"
+              placeholder="パスワード"
               type="password"
-              modifier="underbar"
               class="signUpInput"
               >
               </ons-input>
@@ -220,7 +216,7 @@
             <p>
                 <ons-input
                   id="passwordConfirm"
-                  placeholder="Password again"
+                  placeholder="もう一度パスワードを入力してください"
                   type="password"
                   modifier="underbar"
                 >
@@ -251,18 +247,19 @@
             <ons-pull-hook id="pull-hook">
               再読み込み
             </ons-pull-hook>
-
+            <h2 style="text-align: center;">リクエスト一覧</h2>
             <div id="app">
               <ons-list class="todo-list js-todo-list">
   
-                <!-- <div v-if="!loaded" style="text-align: center; margin-top: 200px">
+                <!-- <div>{{ item.partnerID }}</div> -->
+                <div v-if="!loaded" style="text-align: center; margin-top: 200px">
                      Loading...
-                  </div> -->
-                <!-- <div v-if="loaded"> -->
+                  </div>
+                <div v-if="loaded">
                     <div v-if="isEmpty">
                         <div class="empty-state">
                             <svg class="checklist-icon"><use href="#checklist-icon"></use></svg>
-                            <h2 class="empty-state__title">タスクはありません。</h2>
+                            <h3 class="empty-state__title">タスクはありません。</h3>
                             <p class="empty-state__description">「＋」ボタンを押してタスクを作ります。</p>
                           </div>
 
@@ -283,7 +280,7 @@
                         </button>
                         <!-- <button type="submit" onclick="deleteTodo()" class="delete-todo js-delete-todo"> -->                      
                           </ons-list-item>
-                <!-- </div> -->
+                </div>
               </ons-list>
              
                     </div>
@@ -317,224 +314,270 @@
                           </div>
                         </ons-modal>
 
-            
-              <script>
-                
-// const firebaseTodoRef = firebase.database().ref('todolist/cooking' ).orderByChild('checked').equalTo(false) ;
-var valueofTodo = [];
-
-//   myKey ;
-
-// const firebaseTodoRef = firebase.database().ref('todolist/'+partnerID ).orderByChild('checked').equalTo(false) ;
-// var partnerID = "" ; 
-// var currPartnerID = document.querySelector("div#myPartnerID").textContent;
-// var partnerID = currPartnerID ; 
-
-// Vue.mixin({
-//   data: function() {
-//     return {
-//       get partnerID() {
-//         return partnerID;
-//       }
-//     }
-//   },
-//   created: function() {
-//     this.partnerID;
-//   },
-//   methods: {
-//     partnerID: function() {
-//       var user = firebase.auth().currentUser;
-//       if (user != null) {
-//         // const UID = user.uid;
-   
-//         // firebase.database().ref("usertable").orderByChild("userUID").equalTo(UID).on("value", function(snapshot) {
-//         // let partnerKey = snapshot.key;
-//         //   console.log(partnerKey);
-//         //   return partnerID;
-
-//         partnerID = document.querySelector("div#partnerID").innerHTML ;
-//               // console.log("Partnerid from document"+partnerID)
-//           return partnerID; 
-//         // });
-//       }
-//     }
-//   }
-// })
-
-
-        // vue_firebase
-              var app = new Vue({
-            el: '#app',
-            data () {
-              return {
-                
-                // loaded: false,
-                list: [], // 最新状態はここにコピーされる
-                todo:[],
-              id: null
-              
-            }
-      },
-          
-      created: function() {
-        //   myKey ;
-        partnerID;        
-        
-        partnerID = "-LoBL5MBnKyC7trYe5_A" ; 
-        console.log("trying to get " + partnerID);
-        
-              // partnerID = "-LnodyBqf2-pW2DmkIer";
-      firebase.database().ref('todolist/'+partnerID ).orderByChild('checked').equalTo(false).on("value",  snapshot => {
-        if (snapshot) {
-            const rootList = snapshot.val()
-            const id = snapshot.key;
-            let list = []      
-              Object.keys(rootList).forEach((val, key) => {
-                rootList[val].id = val
-                list.push(rootList[val])
-              valueofTodo.push(val)
-            })
-      
-            this.list = list;
-            // this.loaded = true;
-            } 
-          })
-        },
-        computed: {
-           isEmpty: function () {
-              return jQuery.isEmptyObject(this.list)
-           }
-       },
-      //  mounted() {
-      //       this.$bind('data', firebase.database().ref(".info/connected").on("value", snapshot => { 
-      //         snapshot.val()}))
-      //           .then(() => this.loaded = true);
-      //   },
-      });
-      // console.log(valueofTodo);
-
-
-                
-
-    function showModal(el) {
-      var elname = el.tagName ;
-      // get text of the item that was clicked
-      // console.log(elname);
-      var listItem = el.parentElement.parentElement;
-      // console.log(listItem.outerHTML);
-      var dataKey = listItem.getAttribute('data-modal-id');
-      // console.log(listItem.getAttribute('data-modal-id'));
-      // var todoTextLabel = el.parentElement.querySelector('div.todo-itemName').textContent;
-      var todoTextLabel = el.parentElement.querySelector("div").nextElementSibling.textContent;
-      // console.log(todoTextLabel);
-      // var todoTextComment = el.parentElement.querySelector('div.todo-itemComment').textContent;
-      var todoTextComment = el.parentElement.querySelector('span.todo-itemComment').textContent;
-        var todoTextComment = todoTextComment.replace(/\s+/g, '');
-        if (todoTextComment != "") {
-          todoTextComment = todoTextComment.replace(/\s+/g, '');
-        } else {
-          // console.log(todoTextComment);
-          todoTextComment = "コメントなし"
-        }
-        // console.log(todoTextComment);
-
-
-      var modal = document.querySelector('ons-modal.taskDetailsModal');
-      // var modal = document.querySelector("[data-modal-id=" + CSS.escape(dataKey) + "]");
-      // console.log(modal);
-      // var checkModKey = modal.getAttribute("data-modal-id");
-      // console.log(checkModKey);
-      // console.log(dataKey);
-      // if (checkModKey === dataKey) { 
-        modal.show();
-      // }
-
-      var mText = modal.querySelector('p') ;
-      // console.log(mText);
-
-      mText.innerHTML =  todoTextLabel;
-      mText.innerHTML =  "<div class='noDisplay'>" + dataKey+"</div>"+todoTextLabel;
-      mText.innerHTML += "<br><div class='todo-hLine'></div><br>"+todoTextComment;
-
-   
-
-
-    }
-
-    function closeModal1(el) {
-      var modal1 = document.querySelector('ons-modal.taskDetailsModal');
-      modal1.hide();
-    }
-
-
-
-
-
-          function doTask(el) {
-          // console.log(event.target);
-          var modal = document.querySelector('ons-modal.taskDetailsModal');
-          
-          // console.log(modal)
-          var elname = modal.tagName ;
-            // get text of the item that was clicked
-            // console.log(elname);
-            var dataKey = modal.querySelector("div.noDisplay").innerHTML;
-            // console.log(dataKey);
-   
-            var id = dataKey
-            // Update checked false to true
-                firebase.database().ref('todolist/'+partnerID +'/'+id).update({
-            checked: true,
-            reviewed:false,
-            revScore: 0
-              });
-              // console.log("Task ID "+ id + "has been updated successfully")
-              // console.log("Added Review variables")
-            
-            modal.hide();
-
-            var modal = document.querySelector('ons-modal.doTaskConfirmation');
-
-            modal.show();
-        
-            var closeButton = document.querySelector('.closeBtn2');
-            // console.log(closeButton)
-              closeButton.onclick = function(){
-              modal.hide();
-            };
-          }
-
-
-       function deleteTodo(el) {
-        var target = el.parentElement.parentElement.getAttribute("data-modal-id");
-
-        // console.log(target);
-        //   myKey ;
-        partnerID;
-            getUserDetails();
-            // console.log("In getPoints"+myKey);
-            console.log("In getPoints "+partnerID);
-
-        let todoRef = firebase.database().ref('todolist/' + partnerID +'/' + target);
-            todoRef.remove()
-        // console.log("Finished deleting")
-      }
-
-
-          </script>
-
-
-   
-      
-
-
       <ons-fab position="bottom right" onclick="loadPage('page1.html')">
           <ons-icon icon="md-plus"></ons-icon>
         </ons-fab>
         <!-- <script src="js/todo.js"></script> -->
         <script src="js/pull-hook.js"></script>
 
-
+        <script>
+                
+            // const firebaseTodoRef = firebase.database().ref('todolist/cooking' ).orderByChild('checked').equalTo(false) ;
+            var valueofTodo = [];
+            
+            //   myKey ;
+            // partnerID = "-LoBL5MBnKyC7trYe5_A" ; 
+            
+            // const firebaseTodoRef = firebase.database().ref('todolist/'+partnerID ).orderByChild('checked').equalTo(false) ;
+            // var partnerID = "" ; 
+            // var currPartnerID = document.querySelector("div#myPartnerID").textContent;
+            // var partnerID = currPartnerID ; 
+            
+            // Vue.mixin({
+            //   data: function() {
+            //     return {
+            //       get partnerID() {
+            //         return partnerID;
+            //       }
+            //     }
+            //   },
+            //   created: function() {
+            //     this.partnerID;
+            //   },
+            //   methods: {
+            //     partnerID: function() {
+            //       var user = firebase.auth().currentUser;
+            //       if (user != null) {
+            //         // const UID = user.uid;
+               
+            //         // firebase.database().ref("usertable").orderByChild("userUID").equalTo(UID).on("value", function(snapshot) {
+            //         // let partnerKey = snapshot.key;
+            //         //   console.log(partnerKey);
+            //         //   return partnerID;
+            
+            //         partnerID = document.querySelector("div#partnerID").innerHTML ;
+            //               // console.log("Partnerid from document"+partnerID)
+            //           return partnerID; 
+            //         // });
+            //       }
+            //     }
+            //   }
+            // })
+            
+            
+                    // vue_firebase
+                          var app = new Vue({
+                        el: '#app',
+                        data () {
+                          return {
+                            loaded: false,
+                            list: [], // 最新状態はここにコピーされる
+                            todo:[],
+                            id: null
+                       
+                        }
+                  },
+                      
+                  created: function() {
+                      partnerID ;
+                      // getUserDetails();
+                      
+                      partnerID = "-LoBL5MBnKyC7trYe5_A" ; 
+                    console.log("trying to get " + partnerID);          
+            
+            
+                // var user = firebase.auth().currentUser;
+            
+                // user.providerData.forEach(function (profile) {
+                //   const UID = user.uid;
+            
+                  
+            
+                //   console.log(UID);
+            
+                //   firebase.database().ref("usertable").orderByChild("userUID").equalTo(UID).on("child_added", function(snapshot) {
+                //   myKey = snapshot.key;
+                //   // console.log(myKey);
+                //     // document.querySelector("div#myUserKey").innerHTML = myKey;
+            
+                //     console.log(myKey);
+                //   firebase.database().ref('usertable/'+ myKey).on("value", snapshot => {
+                //       myRole = snapshot.val().role; // total points
+                //       // console.log(snapshot.key + " is " + snapshot.val().role );
+                //       partnerID = snapshot.val().partnerID; // get partnerID
+                //       // strPartnerID = partnerID.toString();
+                //       // console.log(strPartnerID);
+                //       // document.querySelector("div#partnerID").innerHTML = partnerID;
+                //       console.log("Within Vue " + snapshot.key + " is " + snapshot.val().partnerID );
+                     
+                //         // document.querySelector("div#myUserKey").innerHTML = myKey;
+            
+                //         // console.log(myKey);
+            
+                
+            
+                //     });
+            
+                //     var strpartnerID = document.querySelector("div#partnerID").innerHTML;
+                //     console.log(strpartnerID);
+                //     if ( strpartnerID === "-LoBL5MBnKyC7trYe5_A") {
+                  firebase.database().ref('todolist/'+partnerID ).orderByChild('checked').equalTo(false).on("value",  snapshot => {
+                        if (snapshot) {
+                        const rootList = snapshot.val();
+                        const id = snapshot.key;
+                        let list = [];  
+            
+                          Object.keys(rootList).forEach((val, key) => {
+                            rootList[val].id = val
+                            list.push(rootList[val])
+                          valueofTodo.push(val)
+                        })
+                          // this.list = list;
+            
+                      // });
+                    // } else {
+                      // console.log("strpartner != -LoBL5MBnKyC7trYe5_A")
+                    // }
+                    
+                //   });
+                // });            
+            
+            
+             
+                   
+            
+                    
+                          // partnerID = "-LnodyBqf2-pW2DmkIer";
+                  // firebase.database().ref('todolist/'+partnerID ).orderByChild('checked').equalTo(false).on("value",  snapshot => {
+                  //   if (snapshot) {
+                  //       const rootList = snapshot.val()
+                  //       const id = snapshot.key;
+                  //       let list = []      
+                  //         Object.keys(rootList).forEach((val, key) => {
+                  //           rootList[val].id = val
+                  //           list.push(rootList[val])
+                  //         valueofTodo.push(val)
+                  //       })
+                  
+                        this.list = list;
+                        this.loaded = true;
+                        } 
+                      })
+                    },
+                    computed: {
+                       isEmpty: function () {
+                          return jQuery.isEmptyObject(this.list)
+                       }
+                   },
+            
+            
+                  });
+                  console.log(valueofTodo);
+            
+            
+                            
+            
+                function showModal(el) {
+                  var elname = el.tagName ;
+                  // get text of the item that was clicked
+                  // console.log(elname);
+                  var listItem = el.parentElement.parentElement;
+                  // console.log(listItem.outerHTML);
+                  var dataKey = listItem.getAttribute('data-modal-id');
+                  // console.log(listItem.getAttribute('data-modal-id'));
+                  // var todoTextLabel = el.parentElement.querySelector('div.todo-itemName').textContent;
+                  var todoTextLabel = el.parentElement.querySelector("div").nextElementSibling.textContent;
+                  // console.log(todoTextLabel);
+                  // var todoTextComment = el.parentElement.querySelector('div.todo-itemComment').textContent;
+                  var todoTextComment = el.parentElement.querySelector('span.todo-itemComment').textContent;
+                    var todoTextComment = todoTextComment.replace(/\s+/g, '');
+                    if (todoTextComment != "") {
+                      todoTextComment = todoTextComment.replace(/\s+/g, '');
+                    } else {
+                      // console.log(todoTextComment);
+                      todoTextComment = "コメントなし"
+                    }
+                    // console.log(todoTextComment);
+            
+            
+                  var modal = document.querySelector('ons-modal.taskDetailsModal');
+            
+                    modal.show();
+                  // }
+            
+                  var mText = modal.querySelector('p') ;
+                  // console.log(mText);
+            
+                  mText.innerHTML =  todoTextLabel;
+                  mText.innerHTML =  "<div class='noDisplay'>" + dataKey+"</div>"+todoTextLabel;
+                  mText.innerHTML += "<br><div class='todo-hLine'></div><br>"+todoTextComment;
+            
+               
+            
+            
+                }
+            
+                function closeModal1(el) {
+                  var modal1 = document.querySelector('ons-modal.taskDetailsModal');
+                  modal1.hide();
+                }
+            
+            
+            
+            
+            
+                      function doTask(el) {
+                      // console.log(event.target);
+                      var modal = document.querySelector('ons-modal.taskDetailsModal');
+                      
+                      // console.log(modal)
+                      var elname = modal.tagName ;
+                        // get text of the item that was clicked
+                        // console.log(elname);
+                        var dataKey = modal.querySelector("div.noDisplay").innerHTML;
+                        // console.log(dataKey);
+               
+                        var id = dataKey
+                        // Update checked false to true
+                            firebase.database().ref('todolist/'+partnerID +'/'+id).update({
+                        checked: true,
+                        reviewed:false,
+                        revScore: 0
+                          });
+                          // console.log("Task ID "+ id + "has been updated successfully")
+                          // console.log("Added Review variables")
+                        
+                        modal.hide();
+            
+                        var modal = document.querySelector('ons-modal.doTaskConfirmation');
+            
+                        modal.show();
+                    
+                        var closeButton = document.querySelector('.closeBtn2');
+                        // console.log(closeButton)
+                          closeButton.onclick = function(){
+                          modal.hide();
+                        };
+                      }
+            
+            
+                   function deleteTodo(el) {
+                    var target = el.parentElement.parentElement.getAttribute("data-modal-id");
+            
+                    // console.log(target);
+                    //   myKey ;
+                    // partnerID;
+                        // getUserDetails();
+                        // console.log("In getPoints"+myKey);
+                        console.log("In getPoints "+partnerID);
+            
+                    let todoRef = firebase.database().ref('todolist/' + partnerID +'/' + target);
+                        todoRef.remove()
+                    // console.log("Finished deleting")
+                  }
+            
+            
+                      </script>
       </ons-page>
     </template>
 
@@ -551,8 +594,7 @@ var valueofTodo = [];
 
                     <div v-if="isEmpty">
                         <div class="empty-state">
-                            <svg class="checklist-icon"><use href="#checklist-icon"></use></svg>
-                            <h2 class="empty-state__title">タスクはありません。</h2>
+                            <h3 class="empty-state__title">タスクはありません。</h3>
                             <p class="empty-state__description">「＋」ボタンを押してタスクを作ります。</p>
                           </div>
   
@@ -632,16 +674,17 @@ var valueofTodo = [];
                   </div>
                 </ons-modal>
   
-
-                <hr>
+                <br>
+                <div class="hr"></div>
+                <br>
+                
                 <h2 style="text-align: center;">評価済みタスク</h2>
 
                 <div id="appFin2">
                     <ons-list class="todo-list js-todo-list">
                         <div v-if="isEmpty">
                             <div class="empty-state">
-                                <svg class="checklist-icon"><use href="#checklist-icon"></use></svg>
-                                <h2 class="empty-state__title">タスクはありません。</h2>
+                                <h3 class="empty-state__title">タスクはありません。</h3>
                                 <p class="empty-state__description">「＋」ボタンを押してタスクを作ります。</p>
                               </div>
       
@@ -650,9 +693,10 @@ var valueofTodo = [];
                           <div :class="item.taskCategory"></div>
                           <span class="todo-itemName">{{item.taskName}}</span>
                         <span class="todo-itemComment">{{item.taskComment}}</span>
-                        <!-- <span>{{item.id}}</span> -->
+        
+                        <!-- <span>{{item.score}}</span> -->
                         <!-- <span>{{item.reviewed}}</span> -->
-                          <button class="openDetails" name="showmodalbutton" onclick="showModal2(this)">
+                          <button class="openDetails" name="showmodalbutton" onclick="showModal3(this)">
                               詳細
                           </button>
                           <button class="delete-todo js-delete-todo" onclick="deleteTodo(this)">
@@ -662,17 +706,17 @@ var valueofTodo = [];
                     </ons-list>
 
                   </div>
-                  <ons-modal direction="up" class="taskDetailsModal2">
+                  <ons-modal direction="up" class="taskDetailsModal3">
                       <div style="text-align: center;">
                         <div style="text-align: center; background-color: #fff; height: 50vh; width:80vw; margin: 0 auto; padding: 10px;">
-          
+                          
+
+
                         <p style=" z-index:50; color:#000;" class="inserttext">
-                          <!-- <ons-icon icon="md-spinner" size="28px" spin></ons-icon> --> 
-                          <!-- Loading... -->
-                          モーダルウィンドウで詳細を確認します。
+               
                         </p>
                         <!-- <button class="doTaskBtn" onclick="doTask()" name="doTaskButton" >了解！</button> -->
-                        <button class="closeBtn" onclick="closeModal2()">保留にする</button>
+                        <button class="closeBtn" onclick="closeModal3()">保留にする</button>
                       </div>
                     </div>
                   </ons-modal>
@@ -696,7 +740,7 @@ var valueofTodo = [];
             //   myKey ;
               // partnerID;
             // getUserDetails();
-            console.log("In appfin1 "+partnerID);
+            // console.log("In appfin1 "+partnerID);
             firebase.database().ref('todolist/'+partnerID).orderByChild('reviewed').equalTo(false).on("value",  snapshot => {
               if (snapshot) {
                   const rootList = snapshot.val()
@@ -733,7 +777,7 @@ var valueofTodo = [];
      
             // partnerID;
             // getUserDetails();
-            console.log("In appfin2 "+partnerID);
+            // console.log("In appfin2 "+partnerID);
             firebase.database().ref('todolist/'+partnerID).orderByChild('reviewed').equalTo(true).on("value",  snapshot => {
 
               if (snapshot) {
@@ -822,10 +866,10 @@ var valueofTodo = [];
             //  partnerID = "-" ; 
 
             //   myKey ;
-            partnerID;
-            getUserDetails();
+            // partnerID;
+            // getUserDetails();
             // console.log("In getPoints"+myKey);
-            console.log("In getPoints "+partnerID);
+            // console.log("In getPoints "+partnerID);
 
                 firebase.database().ref('todolist/'+partnerID+'/'+id).update({
             reviewed:true,
@@ -865,11 +909,66 @@ var valueofTodo = [];
           }
 
           
+          function showModal3(el) {
+                var elname = el.tagName ;
+              // get text of the item that was clicked
+              // console.log(elname);
+              var listItem = el.parentElement.parentElement;
+              // console.log(listItem.outerHTML);
+              var dataKey = listItem.getAttribute('data-modal-id');
+              // console.log(listItem.getAttribute('data-modal-id'));
+
+              var todoTextLabel = el.parentElement.querySelector('span.todo-itemName').textContent;
+              // console.log(todoTextLabel);
+
+              var todoTextComment = el.parentElement.querySelector('span.todo-itemComment').textContent;
+                var todoTextComment = todoTextComment.replace(/\s+/g, '');
+                if (todoTextComment != "") {
+                  todoTextComment = todoTextComment.replace(/\s+/g, '');
+                } else {
+                  // console.log(todoTextComment);
+                  todoTextComment = "コメントなし"
+                }
+                // console.log(todoTextComment);
+
+                // see the score 
+                var modal = document.querySelector('ons-modal.taskDetailsModal3');
+               var elname = modal.tagName ;
+            // get text of the item that was clicked
+            // console.log(elname);
+           
+
+                  firebase.database().ref('usertable/'+partnerID).on("value", snapshot => {
+                    thisTaskPoint = snapshot.val().point; // total points
+                console.log(snapshot.key + " had " + snapshot.val().point + " points");
+
+              
+              })
+              console.log(dataKey, partnerID, thisTaskPoint)
+
+              // display the modal
+
+            var modal = document.querySelector('ons-modal.taskDetailsModal3');
+            modal.show();
+                   
+            var mText = modal.querySelector('p') ;
+
+            mText.innerHTML =  todoTextLabel;
+            mText.innerHTML =  "<div class='noDisplay'>" + dataKey+"</div>"+todoTextLabel;
+            mText.innerHTML += "<br><div class='todo-hLine'></div><br>"+todoTextComment;
+            mText.innerHTML += "<div class='taskPoint'>"+thisTaskPoint+"</div><div>ポイント</div>";
+
+            var closeButton = document.querySelector('.closeBtn2');
+                  
+          }
           function closeModal2(el) {
             var modal = document.querySelector('ons-modal.taskDetailsModal2');
             modal.hide();
           }
-
+          function closeModal3(el) {
+            var modal = document.querySelector('ons-modal.taskDetailsModal3');
+            modal.hide();
+          }
                     
        function deleteTodo(el) {
         var target = el.parentElement.parentElement.getAttribute("data-modal-id");
@@ -878,8 +977,8 @@ var valueofTodo = [];
         // let partnerID = "" ; 
 
         //   myKey ;
-        partnerID;
-            getUserDetails();
+        // partnerID;
+            // getUserDetails();
             // console.log("In getPoints"+myKey);
             console.log("In getPoints "+partnerID);
 
@@ -904,13 +1003,14 @@ var valueofTodo = [];
               <p id=point--after>ポイント</p>
             </div>
 
-
-
+<br>
+        <div class="hr"></div>
+        <br>
+        <h2>パートナーと連携する</h2>
             <div style="margin: 20px auto; width: 320px;">
                 <ons-input
                 id="partnerEmail"
                 placeholder="partnerEmail"
-                modifier="underbar"
                 class="loginInput"
               ></ons-input>
               <ons-button onclick="renkei()" class="loginBtn">partner登録</ons-button>
@@ -920,7 +1020,6 @@ var valueofTodo = [];
                   <ons-input
                   id="changeUserMail"
                   placeholder="あなたのメールアドレス"
-                  modifier="underbar"
                   class="loginInput"
                 ></ons-input>
               <ons-button onclick="changeMail()" class="loginBtn">自分のメールを変更する</ons-button>
@@ -1014,20 +1113,22 @@ var myUID =[];
               partnerID;
             getUserDetails();
             // console.log("In getPoints"+myKey);
-            console.log("In getPoints "+partnerID);
-         
+            console.log("When getPoints "+partnerID);
+//  partnerID = document.querySelector("div#partnerID").innerHTML ;
+              // console.log("Partnerid from document"+partnerID)         
             const pointContainer = document.querySelector("#points");
               console.log(pointContainer);
 
               firebase.database().ref('usertable/'+partnerID).on("value", snapshot => {
                 myPoints = snapshot.val().point;
                 // console.log(myPoints)
+                console.log("was able to use partnerID here??" + partnerID)
                 if (!myPoints) {
                   myPoints = 0;
                 }
                 console.log(snapshot.key + " has " + snapshot.val().point + " points");
                 pointContainer.textContent = myPoints; 
-                alert("Point is loaded");
+                
 
               })
 
@@ -1063,10 +1164,10 @@ var myUID =[];
                 >
               </ons-list>
 
-            <ul class="menu1"><div class="overlay overlay-a"></div>
-              <li class="toggle2-a "><span class="toggle2-inner closeMenu">Close Menu</span>
+            <ul class="menu1"><div class="overlay overlay-a "></div>
+              <li class="toggle2-a "><span class="toggle2-inner closeMenu ">Close Menu</span>
                 <li class="toggle2 toggle2-a"><div class="cRyouri"></div><span class="toggle2-inner">料理</span>
-                  <ul class="menu2" id="cRyouri">
+                  <ul class="menu2 " id="cRyouri">
                   <div class="overlay"></div>
                   <li  class="toggle3"><a href="#" class="backToMenu1">Back</a></li>
                   <li class="toggle3"><div class="cRyouri"></div><a href="#" class="selectMenu">食器を洗う</a></li>
@@ -1133,7 +1234,7 @@ var myUID =[];
           <br>
 
             <button type="submit" class="submitBtn">
-              submit
+              リクエストする
             </button>
             <div class="warningMsg"></div>
           </form>
@@ -1170,8 +1271,14 @@ var myUID =[];
 
 
     </script>
+    <script>
+    partnerID = ""; 
+    strPartnerID = "";
+
+    </script>
     <script src="js/login.js"></script>
     <script src="js/myApp.js"></script>
+    
 
     
     <!-- <script src="node_modules/vue/dist/vue.js"></script> -->
