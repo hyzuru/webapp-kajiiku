@@ -255,17 +255,17 @@
             <div id="app">
               <ons-list class="todo-list js-todo-list">
   
-                <div v-if="!loaded" style="text-align: center; margin-top: 200px">
+                <!-- <div v-if="!loaded" style="text-align: center; margin-top: 200px">
                      Loading...
-                  </div>
-                <div v-if="loaded">
+                  </div> -->
+                <!-- <div v-if="loaded"> -->
                     <div v-if="isEmpty">
                         <div class="empty-state">
                             <svg class="checklist-icon"><use href="#checklist-icon"></use></svg>
                             <h2 class="empty-state__title">タスクはありません。</h2>
                             <p class="empty-state__description">「＋」ボタンを押してタスクを作ります。</p>
                           </div>
-  
+
                     </div>
                     <ons-list-item v-for="item in list" class="todo-item"  :data-modal-id="item.id" >
                         <div :class="item.taskCategory"></div>
@@ -283,7 +283,7 @@
                         </button>
                         <!-- <button type="submit" onclick="deleteTodo()" class="delete-todo js-delete-todo"> -->                      
                           </ons-list-item>
-                </div>
+                <!-- </div> -->
               </ons-list>
              
                     </div>
@@ -323,9 +323,10 @@
 // const firebaseTodoRef = firebase.database().ref('todolist/cooking' ).orderByChild('checked').equalTo(false) ;
 var valueofTodo = [];
 
+//   myKey ;
 
 // const firebaseTodoRef = firebase.database().ref('todolist/'+partnerID ).orderByChild('checked').equalTo(false) ;
-var partnerID = "-LnodyBqf2-pW2DmkIer" ; 
+// var partnerID = "" ; 
 // var currPartnerID = document.querySelector("div#myPartnerID").textContent;
 // var partnerID = currPartnerID ; 
 
@@ -366,33 +367,28 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
             el: '#app',
             data () {
               return {
-                loaded: false,
+                
+                // loaded: false,
                 list: [], // 最新状態はここにコピーされる
                 todo:[],
-              id: null,
-              loaded: false,
+              id: null
+              
             }
       },
           
       created: function() {
-   
-         partnerID = "-LnodyBqf2-pW2DmkIer" ; 
-
-        // partnerID = document.querySelector("div#partnerID").innerHTML ;
-              // console.log("Partnerid from document"+partnerID)
-
+        //   myKey ;
+        partnerID;        
+        
+        partnerID = "-LoBL5MBnKyC7trYe5_A" ; 
+        console.log("trying to get " + partnerID);
+        
+              // partnerID = "-LnodyBqf2-pW2DmkIer";
       firebase.database().ref('todolist/'+partnerID ).orderByChild('checked').equalTo(false).on("value",  snapshot => {
         if (snapshot) {
-          // snapshot.forEach(function(child) {
-          //   console.log(child+": "+child.val());
-          // });
-          // console.log(snapshot.child.key );
             const rootList = snapshot.val()
             const id = snapshot.key;
-            // console.log("Rootlist: "+rootList);
-            // console.log("Snapshot key: "+id);
-            let list = []
-      
+            let list = []      
               Object.keys(rootList).forEach((val, key) => {
                 rootList[val].id = val
                 list.push(rootList[val])
@@ -400,7 +396,7 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
             })
       
             this.list = list;
-            this.loaded = true;
+            // this.loaded = true;
             } 
           })
         },
@@ -416,6 +412,7 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
       //   },
       });
       // console.log(valueofTodo);
+
 
                 
 
@@ -512,7 +509,12 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
         var target = el.parentElement.parentElement.getAttribute("data-modal-id");
 
         // console.log(target);
-        let partnerID = "-LnodyBqf2-pW2DmkIer" ; 
+        //   myKey ;
+        partnerID;
+            getUserDetails();
+            // console.log("In getPoints"+myKey);
+            console.log("In getPoints "+partnerID);
+
         let todoRef = firebase.database().ref('todolist/' + partnerID +'/' + target);
             todoRef.remove()
         // console.log("Finished deleting")
@@ -691,8 +693,10 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
           },
           
           created: function() {
-            // partnerID = this.partnerID;
-            console.log(partnerID);
+            //   myKey ;
+              // partnerID;
+            // getUserDetails();
+            console.log("In appfin1 "+partnerID);
             firebase.database().ref('todolist/'+partnerID).orderByChild('reviewed').equalTo(false).on("value",  snapshot => {
               if (snapshot) {
                   const rootList = snapshot.val()
@@ -726,10 +730,10 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
           },
           
           created: function() {   
-            // get partnerID from vue.mixins
-            // partnerID = this.partnerID;
-
-            partnerID = "-LnodyBqf2-pW2DmkIer" ; 
+     
+            // partnerID;
+            // getUserDetails();
+            console.log("In appfin2 "+partnerID);
             firebase.database().ref('todolist/'+partnerID).orderByChild('reviewed').equalTo(true).on("value",  snapshot => {
 
               if (snapshot) {
@@ -815,7 +819,14 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
       
             var id = dataKey
             // Update checked false to true and add score to database
-             partnerID = "-LnodyBqf2-pW2DmkIer" ; 
+            //  partnerID = "-" ; 
+
+            //   myKey ;
+            partnerID;
+            getUserDetails();
+            // console.log("In getPoints"+myKey);
+            console.log("In getPoints "+partnerID);
+
                 firebase.database().ref('todolist/'+partnerID+'/'+id).update({
             reviewed:true,
             revScore: score
@@ -824,7 +835,7 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
               // console.log("Review has been added")
 
               // // Update papa's points
-             partnerID = "-LnodyBqf2-pW2DmkIer" ; 
+            //  partnerID = "-" ; 
               //set user's partnerID to this for testing purposes
               // find users with this partnerID このpartnerIDが持っているユーザーを探して、ポイント情報を更新する。
 
@@ -864,7 +875,14 @@ var partnerID = "-LnodyBqf2-pW2DmkIer" ;
         var target = el.parentElement.parentElement.getAttribute("data-modal-id");
 
         console.log(target);
-        let partnerID = "-LnodyBqf2-pW2DmkIer" ; 
+        // let partnerID = "" ; 
+
+        //   myKey ;
+        partnerID;
+            getUserDetails();
+            // console.log("In getPoints"+myKey);
+            console.log("In getPoints "+partnerID);
+
         let todoRef = firebase.database().ref('todolist/' + partnerID +'/' + target);
             todoRef.remove()
         console.log("Finished deleting")
@@ -990,29 +1008,31 @@ var myUID =[];
 
             // Get points and profile details
             function getPoints() {
-              myKey ;
-              myRole;
+            //   myKey ;
+ 
+
               partnerID;
-            getUserDetails(); 
-            console.log("In getPoints"+myKey);
-            console.log("In getPoints"+myrole);
-            console.log("In getPoints"+partnerID);
-            // partnerID = "-LnodyBqf2-pW2DmkIer" ; 
-            // console.log("In getPoints"+partnerID);
-              partnerID = document.querySelector("div#partnerID").innerHTML ;
-              console.log("Partnerid from document"+partnerID)
+            getUserDetails();
+            // console.log("In getPoints"+myKey);
+            console.log("In getPoints "+partnerID);
+         
             const pointContainer = document.querySelector("#points");
               console.log(pointContainer);
 
               firebase.database().ref('usertable/'+partnerID).on("value", snapshot => {
                 myPoints = snapshot.val().point;
+                // console.log(myPoints)
                 if (!myPoints) {
-                  myPoints = 0;}
-                // console.log(snapshot.key + " has " + snapshot.val().point + " points");
+                  myPoints = 0;
+                }
+                console.log(snapshot.key + " has " + snapshot.val().point + " points");
                 pointContainer.textContent = myPoints; 
+                alert("Point is loaded");
+
               })
 
-        // in case the document is already rendered
+            }
+          // in case the document is already rendered
         if (document.readyState!='loading') getPoints();
         // modern browsers
         else if (document.addEventListener) document.addEventListener('DOMContentLoaded', run);
@@ -1020,8 +1040,8 @@ var myUID =[];
         else document.attachEvent('onreadystatechange', function(){
             if (document.readyState=='complete') getPoints();
         });
-      }
-
+      
+        
             </script>
             </ons-page>
             

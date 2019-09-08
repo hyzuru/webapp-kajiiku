@@ -18,7 +18,7 @@ var presenceRef = firebase.database().ref("disconnectmessage");
 presenceRef.onDisconnect().set("I disconnected!");
 
 var userKey;
-var getPartnerID  = [];
+// var getPartnerID  = [];
 
 
 function getUserDetails() {
@@ -27,7 +27,7 @@ var user = firebase.auth().currentUser;
 user.providerData.forEach(function (profile) {
   const UID = user.uid;
 
-  // myUID.push(UID)
+
   console.log(UID);
 
   firebase.database().ref("usertable").orderByChild("userUID").equalTo(UID).on("child_added", function(snapshot) {
@@ -38,6 +38,11 @@ user.providerData.forEach(function (profile) {
       myRole = snapshot.val().role; // total points
       console.log(snapshot.key + " is " + snapshot.val().role );
       partnerID = snapshot.val().partnerID; // get partnerID
+      console.log(partnerID) 
+      
+      strPartnerID = partnerID.toString();
+      console.log(strPartnerID);
+      document.querySelector("div#partnerID").innerHTML = partnerID;
       console.log(snapshot.key + " is " + snapshot.val().partnerID );
     })
   });
@@ -50,8 +55,8 @@ window.onload = function(e){
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       console.log('user is logged');
-      // const currentUser = firebase.auth().currentUser;
-      // console.log(currentUser)
+      var currentEmail = firebase.auth().currentUser.email;
+      console.log("Logged in as "+ currentEmail)
       const navigator = document.querySelector("#navigator");
       navigator.resetToPage("home.html");
       getUserDetails();
