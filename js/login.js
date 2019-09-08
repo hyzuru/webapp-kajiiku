@@ -18,45 +18,31 @@ var presenceRef = firebase.database().ref("disconnectmessage");
 presenceRef.onDisconnect().set("I disconnected!");
 
 var userKey;
+var getPartnerID  = [];
 
-function init() {
+
+function getUserDetails() {
 var user = firebase.auth().currentUser;
 
-var currentUID ;
 user.providerData.forEach(function (profile) {
   const UID = user.uid;
+
+  // myUID.push(UID)
   console.log(UID);
-  currentUID = UID ;
-});
-// var userKey ;
-firebase.database().ref("usertable").orderByChild("userUID").equalTo(currentUID).on("child_added", function(snapshot) {
-console.log(snapshot);
-    // var key = snapshot.key;
-    console.log(key);
-    userKey = key;
-    document.querySelector("div#myUserKey").innerText = userKey;
-  });
-  userKey = document.querySelector("div#myUserKey").innerText ;
-    console.log(userKey) ;
-  firebase.database().ref("usertable/"+userKey ).on("child_added", function(snapshot) {
-    // console.log(snapshot.hasChildren.val());
-        var key = snapshot.key;
-        console.log(key);
 
-      var changedPost = snapshot.val();
-      console.log("The updated post title is " + changedPost.partnerID);
-
-        // userKey = key;
-        // document.querySelector("div#myUserKey").innerText = userKey;
+  firebase.database().ref("usertable").orderByChild("userUID").equalTo(UID).on("child_added", function(snapshot) {
+  myKey = snapshot.key;
+  console.log(myKey);
+    document.querySelector("div#myUserKey").innerHTML = myKey;
+  firebase.database().ref('usertable/'+ myKey).on("value", snapshot => {
+      myRole = snapshot.val().role; // total points
+      console.log(snapshot.key + " is " + snapshot.val().role );
+      myRole = snapshot.val().partnerID; // get partnerID
+      console.log(snapshot.key + " is " + snapshot.val().partnerID );
+    })
   });
-    // if (snapshot.hasChild("partnerID")) {
-    //   console.log(snapshot);
-    //   };
-  
-    // var partner = snapshot.child('partnerID').val();
-    // console.log(partner);
-    // document.querySelector("div#partnerID").innerText = partnerID;
-  
+});    
+
 }
 
 
@@ -64,11 +50,11 @@ window.onload = function(e){
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       console.log('user is logged');
-      const currentUser = firebase.auth().currentUser;
-      console.log(currentUser)
+      // const currentUser = firebase.auth().currentUser;
+      // console.log(currentUser)
       const navigator = document.querySelector("#navigator");
       navigator.resetToPage("home.html");
-      init();
+      getUserDetails();
     } else {
       console.log("user not found")
       const navigator = document.querySelector("#navigator");

@@ -18,37 +18,48 @@ var presenceRef = firebase.database().ref("disconnectmessage");
 // Write a string when this client loses connection
 presenceRef.onDisconnect().set("I disconnected!");
 
-// var getPartnerID  = [];
+var getPartnerID  = [];
 
-// function init() {
-//   var user = firebase.auth().currentUser;
+function init() {
 
-//   user.providerData.forEach(function (profile) {
-//     const UID = user.uid;
-//     console.log(UID);
+    var user = firebase.auth().currentUser;
+    user.providerData.forEach(function (profile) {
+      const UID = user.uid;
 
-//       firebase.database().ref("usertable").orderByChild("userUID").equalTo(UID).on("child_added", function(snapshot) {
-//         myKey = snapshot.key;
-//         console.log(myKey);
-//         getPartnerID.push(myKey) ;        
-//       });
-//       console.log(getPartnerID);
-//     }); 
-// }
-// console.log(getPartnerID[0]);
-// var partnerID1 = getPartnerID[0];
-// console.log(partnerID1)
+      myUID.push(UID)
+      console.log(UID);
+      
+firebase.database().ref("usertable").orderByChild("userUID").equalTo(UID).on("child_added", function(snapshot) {
+  myKey = snapshot.key;
+  console.log(myKey);
+  myRole = snapshot.val().role; // get role 
+  console.log(snapshot.key + " is " + snapshot.val().role );
+  myRole = snapshot.val().partnerID; // get partnerID
+  console.log(snapshot.key + " is " + snapshot.val().partnerID );
+  // getPartnerID.push(myKey) ;
+
+  firebase.database().ref('usertable/'+ myKey).on("value", snapshot => {
+      myRole = snapshot.val().role; // total points
+      console.log(snapshot.key + " is " + snapshot.val().role );
+      myRole = snapshot.val().partnerID; // get partnerID
+      console.log(snapshot.key + " is " + snapshot.val().partnerID );
+    })
+  });
+});    
+
+}
+
 
 window.onload = function(e){ 
   firebase.auth().onAuthStateChanged((user) => {
     
     if (user) {
       console.log('user is logged');
-      const currentUser = firebase.auth().currentUser;
-      console.log(currentUser)
+      // const currentUser = firebase.auth().currentUser;
+      // // console.log(currentUser)
       const navigator = document.querySelector("#navigator");
       navigator.resetToPage("home.html");
-      // init();
+      init();
     } else {
       console.log("user not found")
       const navigator = document.querySelector("#navigator");
