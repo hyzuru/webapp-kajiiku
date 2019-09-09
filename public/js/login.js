@@ -13,37 +13,42 @@ connectedRef.on("value", function(snap) {
 });
 
 // Managing Presence
-
 var presenceRef = firebase.database().ref("disconnectmessage");
-// Write a string when this client loses connection
+// // Write a string when this client loses connection
 presenceRef.onDisconnect().set("I disconnected!");
 
-var getPartnerID  = [];
+var userKey;
+// var getPartnerID  = [];
 
-function init() {
+var getUserDetails = function() {
 
-    var user = firebase.auth().currentUser;
-    user.providerData.forEach(function (profile) {
-      const UID = user.uid;
+var user = firebase.auth().currentUser;
 
-      myUID.push(UID)
-      console.log(UID);
-      
-firebase.database().ref("usertable").orderByChild("userUID").equalTo(UID).on("child_added", function(snapshot) {
-  myKey = snapshot.key;
-  console.log(myKey);
-  myRole = snapshot.val().role; // get role 
-  console.log(snapshot.key + " is " + snapshot.val().role );
-  myRole = snapshot.val().partnerID; // get partnerID
-  console.log(snapshot.key + " is " + snapshot.val().partnerID );
-  // getPartnerID.push(myKey) ;
+user.providerData.forEach(function (profile) {
+  const UID = user.uid;
 
+
+  // console.log(UID);
+
+  firebase.database().ref("usertable").orderByChild("userUID").equalTo(UID).on("child_added", function(snapshot) {
+  myKey ="" ;
+    myKey = snapshot.key;
+  // console.log(myKey);
+    document.querySelector("div#myUserKey").innerHTML = myKey;
   firebase.database().ref('usertable/'+ myKey).on("value", snapshot => {
       myRole = snapshot.val().role; // total points
-      console.log(snapshot.key + " is " + snapshot.val().role );
-      myRole = snapshot.val().partnerID; // get partnerID
+      // console.log(snapshot.key + " is " + snapshot.val().role );
+      partnerID = snapshot.val().partnerID; // get partnerID
+      strPartnerID = partnerID.toString();
+      console.log(strPartnerID);
+      var divPartnerID = document.querySelector("div#partnerID");
+      if (divPartnerID.innerHTML === "") {
+        divPartnerID.innerHTML += strPartnerID;  
+      }
+
+      
       console.log(snapshot.key + " is " + snapshot.val().partnerID );
-    })
+    });
   });
 });    
 
@@ -68,7 +73,6 @@ window.onload = function(e){
     // onUserStatusChanged(status)   Login shiteiru ka douka  user.uid
   });
 }
-
 
 
 
