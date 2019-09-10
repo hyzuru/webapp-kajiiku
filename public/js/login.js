@@ -57,14 +57,15 @@ user.providerData.forEach(function (profile) {
 
 window.onload = function(e){ 
   firebase.auth().onAuthStateChanged((user) => {
-    
     if (user) {
-      console.log('user is logged');
-      // const currentUser = firebase.auth().currentUser;
-      // // console.log(currentUser)
+      // console.log('user is logged');
+      var currentEmail = firebase.auth().currentUser.email;
+      console.log("Logged in as "+ currentEmail)
       const navigator = document.querySelector("#navigator");
       navigator.resetToPage("home.html");
-      init();
+      getUserDetails();
+      console.log("On load " + partnerID);
+
     } else {
       console.log("user not found")
       const navigator = document.querySelector("#navigator");
@@ -75,15 +76,13 @@ window.onload = function(e){
 }
 
 
-
-
 // Login Page
 const login = () => {
 
   const myEmail = document.querySelector("#email").value;
   const password = document.querySelector("#password").value;
-  console.log(myEmail);
-  console.log(password);
+  // console.log(myEmail);
+  // console.log(password);
   firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
   .then(function() {
   firebase.auth().signInWithEmailAndPassword(myEmail, password)
@@ -116,12 +115,12 @@ const signUp = () => {
     }
   }
 
-console.log(a);
-firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
-.then(function() {
+  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+  .then(function() {
   firebase.auth().createUserWithEmailAndPassword(myEmail, password)
   .then(function() {
     console.log('サインアップしました。');
+    if (a === "papa") {
     const navigator = document.querySelector("#navigator");
     navigator.resetToPage("home.html");
     var user = firebase.auth().currentUser;
@@ -129,14 +128,44 @@ firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
       const UID = user.uid;
       firebase.database().ref('usertable').push({
         email:myEmail,
-        password:password,
+        // password:password,
         role:a,
         userUID:UID,
         partnerID:"",
         point:0
+      }).then((snap) => {
+        const key = snap.key ;
+        // console.log("role: "+ a)
+        // console.log("snapshotKey: "+ key)
+        if (a === "papa") {
+          firebase.database().ref('usertable/'+ key ).update({
+          partnerID:key, 
+        });
 
-      })
+      } 
+     })
+      
+        
     });
+  } else if (a === "mama") {
+    const navigator = document.querySelector("#navigator");
+    navigator.resetToPage("connect.html");
+    var user = firebase.auth().currentUser;
+    user.providerData.forEach(function (profile) {
+      const UID = user.uid;
+      firebase.database().ref('usertable').push({
+        email:myEmail,
+        // password:password,
+        role:a,
+        userUID:UID,
+        partnerID:"",
+        point:0
+      }).then((snap) => {
+        const key = snap.key ;
+        // console.log("role: "+ a)
+        })
+    });
+  }
   })
   .catch(function(error) {
     console.log('サインアップできませんでした。');
@@ -158,24 +187,3 @@ const logOut = () => {
     // An error happened.
   });
 }
-
-
-function newFunction(partnerkey) {
-  console.log(myKey);
-  console.log(partnerkey());
-}
-// edit user settings ユーザ設定を変更　（Eメール）
-
-// var user = firebase.auth().currentUser;
-
-// const changeEmail = () => {
-
-
-//   user.updateEmail("aaa@aaa.com").then(function() {
-//     // Update successful.
-//   }).catch(function(error) {
-//     // An error happened.
-//   });
-// }
-
-

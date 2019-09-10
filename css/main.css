@@ -572,11 +572,13 @@ text.cls-5.letter4 {
 }
 
 /* star rating */
-/* .formContainer {
+.formContainer {
   height: 100px;
-} */
+  width: 70vw;
+  margin: 0 auto 20px;
+}
 .rating .doTaskBtn {
-  margin-top: 80px;
+  margin-top: 70px;
 }
 .rating {
   display: inline-block;
@@ -618,6 +620,7 @@ text.cls-5.letter4 {
   z-index: 1;
 }
 
+
 .rating label input {
   position: absolute;
   top: 0;
@@ -627,7 +630,11 @@ text.cls-5.letter4 {
 
 .rating label .icon {
   float: left;
-  color: #cccccc50;
+  color: transparent;
+}
+.rating label .icon.fiveStars {
+  float: left;
+  color: #cccccc;
 }
 
 .rating label:last-child .icon {

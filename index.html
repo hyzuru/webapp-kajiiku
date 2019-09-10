@@ -21,10 +21,6 @@
         <script type="text/javascript" src="js/category.js"></script>
   </head>
   <body>
-    <!--    <div class="noDisplay" id="myUserKey"></div>
-            <div class="noDisplay" id="partnerID"></div> -->
-            <div id="myUserKey"></div>
-            <div id="partnerID"></div>
     <ons-splitter>
       <!-- The side menu -->
       <ons-splitter-side id="menu" collapse>
@@ -246,7 +242,8 @@
 
     <template id="requests.html">
       <ons-page id="requests">
-
+          <div style="display:none" id="myUserKey"></div>
+          <div style="display:none" id="partnerID"></div>
             <ons-pull-hook id="pull-hook">
               再読み込み
             </ons-pull-hook>
@@ -256,7 +253,7 @@
   
                 <!-- <div>{{ item.partnerID }}</div> -->
                 <div v-if="!loaded" style="text-align: center; margin-top: 200px">
-                     Loading...
+                     読み込み中...
                   </div>
                 <div v-if="loaded">
                     <div v-if="isEmpty">
@@ -324,52 +321,14 @@
         <script src="js/pull-hook.js"></script>
 
         <script>
-                
-            // const firebaseTodoRef = firebase.database().ref('todolist/cooking' ).orderByChild('checked').equalTo(false) ;
-            var valueofTodo = [];
-            
-            //   myKey ;
-            // partnerID = "-LoBL5MBnKyC7trYe5_A" ; 
-            
-            // const firebaseTodoRef = firebase.database().ref('todolist/'+partnerID ).orderByChild('checked').equalTo(false) ;
-            // var partnerID = "" ; 
-            // var currPartnerID = document.querySelector("div#myPartnerID").textContent;
-            // var partnerID = currPartnerID ; 
-            
-            // Vue.mixin({
-            //   data: function() {
-            //     return {
-            //       get partnerID() {
-            //         return partnerID;
-            //       }
-            //     }
-            //   },
-            //   created: function() {
-            //     this.partnerID;
-            //   },
-            //   methods: {
-            //     partnerID: function() {
-            //       var user = firebase.auth().currentUser;
-            //       if (user != null) {
-            //         // const UID = user.uid;
-               
-            //         // firebase.database().ref("usertable").orderByChild("userUID").equalTo(UID).on("value", function(snapshot) {
-            //         // let partnerKey = snapshot.key;
-            //         //   console.log(partnerKey);
-            //         //   return partnerID;
-            
-            //         partnerID = document.querySelector("div#partnerID").innerHTML ;
-            //               // console.log("Partnerid from document"+partnerID)
-            //           return partnerID; 
-            //         // });
-            //       }
-            //     }
-            //   }
-            // })
-            
-            
-                    // vue_firebase
-                          var app = new Vue({
+//           console.log("Start here")
+                  console.log(partnerID) // returns [object HTMLDivElement]
+      
+
+                  
+
+                  // vue_firebase
+                  var app = new Vue({
                         el: '#app',
                         data () {
                           return {
@@ -382,48 +341,10 @@
                   },
                       
                   created: function() {
-                      partnerID ;
-                      // getUserDetails();
+                    console.log(partnerID) // returns [object HTMLDivElement]
                       
                       partnerID = "-LoBL5MBnKyC7trYe5_A" ; 
-                    console.log("trying to get " + partnerID);          
-            
-            
-                // var user = firebase.auth().currentUser;
-            
-                // user.providerData.forEach(function (profile) {
-                //   const UID = user.uid;
-            
-                  
-            
-                //   console.log(UID);
-            
-                //   firebase.database().ref("usertable").orderByChild("userUID").equalTo(UID).on("child_added", function(snapshot) {
-                //   myKey = snapshot.key;
-                //   // console.log(myKey);
-                //     // document.querySelector("div#myUserKey").innerHTML = myKey;
-            
-                //     console.log(myKey);
-                //   firebase.database().ref('usertable/'+ myKey).on("value", snapshot => {
-                //       myRole = snapshot.val().role; // total points
-                //       // console.log(snapshot.key + " is " + snapshot.val().role );
-                //       partnerID = snapshot.val().partnerID; // get partnerID
-                //       // strPartnerID = partnerID.toString();
-                //       // console.log(strPartnerID);
-                //       // document.querySelector("div#partnerID").innerHTML = partnerID;
-                //       console.log("Within Vue " + snapshot.key + " is " + snapshot.val().partnerID );
-                     
-                //         // document.querySelector("div#myUserKey").innerHTML = myKey;
-            
-                //         // console.log(myKey);
-            
-                
-            
-                //     });
-            
-                //     var strpartnerID = document.querySelector("div#partnerID").innerHTML;
-                //     console.log(strpartnerID);
-                //     if ( strpartnerID === "-LoBL5MBnKyC7trYe5_A") {
+                    
                   firebase.database().ref('todolist/'+partnerID ).orderByChild('checked').equalTo(false).on("value",  snapshot => {
                         if (snapshot) {
                         const rootList = snapshot.val();
@@ -433,7 +354,7 @@
                           Object.keys(rootList).forEach((val, key) => {
                             rootList[val].id = val
                             list.push(rootList[val])
-                          valueofTodo.push(val)
+                          
                         })
                           // this.list = list;
             
@@ -472,10 +393,8 @@
                           return jQuery.isEmptyObject(this.list)
                        }
                    },
-            
-            
-                  });
-                  console.log(valueofTodo);
+                });
+               
             
             
                             
@@ -635,7 +554,7 @@
                       モーダルウィンドウで詳細を確認します。
                     </p>
                     
-                    <div class="formContainer" style="margin: 20px auto; width: 320px;">
+                    <div class="formContainer" >
 
 
                     <form class="rating" >
@@ -644,12 +563,14 @@
                           <input type="radio" name="stars" value="1" />
                           <!-- <span>1</span> -->
                           <span class="icon">★</span>
+                   
                         </label>
                         <label>
                           <input type="radio" name="stars" value="2" />
                           <!-- <span>2</span> -->
                           <span class="icon">★</span>
                           <span class="icon">★</span>
+                   
                         </label>
                         <label>
                           <input type="radio" name="stars" value="3" />
@@ -657,6 +578,9 @@
                           <span class="icon">★</span>
                           <span class="icon">★</span>
                           <span class="icon">★</span>   
+                          <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 32.167 30.98">
+
+                          </svg></span>
                         </label>
                         <label>
                           <input type="radio" name="stars" value="4" />
@@ -669,11 +593,11 @@
                         <label>
                           <input type="radio" name="stars" value="5" />
                           <!-- <span>5</span> -->
-                          <span class="icon">★</span>
-                          <span class="icon">★</span>
-                          <span class="icon">★</span>
-                          <span class="icon">★</span>
-                          <span class="icon">★</span>
+                          <span class="icon fiveStars">★</span>
+                          <span class="icon fiveStars">★</span>
+                          <span class="icon fiveStars">★</span>
+                          <span class="icon fiveStars">★</span>
+                          <span class="icon fiveStars">★</span>
                         </label>
                         <button class="doTaskBtn" onclick="reviewTask(this)" name="reviewTaskButton" >評価する</button>
                       </form>
@@ -733,7 +657,9 @@
                   </ons-modal>
 
  <script>
-
+window.addEventListener("load", function(event) {
+    // here is the Vue code
+  });
      // vue_firebase
       var app = new Vue({
           el: '#appFin1',
@@ -785,7 +711,7 @@
           },
           
           created: function() {   
-     
+
             // partnerID;
             // getUserDetails();
             // console.log("In appfin2 "+partnerID);
@@ -1139,11 +1065,10 @@
     console.log(snapshot.key + " had " + snapshot.val().point + " points");
 
         if (!myPoints) {
-          myPoints = 0;
-        } else {
+          myPoints = 0; 
           console.log("myPoints not read")
-        }
-        console.log(snapshot.key + " has " + snapshot.val().point + " points");
+        } 
+        console.log(snapshot.key + " now has " + snapshot.val().point + " points");
         pointContainer.textContent = myPoints; 
         
 
@@ -1288,21 +1213,10 @@ else document.attachEvent('onreadystatechange', function(){
 
 
     </script>
-    <script>
-    partnerID = ""; 
-    strPartnerID = "";
 
-    </script>
     <script src="js/login.js"></script>
     <script src="js/myApp.js"></script>
     
-
-    
-    <!-- <script src="node_modules/vue/dist/vue.js"></script> -->
-     <!-- <script src="js/selector.vue"></script> -->
-      
-      <!-- <script src="https://unpkg.com/v-cascade/lib/v-cascade.min.js"></script> -->
-      <!-- <script src="node_modules/v-cascade/src/main.js"></script>  -->
 
 
   </body>

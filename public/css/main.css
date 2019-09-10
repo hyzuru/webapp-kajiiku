@@ -325,7 +325,6 @@ form {
   border-right: 1px solid #cfdbe7;
 }
 
-
 .menu2 {
   position: absolute;
   left: -201%;
@@ -347,15 +346,16 @@ form {
   height: 100%;
   vertical-align: middle;
   background-color: #fff;
-
+color: #333;
   padding: 0 4px;
   text-decoration: none;
 }
 .toggle3-back{
   background-color: #82a9d4;
 }
-.toggle3-back a {
-  color: #1560b6;
+.menu2 li.toggle3-back a {
+  color: #fff;
+  background-color:  transparent;
 }
 .visible2 .menu2 {
   left: 0px;
@@ -413,7 +413,7 @@ form {
   width: 33px;
 }
 .cSentaku {
-  background-image: url("../assets/c-sentaku.png");
+  background-image: url("../assets/c-sentaku1.svg");
   background-repeat: no-repeat;
   background-size: contain;
   height: 33px;
@@ -475,6 +475,7 @@ form {
 .loginBtn {
   width: 90%;
   margin: 10px auto 100px;
+  text-align: center;
   background-color: #46A2FF;
 }
 .newAccBtn {
@@ -532,4 +533,120 @@ ons-progress-circular.loading {
 .doTaskBtn, .closeBtn, .closeBtn2,
 .submitBtn {
   margin: 10px auto;
+}
+#titleLogo {
+  width: 450px;
+  max-width: 95%;
+  margin: 0 auto;
+}
+circle.cls-1, circle.cls-2 {
+  stroke: #46A2FF;
+}
+path.cls-1, path.cls-3 {
+  stroke: #46A2FF;
+
+}
+svg circle.cls-2 {
+  stroke: #46A2FF;
+  fill: #46A2FF;
+}
+text.cls-5 {
+  font-size: 60px;
+  stroke-width: 3px;
+}
+text.cls-5.letter1 {
+  stroke: #46A2FF;
+  fill: #46A2FF;
+}
+text.cls-5.letter2 {
+  stroke: #65ef33; 
+    fill: #65ef33;
+}
+text.cls-5.letter3 {
+  stroke: #FFB73B;
+    fill: #FFB73B;
+}
+text.cls-5.letter4 {
+  stroke: #FF3B56;
+    fill: #FF3B56;
+}
+
+/* star rating */
+.formContainer {
+  height: 100px;
+  width: 70vw;
+  margin: 0 auto 20px;
+}
+.rating .doTaskBtn {
+  margin-top: 70px;
+}
+.rating {
+  display: inline-block;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  font-size: 50px;
+}
+
+.rating label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  cursor: pointer;
+}
+
+.rating label:last-child {
+  position: static;
+}
+
+.rating label:nth-child(1) {
+  z-index: 5;
+}
+
+.rating label:nth-child(2) {
+  z-index: 4;
+}
+
+.rating label:nth-child(3) {
+  z-index: 3;
+}
+
+.rating label:nth-child(4) {
+  z-index: 2;
+}
+
+.rating label:nth-child(5) {
+  z-index: 1;
+}
+
+
+.rating label input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.rating label .icon {
+  float: left;
+  color: transparent;
+}
+.rating label .icon.fiveStars {
+  float: left;
+  color: #cccccc;
+}
+
+.rating label:last-child .icon {
+  color: #000;
+}
+
+.rating:not(:hover) label input:checked ~ .icon,
+.rating:hover label:hover input ~ .icon {
+  color: #09f;
+}
+
+.rating label input:focus:not(:checked) ~ .icon:last-child {
+  color: #000;
+  text-shadow: 0 0 5px #09f;
 }

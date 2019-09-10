@@ -21,10 +21,6 @@
         <script type="text/javascript" src="js/category.js"></script>
   </head>
   <body>
-    <!--    <div class="noDisplay" id="myUserKey"></div>
-            <div class="noDisplay" id="partnerID"></div> -->
-            <div id="myUserKey"></div>
-            <div id="partnerID"></div>
     <ons-splitter>
       <!-- The side menu -->
       <ons-splitter-side id="menu" collapse>
@@ -128,9 +124,9 @@
   <ons-page id="login">
 
     <div style="text-align: center; margin-top: 200px">
-      <h1 class="app-title">かじいく</h1>
-    <div>
-      <svg id="レイヤー_1" data-name="レイヤー 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 445.78 264.09"><defs><style>.cls-1,.cls-3,.cls-4{fill:none;}.cls-1,.cls-2,.cls-3,.cls-4{stroke:#ff9124;stroke-miterlimit:10;}.cls-1,.cls-3{stroke-width:6px;}.cls-2,.cls-5{fill:#ff9124;}.cls-2,.cls-4{stroke-width:2px;}.cls-3{stroke-linecap:round;}.cls-5{font-size:49.65px;font-family:mini-wakuwaku-90ms-RKSJ-H, mini-wakuwaku;}</style></defs><title>ロゴ</title><circle class="cls-1" cx="217.79" cy="177.53" r="83.41"/><circle class="cls-2" cx="244.07" cy="178.68" r="5.71"/><circle class="cls-2" cx="198.37" cy="178.68" r="5.71"/><path class="cls-3" d="M326.58,338.7s-16.33,12.06-30.86,0" transform="translate(-88.22 -143.11)"/><path class="cls-3" d="M335.66,243.35s7.85,31.71-23.09,49.49" transform="translate(-88.22 -143.11)"/><path class="cls-4" d="M366.05,403.5" transform="translate(-88.22 -143.11)"/><path class="cls-3" d="M271.68,245.63s8.45,37.94-26.23,57.87" transform="translate(-88.22 -143.11)"/><path class="cls-3" d="M306,238.78s6.61,35.52-26.23,57.87" transform="translate(-88.22 -143.11)"/><path class="cls-1" d="M226,297.79a23.6,23.6,0,0,0-9.14-2.29c-9.42,0-13.71,9.15-13.71,18.29s11.43,18.28,20.57,16" transform="translate(-88.22 -143.11)"/><text class="cls-5 letter" transform="translate(125.76 61.87) rotate(-19.3)">か</text><text class="cls-5 letter2" transform="matrix(0.99, -0.14, 0.14, 0.99, 167.82, 46.63)">じ</text><text class="cls-5 letter3" transform="matrix(1, 0.06, -0.06, 1, 212.07, 40.09)">い</text><text class="cls-5 letter4" transform="translate(256.76 42.35) rotate(15)">く</text></svg>
+      <!-- <h1 class="app-title">かじいく</h1> -->
+      <div style="margin: 20px auto; width: 320px;">
+      <svg id="レイヤー_1" data-name="レイヤー 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 445.78 264.09"><defs><style>.cls-1,.cls-3,.cls-4{fill:none;}.cls-1,.cls-2,.cls-3,.cls-4{stroke:#ff9124;stroke-miterlimit:10;}.cls-1,.cls-3{stroke-width:6px;}.cls-2,.cls-5{fill:#ff9124;}.cls-2,.cls-4{stroke-width:2px;}.cls-3{stroke-linecap:round;}.cls-5{font-size:49.65px;font-family:mini-wakuwaku-90ms-RKSJ-H, mini-wakuwaku;}</style></defs><title>かじいくロゴ</title><circle class="cls-1" cx="217.79" cy="177.53" r="83.41"/><circle class="cls-2" cx="244.07" cy="178.68" r="5.71"/><circle class="cls-2" cx="198.37" cy="178.68" r="5.71"/><path class="cls-3" d="M326.58,338.7s-16.33,12.06-30.86,0" transform="translate(-88.22 -143.11)"/><path class="cls-3" d="M335.66,243.35s7.85,31.71-23.09,49.49" transform="translate(-88.22 -143.11)"/><path class="cls-4" d="M366.05,403.5" transform="translate(-88.22 -143.11)"/><path class="cls-3" d="M271.68,245.63s8.45,37.94-26.23,57.87" transform="translate(-88.22 -143.11)"/><path class="cls-3" d="M306,238.78s6.61,35.52-26.23,57.87" transform="translate(-88.22 -143.11)"/><path class="cls-1" d="M226,297.79a23.6,23.6,0,0,0-9.14-2.29c-9.42,0-13.71,9.15-13.71,18.29s11.43,18.28,20.57,16" transform="translate(-88.22 -143.11)"/><text class="cls-5 letter1" transform="translate(125.76 61.87) rotate(-19.3)">か</text><text class="cls-5 letter2" transform="matrix(0.99, -0.14, 0.14, 0.99, 167.82, 46.63)">じ</text><text class="cls-5 letter3" transform="matrix(1, 0.06, -0.06, 1, 212.07, 40.09)">い</text><text class="cls-5 letter4" transform="translate(256.76 42.35) rotate(15)">く</text></svg>
     </div>
       <div style="margin: 20px auto; width: 320px;">
         <form id="loginForm">
@@ -196,8 +192,8 @@
             </ons-toolbar>
    
             <h1 class="app-title">サインアップ</h1>
-            
-          <div style="text-align: center; margin-top: 200px">
+
+            <div style="margin: 20px auto; width: 320px;">
             <p>
               <ons-input
               id="newEmail"
@@ -212,7 +208,7 @@
               id="newPassword"
               placeholder="パスワード"
               type="password"
-              class="signUpInput"
+              class="loginInput"
               >
               </ons-input>
             </p>
@@ -221,7 +217,7 @@
                   id="passwordConfirm"
                   placeholder="もう一度パスワードを入力してください"
                   type="password"
-                  modifier="underbar"
+                  class="loginInput"
                 >
                 </ons-input>
               </p>
@@ -238,7 +234,7 @@
                     </div>
               </p>
             <p>
-              <ons-button onclick="signUp()">登録</ons-button>
+              <ons-button onclick="signUp()" class="loginBtn">登録</ons-button>
             </p>
           </div>
         </ons-page>
@@ -246,7 +242,8 @@
 
     <template id="requests.html">
       <ons-page id="requests">
-
+          <div style="display:none" id="myUserKey"></div>
+          <div style="display:none" id="partnerID"></div>
             <ons-pull-hook id="pull-hook">
               再読み込み
             </ons-pull-hook>
@@ -256,7 +253,7 @@
   
                 <!-- <div>{{ item.partnerID }}</div> -->
                 <div v-if="!loaded" style="text-align: center; margin-top: 200px">
-                     Loading...
+                     読み込み中...
                   </div>
                 <div v-if="loaded">
                     <div v-if="isEmpty">
@@ -325,105 +322,24 @@
 
         <script>
                 
-            // const firebaseTodoRef = firebase.database().ref('todolist/cooking' ).orderByChild('checked').equalTo(false) ;
             var valueofTodo = [];
-            
-            //   myKey ;
-            // partnerID = "-LoBL5MBnKyC7trYe5_A" ; 
-            
-            // const firebaseTodoRef = firebase.database().ref('todolist/'+partnerID ).orderByChild('checked').equalTo(false) ;
-            // var partnerID = "" ; 
-            // var currPartnerID = document.querySelector("div#myPartnerID").textContent;
-            // var partnerID = currPartnerID ; 
-            
-            // Vue.mixin({
-            //   data: function() {
-            //     return {
-            //       get partnerID() {
-            //         return partnerID;
-            //       }
-            //     }
-            //   },
-            //   created: function() {
-            //     this.partnerID;
-            //   },
-            //   methods: {
-            //     partnerID: function() {
-            //       var user = firebase.auth().currentUser;
-            //       if (user != null) {
-            //         // const UID = user.uid;
-               
-            //         // firebase.database().ref("usertable").orderByChild("userUID").equalTo(UID).on("value", function(snapshot) {
-            //         // let partnerKey = snapshot.key;
-            //         //   console.log(partnerKey);
-            //         //   return partnerID;
-            
-            //         partnerID = document.querySelector("div#partnerID").innerHTML ;
-            //               // console.log("Partnerid from document"+partnerID)
-            //           return partnerID; 
-            //         // });
-            //       }
-            //     }
-            //   }
-            // })
-            
-            
                     // vue_firebase
-                          var app = new Vue({
-                        el: '#app',
-                        data () {
-                          return {
-                            loaded: false,
-                            list: [], // 最新状態はここにコピーされる
-                            todo:[],
-                            id: null
-                       
-                        }
-                  },
+                var app = new Vue({
+              el: '#app',
+              data () {
+                return {
+                  loaded: false,
+                  list: [], // 最新状態はここにコピーされる
+                  todo:[],
+                  id: null
+              
+              }
+        },
                       
                   created: function() {
-                      partnerID ;
-                      // getUserDetails();
-                      
+ 
                       partnerID = "-LoBL5MBnKyC7trYe5_A" ; 
-                    console.log("trying to get " + partnerID);          
-            
-            
-                // var user = firebase.auth().currentUser;
-            
-                // user.providerData.forEach(function (profile) {
-                //   const UID = user.uid;
-            
-                  
-            
-                //   console.log(UID);
-            
-                //   firebase.database().ref("usertable").orderByChild("userUID").equalTo(UID).on("child_added", function(snapshot) {
-                //   myKey = snapshot.key;
-                //   // console.log(myKey);
-                //     // document.querySelector("div#myUserKey").innerHTML = myKey;
-            
-                //     console.log(myKey);
-                //   firebase.database().ref('usertable/'+ myKey).on("value", snapshot => {
-                //       myRole = snapshot.val().role; // total points
-                //       // console.log(snapshot.key + " is " + snapshot.val().role );
-                //       partnerID = snapshot.val().partnerID; // get partnerID
-                //       // strPartnerID = partnerID.toString();
-                //       // console.log(strPartnerID);
-                //       // document.querySelector("div#partnerID").innerHTML = partnerID;
-                //       console.log("Within Vue " + snapshot.key + " is " + snapshot.val().partnerID );
-                     
-                //         // document.querySelector("div#myUserKey").innerHTML = myKey;
-            
-                //         // console.log(myKey);
-            
-                
-            
-                //     });
-            
-                //     var strpartnerID = document.querySelector("div#partnerID").innerHTML;
-                //     console.log(strpartnerID);
-                //     if ( strpartnerID === "-LoBL5MBnKyC7trYe5_A") {
+             
                   firebase.database().ref('todolist/'+partnerID ).orderByChild('checked').equalTo(false).on("value",  snapshot => {
                         if (snapshot) {
                         const rootList = snapshot.val();
@@ -435,32 +351,7 @@
                             list.push(rootList[val])
                           valueofTodo.push(val)
                         })
-                          // this.list = list;
-            
-                      // });
-                    // } else {
-                      // console.log("strpartner != -LoBL5MBnKyC7trYe5_A")
-                    // }
-                    
-                //   });
-                // });            
-            
-            
-             
-                   
-            
-                    
-                          // partnerID = "-LnodyBqf2-pW2DmkIer";
-                  // firebase.database().ref('todolist/'+partnerID ).orderByChild('checked').equalTo(false).on("value",  snapshot => {
-                  //   if (snapshot) {
-                  //       const rootList = snapshot.val()
-                  //       const id = snapshot.key;
-                  //       let list = []      
-                  //         Object.keys(rootList).forEach((val, key) => {
-                  //           rootList[val].id = val
-                  //           list.push(rootList[val])
-                  //         valueofTodo.push(val)
-                  //       })
+                     
                   
                         this.list = list;
                         this.loaded = true;
@@ -472,9 +363,7 @@
                           return jQuery.isEmptyObject(this.list)
                        }
                    },
-            
-            
-                  });
+              });
                   console.log(valueofTodo);
             
             
@@ -514,10 +403,7 @@
                   mText.innerHTML =  todoTextLabel;
                   mText.innerHTML =  "<div class='noDisplay'>" + dataKey+"</div>"+todoTextLabel;
                   mText.innerHTML += "<br><div class='todo-hLine'></div><br>"+todoTextComment;
-            
-               
-            
-            
+  
                 }
             
                 function closeModal1(el) {
@@ -525,66 +411,63 @@
                   modal1.hide();
                 }
             
+  
+            function doTask(el) {
+            // console.log(event.target);
+            var modal = document.querySelector('ons-modal.taskDetailsModal');
             
+            // console.log(modal)
+            var elname = modal.tagName ;
+              // get text of the item that was clicked
+              // console.log(elname);
+              var dataKey = modal.querySelector("div.noDisplay").innerHTML;
+              // console.log(dataKey);
+      
+              var id = dataKey
+              // Update checked false to true
+                  firebase.database().ref('todolist/'+partnerID +'/'+id).update({
+              checked: true,
+              reviewed:false,
+              revScore: 0
+                });
+                // console.log("Task ID "+ id + "has been updated successfully")
+                // console.log("Added Review variables")
+              
+              modal.hide();
+  
+              var modal = document.querySelector('ons-modal.doTaskConfirmation');
+  
+              modal.show();
+          
+              var closeButton = document.querySelector('.closeBtn2');
+              // console.log(closeButton)
+                closeButton.onclick = function(){
+                modal.hide();
+              };
+            }
             
-            
-            
-                      function doTask(el) {
-                      // console.log(event.target);
-                      var modal = document.querySelector('ons-modal.taskDetailsModal');
-                      
-                      // console.log(modal)
-                      var elname = modal.tagName ;
-                        // get text of the item that was clicked
-                        // console.log(elname);
-                        var dataKey = modal.querySelector("div.noDisplay").innerHTML;
-                        // console.log(dataKey);
-               
-                        var id = dataKey
-                        // Update checked false to true
-                            firebase.database().ref('todolist/'+partnerID +'/'+id).update({
-                        checked: true,
-                        reviewed:false,
-                        revScore: 0
-                          });
-                          // console.log("Task ID "+ id + "has been updated successfully")
-                          // console.log("Added Review variables")
-                        
-                        modal.hide();
-            
-                        var modal = document.querySelector('ons-modal.doTaskConfirmation');
-            
-                        modal.show();
-                    
-                        var closeButton = document.querySelector('.closeBtn2');
-                        // console.log(closeButton)
-                          closeButton.onclick = function(){
-                          modal.hide();
-                        };
-                      }
-            
-            
-                   function deleteTodo(el) {
-                    var target = el.parentElement.parentElement.getAttribute("data-modal-id");
-            
-                    // console.log(target);
-                    //   myKey ;
-                    // partnerID;
-                        // getUserDetails();
-                        // console.log("In getPoints"+myKey);
-                        console.log("In getPoints "+partnerID);
-            
-                    let todoRef = firebase.database().ref('todolist/' + partnerID +'/' + target);
-                        todoRef.remove()
-                    // console.log("Finished deleting")
+  
+          function deleteTodo(el) {
+          var target = el.parentElement.parentElement.getAttribute("data-modal-id");
+  
+          // console.log(target);
+          //   myKey ;
+          // partnerID;
+              // getUserDetails();
+              // console.log("In getPoints"+myKey);
+              console.log("In getPoints "+partnerID);
+  
+          let todoRef = firebase.database().ref('todolist/' + partnerID +'/' + target);
+              todoRef.remove()
+          // console.log("Finished deleting")
                     
         ons.notification.confirm("削除しますか？").then(function(){
-                      ons.notification.alert("削除しました。");
-                  });
-                  }
+          ons.notification.alert("削除しました。");
+      });
+      }
+
             
-            
-                      </script>
+    </script>
       </ons-page>
     </template>
 
@@ -634,47 +517,56 @@
                       <!-- Loading... -->
                       モーダルウィンドウで詳細を確認します。
                     </p>
-                    <!-- <button class="doTaskBtn" onclick="doTask()" name="doTaskButton" >了解！</button> -->
-                    <form class="rating" style="color: black">
+                    
+                    <div class="formContainer" >
+
+
+                    <form class="rating" >
                         <label>
+                          
                           <input type="radio" name="stars" value="1" />
-                          <span>1</span>
-                          <!-- <span class="icon">★</span> -->
+                          <!-- <span>1</span> -->
+                          <span class="icon">★</span>
+                   
                         </label>
                         <label>
                           <input type="radio" name="stars" value="2" />
-                          <span>2</span>
-                          <!-- <span class="icon">★</span>
-                          <span class="icon">★</span> -->
+                          <!-- <span>2</span> -->
+                          <span class="icon">★</span>
+                          <span class="icon">★</span>
+                   
                         </label>
                         <label>
                           <input type="radio" name="stars" value="3" />
-                          <span>3</span>
-                          <!-- <span class="icon">★</span>
+                          <!-- <span>3</span> -->
                           <span class="icon">★</span>
-                          <span class="icon">★</span>    -->
+                          <span class="icon">★</span>
+                          <span class="icon">★</span>   
+                          <span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 32.167 30.98">
+
+                          </svg></span>
                         </label>
                         <label>
                           <input type="radio" name="stars" value="4" />
-                          <span>4</span>
-                          <!-- <span class="icon">★</span>
+                          <!-- <span>4</span> -->
                           <span class="icon">★</span>
                           <span class="icon">★</span>
-                          <span class="icon">★</span> -->
+                          <span class="icon">★</span>
+                          <span class="icon">★</span>
                         </label>
                         <label>
                           <input type="radio" name="stars" value="5" />
-                          <span>5</span>
-                          <!-- <span class="icon">★</span>
-                          <span class="icon">★</span>
-                          <span class="icon">★</span>
-                          <span class="icon">★</span>
-                          <span class="icon">★</span> -->
+                          <!-- <span>5</span> -->
+                          <span class="icon fiveStars">★</span>
+                          <span class="icon fiveStars">★</span>
+                          <span class="icon fiveStars">★</span>
+                          <span class="icon fiveStars">★</span>
+                          <span class="icon fiveStars">★</span>
                         </label>
-                        <button class="doTaskBtn" onclick="reviewTask(this)" name="reviewTaskButton" >ADD REVIEW</button>
+                        <button class="doTaskBtn" onclick="reviewTask(this)" name="reviewTaskButton" >評価する</button>
                       </form>
                       
-
+                    </div>
                    
                     <button class="closeBtn" onclick="closeModal2()">保留にする</button>
                     </div>
@@ -1020,10 +912,10 @@
             <div style="margin: 20px auto; width: 320px;">
                 <ons-input
                 id="partnerEmail"
-                placeholder="partnerEmail"
+                placeholder="パートナーのメールアドレス"
                 class="loginInput"
               ></ons-input>
-              <ons-button onclick="renkei()" class="loginBtn">partner登録</ons-button>
+              <ons-button onclick="renkei()" class="loginBtn">パートナー登録</ons-button>
             
             <!-- </div>
             <div style="margin: 20px auto; width: 320px;">
@@ -1039,7 +931,7 @@
             <script>
 
 
-var myUID =[];
+            var myUID =[];
             function renkei() {
               const partnerEmail = document.querySelector("#partnerEmail").value;
               console.log(partnerEmail);
@@ -1284,22 +1176,8 @@ else document.attachEvent('onreadystatechange', function(){
 
 
     </script>
-    <script>
-    partnerID = ""; 
-    strPartnerID = "";
-
-    </script>
     <script src="js/login.js"></script>
     <script src="js/myApp.js"></script>
-    
-
-    
-    <!-- <script src="node_modules/vue/dist/vue.js"></script> -->
-     <!-- <script src="js/selector.vue"></script> -->
-      
-      <!-- <script src="https://unpkg.com/v-cascade/lib/v-cascade.min.js"></script> -->
-      <!-- <script src="node_modules/v-cascade/src/main.js"></script>  -->
-
 
   </body>
 </html>
