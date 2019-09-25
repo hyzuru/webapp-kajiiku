@@ -43,19 +43,19 @@ user.providerData.forEach(function (profile) {
       console.log(strPartnerID);
       var divPartnerID = document.querySelector("div#partnerID");
       if (divPartnerID.innerHTML === "") {
-        divPartnerID.innerHTML += strPartnerID;  
+        divPartnerID.innerHTML += strPartnerID;
       }
 
-      
+
       console.log(snapshot.key + " is " + snapshot.val().partnerID );
     });
   });
-});    
+});
 
 }
 
 
-window.onload = function(e){ 
+window.onload = function(e){
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       // console.log('user is logged');
