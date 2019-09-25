@@ -20,22 +20,22 @@
       <!-- The side menu -->
       <ons-splitter-side id="menu" collapse>
         <ons-page>
-          <ons-toolbar>
+          <!-- <ons-toolbar> -->
               <!-- <div class="left"><ons-back-button>Page1</ons-back-button></div> -->
-              <div class="center">設定</div>
-          </ons-toolbar>
+              <!-- <div class="center">設定</div> -->
+          <!-- </ons-toolbar> -->
            
-          <ons-list> 
-            <ons-list-item onclick="loadPage('changeMail.html')" tappable modifier="chevron">
+          <!-- <ons-list>  -->
+            <!-- <ons-list-item onclick="loadPage('changeMail.html')" tappable modifier="chevron">
               メール変更
-            </ons-list-item>
+            </ons-list-item> -->
             <!-- <ons-list-item onclick="loadPage('connect.html')" tappable modifier="chevron">
                 連携する
               </ons-list-item> -->
-            <ons-list-item onclick="logOut()" tappable modifier="chevron">
+            <!-- <ons-list-item onclick="logOut()" tappable modifier="chevron">
               ログアウト
-            </ons-list-item>
-          </ons-list>
+            </ons-list-item> -->
+          <!-- </ons-list> -->
         </ons-page>
       </ons-splitter-side>
     <!-- Everything not in the side menu -->
@@ -69,30 +69,7 @@
           </ons-page>
         </ons-template>
 
-        <ons-template id="changeMail.html">
-            <ons-page id="changeMail">
-                <ons-toolbar>
-                    <div class="left"><ons-back-button>戻る</ons-back-button></div>
-                </ons-toolbar>
-                <h2>自分のメールを変更する</h2>
-                <div style="margin: 20px auto; width: 320px;">
-                  
-                        <ons-input
-                        id="changeUserMail"
-                        placeholder="あなたのメールアドレス"
-                        class="loginInput"
-                      ></ons-input>
-                    <ons-button onclick="changeMail()" class="loginBtn">変更する</ons-button>
-                       
-                  </div>
-            
-                <script>
-            
-            </script>
-            </ons-page>
-          </ons-template>
-
-
+    
           <ons-template id="connect.html">
               <ons-page id="connect">
                   <ons-toolbar>
@@ -162,9 +139,9 @@
     <ons-toolbar id="home-toolbar">
       <div class="center">リクエスト</div>
       <div class="left">
-        <ons-toolbar-button onclick="openMenu()">
+        <!-- <ons-toolbar-button onclick="openMenu()">
           <ons-icon icon="md-menu"></ons-icon>
-        </ons-toolbar-button>
+        </ons-toolbar-button> -->
       </div>
     </ons-toolbar>
   
@@ -1328,25 +1305,25 @@ window.addEventListener("load", function(event) {
               }
      
 
-            function changeMail() {
-              const userEmail = document.querySelector("#changeUserMail").value;
-              console.log(userEmail);
+            // function changeMail() {
+            //   const userEmail = document.querySelector("#changeUserMail").value;
+            //   console.log(userEmail);
 
-              var user = firebase.auth().currentUser;
-              var UID = user.uid 
+            //   var user = firebase.auth().currentUser;
+            //   var UID = user.uid 
 
-              var currentEmail = firebase.auth().currentUser.email;
-              console.log(currentEmail)
+            //   var currentEmail = firebase.auth().currentUser.email;
+            //   console.log(currentEmail)
               
-              user.updateEmail(userEmail).then(function() {
-                // Update successful.
-                ons.notification.alert('メールを「'+userEmail+'」に変更しました。');
+            //   user.updateEmail(userEmail).then(function() {
+            //     // Update successful.
+            //     ons.notification.alert('メールを「'+userEmail+'」に変更しました。');
 
-              }).catch(function(error) {
-                // An error happened.
-                ons.notification.alert('ユーザーメール変更できませんでした。' + error.message + '）');
-              });
-            }
+            //   }).catch(function(error) {
+            //     // An error happened.
+            //     ons.notification.alert('ユーザーメール変更できませんでした。' + error.message + '）');
+            //   });
+            // }
 
          
    // Get points and profile details
