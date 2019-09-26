@@ -168,13 +168,13 @@
     <ons-toolbar id="home-toolbar">
       <div class="center">リクエスト</div>
       <div class="left">
-        <!-- <ons-toolbar-button onclick="openMenu()">
+        <ons-toolbar-button onclick="openMenu()">
           <ons-icon icon="md-menu"></ons-icon>
-        </ons-toolbar-button> -->
+        </ons-toolbar-button>
       </div>
     </ons-toolbar>
   
-    <ons-tabbar id="tabbar" position="top">
+    <ons-tabbar id="home-tabbar" position="top">
       <ons-tab page="requests.html" label="リクエスト"></ons-tab>
       <ons-tab page="completed.html" label="終わったタスク"></ons-tab>
       <ons-tab page="profile.html" label="プロフィール"></ons-tab>
@@ -773,6 +773,7 @@
 
 
                     <form class="rating" >
+
                         <label>
                           
                           <input type="radio" name="stars" value="1" />
@@ -815,6 +816,7 @@
                           <span class="icon fiveStars">★</span>
                         </label>
                         <button class="doTaskBtn" onclick="reviewTask(this)" name="reviewTaskButton" >評価する</button>
+                      
                       </form>
                       
                     </div>
@@ -1173,9 +1175,9 @@
                       <button class="openDetails" name="showmodalbutton" onclick="showModal2(this)">
                           詳細
                       </button>
-                      <button class="delete-todo js-delete-todo" onclick="deleteTodo(this)">
+                      <!-- <button class="delete-todo js-delete-todo" onclick="deleteTodo(this)">
                         <svg><use href="#delete-icon"></use></svg>
-                      </button>
+                      </button> -->
                   </ons-list-item>
                 </ons-list>
 
@@ -1575,7 +1577,7 @@
           <ons-page id="profile">
               <script></script>
                <div style="text-align: center;">
-              <h1>パパのポイント</h1>
+              <h1 class="mama-prf">パパのポイント</h1>
               <p id="points" class="text-points"
               onclick="getPoints()">0</p>
               <p id=point--after>ポイント</p>
@@ -1735,7 +1737,7 @@ else document.attachEvent('onreadystatechange', function(){
         <ons-page id="profile2">
             <script></script>
              <div style="text-align: center;">
-            <h1>パパのポイント</h1>
+            <h1 class="papa-prf">パパのポイント</h1>
             <p id="points" class="text-points"
             onclick="getPoints()">0</p>
             <p id=point--after>ポイント</p>
@@ -1915,7 +1917,7 @@ else document.attachEvent('onreadystatechange', function(){
                   <li  class="toggle3"><a href="#" class="backToMenu1">Back</a></li>
                   <li class="toggle3"><div class="cRyouri"></div><a href="#" class="selectMenu">食器を洗う</a></li>
                   <li class="toggle3"><div class="cRyouri"></div><a href="#" class="selectMenu">食器を拭く</a></li>
-                  <li class="toggle3"><div class="cRyouri"></div><a href="#" class="selectMenu">食器を片付ける</a></li>
+                  <li class="toggle3"><div class="cRyouri"></div><a href="#" class="selectMenu">食器の片付け</a></li>
                   <li class="toggle3"><div class="cRyouri"></div><a href="#" class="selectMenu">朝食を作る</a></li>
                   <li class="toggle3"><div class="cRyouri"></div><a href="#" class="selectMenu">昼食を作る</a></li>
                   <li class="toggle3"><div class="cRyouri"></div><a href="#" class="selectMenu">夕食を作る</a></li>
@@ -1929,7 +1931,7 @@ else document.attachEvent('onreadystatechange', function(){
                   <li class="toggle3"><div class="cSouji"></div><a href="#" class="selectMenu">テーブルを拭く</a></li>
                   <li class="toggle3"><div class="cSouji"></div><a href="#" class="selectMenu">掃除機をかける</a></li>
                   <li class="toggle3"><div class="cSouji"></div><a href="#" class="selectMenu">トイレを掃除する</a></li>
-                  <li class="toggle3"><div class="cSouji"></div><a href="#" class="selectMenu">お風呂を掃</a></li>
+                  <li class="toggle3"><div class="cSouji"></div><a href="#" class="selectMenu">お風呂を洗う</a></li>
 
                 </ul>
               </li>
@@ -1957,7 +1959,7 @@ else document.attachEvent('onreadystatechange', function(){
                 <ul class="menu2" id="cKaimono">
                     <div class="overlay"></div>
                     <li  class="toggle3"><a href="#" class="backToMenu1">Back</a></li>
-                  <li class="toggle3"><div class="cKaimono"></div><a href="#" class="selectMenu">夕食の買い物をする</a></li>
+                  <li class="toggle3"><div class="cKaimono"></div><a href="#" class="selectMenu">夕食の買い物</a></li>
                   <li class="toggle3"><div class="cKaimono"></div><a href="#" class="selectMenu">おむつを買う</a></li>
                   <li class="toggle3"><div class="cKaimono"></div><a href="#" class="selectMenu">トイレットペーパーを買う</a></li>
                 </ul>
