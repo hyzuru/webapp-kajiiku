@@ -52,7 +52,7 @@
       </ons-splitter>
 
       <ons-template id="loading.html">
-          <ons-page id="page2">
+          <ons-page id="page">
 
               <div style="margin: 20px auto; width: 320px;">
                   <ons-progress-bar value="20" secondary-value="95"></ons-progress-bar>
@@ -187,9 +187,9 @@
 
 <!-- パパの画面　home -->
 <ons-template id="home2.html">
-  <ons-page id="home">
+  <ons-page id="home2">
     <!-- <script src="js/app.js"></script> -->
-    <ons-toolbar id="home-toolbar">
+    <ons-toolbar id="home2-toolbar">
       <div class="center">リクエスト</div>
       <div class="left">
         <!-- <ons-toolbar-button onclick="openMenu()">
@@ -198,7 +198,7 @@
       </div>
     </ons-toolbar>
   
-    <ons-tabbar id="tabbar" position="top">
+    <ons-tabbar id="tabbar2" position="top">
       <ons-tab page="requests2.html" label="リクエスト"></ons-tab>
       <ons-tab page="completed2.html" label="終わったタスク"></ons-tab>
       <ons-tab page="profile2.html" label="プロフィール"></ons-tab>
@@ -272,7 +272,7 @@
             <ons-pull-hook id="pull-hook">
               再読み込み
             </ons-pull-hook>
-            <h2 style="text-align: center;">リクエスト一覧</h2>
+            <h2 style="text-align: center;">おねがいリスト</h2>
             <div id="app">
               <ons-list class="todo-list js-todo-list">
 
@@ -501,7 +501,7 @@
             <ons-pull-hook id="pull-hook">
               再読み込み
             </ons-pull-hook>
-            <h2 style="text-align: center;">リクエスト一覧</h2>
+            <h2 style="text-align: center;">おねがいリスト</h2>
             <div id="app">
               <ons-list class="todo-list js-todo-list">
 
@@ -568,9 +568,9 @@
                           </div>
                         </ons-modal>
 
-      <ons-fab position="bottom right" onclick="loadPage('page1.html')">
+      <!-- <ons-fab position="bottom right" onclick="loadPage('page1.html')">
           <ons-icon icon="md-plus"></ons-icon>
-        </ons-fab>
+        </ons-fab> -->
         <!-- <script src="js/todo.js"></script> -->
         <script src="js/pull-hook.js"></script>
 
@@ -751,9 +751,9 @@
                       <button class="openDetails" name="showmodalbutton" onclick="showModal2(this)">
                           詳細
                       </button>
-                      <button class="delete-todo js-delete-todo" onclick="deleteTodo(this)">
+                      <!-- <button class="delete-todo js-delete-todo" onclick="deleteTodo(this)">
                         <svg><use href="#delete-icon"></use></svg>
-                      </button>
+                      </button> -->
                   </ons-list-item>
                 </ons-list>
 

@@ -4,10 +4,10 @@
 }
 
 .page__background {
-  background-color: #F1F5F6;
+  background-color: #F6F1F3;
 }
 .toolbar {
-  background-color: #46A2FF;
+  background-color: #FF60B0;
 }
 .toolbar > div {
   color: #fff;
@@ -16,13 +16,15 @@ ons-toolbar-button > .ons-icon {
   color: #fff;
 }
 .ons-tabbar__footer {
-  background-color: rgb(233, 238, 240);
+  background-color: #FF75BF;
+  ;
 }
 .tabbar__label {
-  color:  rgb(103, 127, 131);
+  color:  #fff;
 }
 .tabbar__item.active .tabbar__label{
-  color:  #1560b6;
+  color:  #fff;
+  font-weight: bold;
 }
 ons-input {
   border: lightgrey 1px solid;
@@ -41,7 +43,7 @@ ons-back-button {
 
 h1, h2 {
   text-align: center;
-  color: #50ABE1;
+  color: #E150B1;
 }
 .selectMenu {
   border: none;
@@ -114,7 +116,7 @@ body {
 
 button {
   font-size: 0.9rem;
-  margin: 0 2px;
+  margin: 0 8px;
 }
 .todo-list {
   list-style: none;
@@ -438,10 +440,9 @@ color: #333;
 .openDetails,
 .doTaskBtn {
   padding: 2px 20px;
-  background-image: linear-gradient(160deg, #FFFFD4, #55AAFF);
+  background-image: linear-gradient(160deg, #FFFFA9, #FF559A);
   border-radius: 15px;
   border: transparent;
-  box-shadow: #707070 2px 3px 5px;
   color: #fff;
   margin: 0 auto;
     display: block;
@@ -493,7 +494,7 @@ color: #333;
   background-color: #ffffff50;
 }
 ons-fab.fab {
-  background-color: #46A2FF;
+  background-color: #FF4685;
 }
 .noDisplay {
   display: none;
@@ -527,7 +528,7 @@ ons-progress-circular.loading {
   margin-right: auto;
   width: 300px;
   max-width: 80%;
-  border-bottom: 2px solid #82a9d4;
+  border-bottom: 2px solid #E150B1;
 }
 
 .doTaskBtn, .closeBtn, .closeBtn2,
@@ -650,3 +651,8 @@ text.cls-5.letter4 {
   color: #000;
   text-shadow: 0 0 5px #09f;
 }
+
+/* mama css */
+
+
+/* papa css */
