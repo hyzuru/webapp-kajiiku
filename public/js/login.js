@@ -35,6 +35,7 @@ user.providerData.forEach(function (profile) {
     myKey = snapshot.key;
   // console.log(myKey);
     document.querySelector("div#myUserKey").innerHTML = myKey;
+    
   firebase.database().ref('usertable/'+ myKey).on("value", snapshot => {
       myRole = snapshot.val().role; // total points
       // console.log(snapshot.key + " is " + snapshot.val().role );
@@ -61,17 +62,46 @@ window.onload = function(e){
       // console.log('user is logged');
       var currentEmail = firebase.auth().currentUser.email;
       console.log("Logged in as "+ currentEmail)
-      const navigator = document.querySelector("#navigator");
-      navigator.resetToPage("home.html");
-      getUserDetails();
-      console.log("On load " + partnerID);
+      // const navigator = document.querySelector("#navigator");
+      // navigator.resetToPage("home.html");
+    
+      var user = firebase.auth().currentUser;
+      user.providerData.forEach(function (profile) {
+        const UID = user.uid;
+      
+        firebase.database().ref("usertable").orderByChild("userUID").equalTo(UID).on("child_added", function(snapshot) {
+          myKey = snapshot.key;
+          firebase.database().ref('usertable/'+ myKey).on("value", snapshot => {
+            myRole = snapshot.val().role; // total points
+
+            console.log(snapshot.key + " is " + myRole );
+            if (myRole === "papa" ) {
+              // set partnerID as own user key if user is papa
+              console.log("User is papa");
+              const navigator = document.querySelector("#navigator");
+              navigator.resetToPage("home2.html");
+           
+            } else if  (myRole === "mama" ) {
+              // set partnerID as partner's key if user is mama
+                  console.log("User is mama");  
+                  const navigator = document.querySelector("#navigator");
+                  // navigator.resetToPage("home-papa.html");
+                  navigator.resetToPage("home.html");
+            
+              }
+          });
+        });
+      });    
+
+      console.log("On load " );
+
 
     } else {
       console.log("user not found")
       const navigator = document.querySelector("#navigator");
       navigator.loadPage("login.html");
     }
-    // onUserStatusChanged(status)   Login shiteiru ka douka  user.uid
+    
   });
 }
 
