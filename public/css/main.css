@@ -21,7 +21,7 @@ ons-toolbar-button > .ons-icon {
 .tabbar__label {
   color:  #fff;
 }
-.tabbar__item.active .tabbar__label{
+.tabbar__item:active .tabbar__label{
   color:  #fff;
   font-weight: bold;
 }
@@ -447,7 +447,8 @@ color: #333;
 }
 
 /* login page */
-.loginBtn {
+.loginBtn,
+.loginBtn:active {
   width: 90%;
   margin: 10px auto 50px;
   text-align: center;
@@ -619,7 +620,7 @@ text.cls-5.letter4 {
   text-shadow: 0 0 5px #09f;
 }
 .page__background {
-  background-color: #EEEEEE;
+  background-color: rgb(245, 243, 240);
 }
 h1, h2 {
   text-align: center;
@@ -628,6 +629,13 @@ h1, h2 {
 
 
 /* mama css */
+#home .loginBtn,
+#home .loginBtn:active {
+  width: 90%;
+  margin: 10px auto 50px;
+  text-align: center;
+  background-color: #FF60B0;
+}
 #home h1,#home h2 {
   text-align: center;
   color: #E150B1;
@@ -670,7 +678,8 @@ h1, h2 {
   border-left: 1px solid #cfdbe7;
   border-right: 1px solid #cfdbe7;
 }
-ons-fab.fab {
+ons-fab.fab,
+ons-fab.fab:active {
   background-color: #FF4685;
 }
 
@@ -682,11 +691,19 @@ ons-fab.fab {
   border-radius: 15px;
   border: transparent;
   color: #fff;
-  margin: 0 auto;
-    display: block;
+  /* margin: 0 auto;
+    display: block; */
 }
 
 /* papa css */
+#home2 .loginBtn,
+#home2 .loginBtn:active {
+  width: 90%;
+  margin: 10px auto 50px;
+  text-align: center;
+  background-color: #60AFFF;
+}
+
 #home2 .page__background{
   background-color: #F1F5F6;
 }
