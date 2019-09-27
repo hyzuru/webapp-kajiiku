@@ -21,7 +21,7 @@ ons-toolbar-button > .ons-icon {
 .tabbar__label {
   color:  #fff;
 }
-.tabbar__item:active .tabbar__label{
+.tabbar__item.active .tabbar__label{
   color:  #fff;
   font-weight: bold;
 }
