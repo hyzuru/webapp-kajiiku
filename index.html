@@ -11,12 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
     <script>
       Vue.config.devtools = true
-      // After you create app
-      // window.__VUE_DEVTOOLS_GLOBAL_HOOK__.Vue = app.constructor;
     </script>
-        <!-- <script src="js/main.js"></script> -->
-
-             <!-- <link rel="stylesheet" href="css/categorystyle.css"> -->
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <script type="text/javascript" src="js/category.js"></script>
   </head>
@@ -25,22 +20,22 @@
       <!-- The side menu -->
       <ons-splitter-side id="menu" collapse>
         <ons-page>
-          <ons-toolbar>
+          <!-- <ons-toolbar> -->
               <!-- <div class="left"><ons-back-button>Page1</ons-back-button></div> -->
-              <div class="center">設定</div>
-          </ons-toolbar>
+              <!-- <div class="center">設定</div> -->
+          <!-- </ons-toolbar> -->
            
-          <ons-list> 
-            <ons-list-item onclick="loadPage('changeMail.html')" tappable modifier="chevron">
+          <!-- <ons-list>  -->
+            <!-- <ons-list-item onclick="loadPage('changeMail.html')" tappable modifier="chevron">
               メール変更
-            </ons-list-item>
+            </ons-list-item> -->
             <!-- <ons-list-item onclick="loadPage('connect.html')" tappable modifier="chevron">
                 連携する
               </ons-list-item> -->
-            <ons-list-item onclick="logOut()" tappable modifier="chevron">
+            <!-- <ons-list-item onclick="logOut()" tappable modifier="chevron">
               ログアウト
-            </ons-list-item>
-          </ons-list>
+            </ons-list-item> -->
+          <!-- </ons-list> -->
         </ons-page>
       </ons-splitter-side>
     <!-- Everything not in the side menu -->
@@ -74,30 +69,7 @@
           </ons-page>
         </ons-template>
 
-        <ons-template id="changeMail.html">
-            <ons-page id="changeMail">
-                <ons-toolbar>
-                    <div class="left"><ons-back-button>戻る</ons-back-button></div>
-                </ons-toolbar>
-                <h2>自分のメールを変更する</h2>
-                <div style="margin: 20px auto; width: 320px;">
-                  
-                        <ons-input
-                        id="changeUserMail"
-                        placeholder="あなたのメールアドレス"
-                        class="loginInput"
-                      ></ons-input>
-                    <ons-button onclick="changeMail()" class="loginBtn">変更する</ons-button>
-                       
-                  </div>
-            
-                <script>
-            
-            </script>
-            </ons-page>
-          </ons-template>
-
-
+    
           <ons-template id="connect.html">
               <ons-page id="connect">
                   <ons-toolbar>
@@ -167,22 +139,39 @@
     <ons-toolbar id="home-toolbar">
       <div class="center">リクエスト</div>
       <div class="left">
-        <ons-toolbar-button onclick="openMenu()">
+        <!-- <ons-toolbar-button onclick="openMenu()">
           <ons-icon icon="md-menu"></ons-icon>
-        </ons-toolbar-button>
+        </ons-toolbar-button> -->
       </div>
     </ons-toolbar>
   
-    <ons-tabbar id="tabbar" position="top">
+    <ons-tabbar id="tabbar" position="top" >
       <ons-tab page="requests.html" label="リクエスト"></ons-tab>
       <ons-tab page="completed.html" label="終わったタスク"></ons-tab>
       <ons-tab page="profile.html" label="プロフィール"></ons-tab>
     </ons-tabbar>
-    <!-- <ons-button onclick="loadPage('page1.html')">Go to page 1 </ons-button> -->
-    <!-- <ons-navigator swipeable id="myNavigator"></ons-navigator> -->
-    <!-- <ons-navigator swipeable id="myNavigator" page="page1.html"></ons-navigator> -->
   </ons-page>
 </ons-template>
+
+<ons-template id="home-papa.html">
+    <ons-page id="home-papa">
+      <!-- <script src="js/app.js"></script> -->
+      <ons-toolbar id="home-toolbar">
+        <div class="center">リクエスト</div>
+        <div class="left">
+          <ons-toolbar-button onclick="openMenu()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+      </ons-toolbar>
+    
+      <ons-tabbar id="tabbar" position="top" >
+        <ons-tab page="requests-papa.html" label="リクエスト"></ons-tab>
+        <ons-tab page="completed-papa.html" label="終わったタスク"></ons-tab>
+        <ons-tab page="profile-papa.html" label="プロフィール"></ons-tab>
+      </ons-tabbar>
+    </ons-page>
+  </ons-template>
 
     <ons-template id="signup.html">
         <ons-page id="signup">
@@ -239,6 +228,11 @@
           </div>
         </ons-page>
       </ons-template>
+
+
+<!-- ------------------------------ -->
+<!-- MAMA REQUESTS PAGE STARTS HERE -->
+<!-- ------------------------------ -->
 
     <template id="requests.html">
       <ons-page id="requests">
@@ -507,7 +501,293 @@
       </ons-page>
     </template>
 
+<!-- ---------------------------- -->
+<!-- MAMA REQUESTS PAGE ENDS HERE -->
+<!-- ---------------------------- -->
 
+
+    
+<!-- ------------------------------ -->
+<!-- PAPA REQUESTS PAGE STARTS HERE -->
+<!-- ------------------------------ -->
+
+    <template id="requests-papa.html">
+        <ons-page id="requests-papa">
+            <div style="display:none" id="myUserKey"></div>
+            <div style="display:none" id="partnerID"></div>
+              <ons-pull-hook id="pull-hook">
+                再読み込み
+              </ons-pull-hook>
+              <h2 style="text-align: center;">リクエスト一覧</h2>
+              <div id="app">
+                <ons-list class="todo-list js-todo-list">
+    
+                  <!-- <div>{{ item.partnerID }}</div> -->
+                  <div v-if="!loaded" style="text-align: center; margin-top: 200px">
+                       読み込み中...
+                    </div>
+                  <div v-if="loaded">
+                      <div v-if="isEmpty">
+                          <div class="empty-state">
+                              <svg class="checklist-icon"><use href="#checklist-icon"></use></svg>
+                              <h3 class="empty-state__title">タスクはありません。</h3>
+                              <p class="empty-state__description">「＋」ボタンを押してタスクを作ります。</p>
+                            </div>
+  
+                      </div>
+                      <ons-list-item v-for="item in list" class="todo-item"  :data-modal-id="item.id" >
+                          <div :class="item.taskCategory"></div>
+                          <span class="todo-itemName">{{item.taskName}}</span>
+                        <span class="todo-itemComment">{{item.taskComment}}</span>
+    
+                        <!-- <div :class="item.taskCategory"></div> -->
+                        <!-- <input id="1566658474566" type="checkbox" class="noDisplay">
+                        <label for="1566658474566" class="noDisplay"></label> -->
+                        <button class="openDetails" name="showmodalbutton" onclick="showModal(this)">
+                            詳細
+                        </button>
+                        <button class="delete-todo js-delete-todo" onclick="deleteTodo(this)">
+                            <svg><use href="#delete-icon"></use></svg>
+                          </button>
+                          <!-- <button type="submit" onclick="deleteTodo()" class="delete-todo js-delete-todo"> -->                      
+                            </ons-list-item>
+                  </div>
+                </ons-list>
+               
+                      </div>
+                    <!-- <ons-modal direction="up" class="taskDetailsModal" v-for="item in list"  :data-modal-id="item.id" > -->
+                          <ons-modal direction="up" class="taskDetailsModal" >
+                      <div style="text-align: center;">
+                            <div style="text-align: center; background-color: #fff; height: 50vh; width:80vw; margin: 0 auto; padding: 10px;">
+              
+                            <p style=" z-index:50; color:#000;">
+                              <ons-icon icon="md-spinner" size="28px" spin></ons-icon> 
+                              Loading...
+                              モーダルウィンドウで詳細を確認します。
+                            </p>
+                            <button class="doTaskBtn" onclick="doTask(this)" name="doTaskButton" >了解！</button>
+                            <button class="closeBtn" onclick="closeModal1()">保留にする</button>
+                            </div>
+                          </div>
+                        </ons-modal>
+                        <ons-modal direction="up" class="doTaskConfirmation" v-for="item in list" :data-modal-id="item.id" :id="item.id">
+                            <div style="text-align: center;">
+                              <div style="text-align: center; background-color: #fff; height: 50vh; width:80vw; margin: 0 auto; padding: 10px;">
+                
+                              <p style=" z-index:50; color:#000;">
+                                <!-- <ons-icon icon="md-spinner" size="28px" spin></ons-icon> --> 
+                                <!-- Loading... -->
+                                リクエストを完了しました
+                              </p>
+                              <p>パパありがとう！</p>
+                              <button class="closeBtn2 button">閉じる</button>
+                              </div>
+                            </div>
+                          </ons-modal>
+  
+        <ons-fab position="bottom right" onclick="loadPage('page1.html')">
+            <ons-icon icon="md-plus"></ons-icon>
+          </ons-fab>
+          <!-- <script src="js/todo.js"></script> -->
+          <script src="js/pull-hook.js"></script>
+  
+          <script>
+  //           console.log("Start here")
+                    console.log(partnerID) // returns [object HTMLDivElement]
+        
+  
+                    
+  
+                    // vue_firebase
+                    var app = new Vue({
+                          el: '#app',
+                          data () {
+                            return {
+                              loaded: false,
+                              list: [], // 最新状態はここにコピーされる
+                              todo:[],
+                              id: null
+                         
+                          }
+                    },
+                        
+                    created: function() {
+                      console.log(partnerID) // returns [object HTMLDivElement]
+                        
+                        partnerID = "-LoBL5MBnKyC7trYe5_A" ; 
+                      
+                    firebase.database().ref('todolist/'+partnerID ).orderByChild('checked').equalTo(false).on("value",  snapshot => {
+                          if (snapshot) {
+                          const rootList = snapshot.val();
+                          const id = snapshot.key;
+                          let list = [];  
+              
+                            Object.keys(rootList).forEach((val, key) => {
+                              rootList[val].id = val
+                              list.push(rootList[val])
+                            
+                          })
+                            // this.list = list;
+              
+                        // });
+                      // } else {
+                        // console.log("strpartner != -LoBL5MBnKyC7trYe5_A")
+                      // }
+                      
+                  //   });
+                  // });            
+              
+              
+               
+                     
+              
+                      
+                            // partnerID = "-LnodyBqf2-pW2DmkIer";
+                    // firebase.database().ref('todolist/'+partnerID ).orderByChild('checked').equalTo(false).on("value",  snapshot => {
+                    //   if (snapshot) {
+                    //       const rootList = snapshot.val()
+                    //       const id = snapshot.key;
+                    //       let list = []      
+                    //         Object.keys(rootList).forEach((val, key) => {
+                    //           rootList[val].id = val
+                    //           list.push(rootList[val])
+                    //         valueofTodo.push(val)
+                    //       })
+                    
+                          this.list = list;
+                          this.loaded = true;
+                          } 
+                        })
+                      },
+                      computed: {
+                         isEmpty: function () {
+                            return jQuery.isEmptyObject(this.list)
+                         }
+                     },
+                  });
+                 
+              
+              
+                              
+              
+                  function showModal(el) {
+                    var elname = el.tagName ;
+                    // get text of the item that was clicked
+                    // console.log(elname);
+                    var listItem = el.parentElement.parentElement;
+                    // console.log(listItem.outerHTML);
+                    var dataKey = listItem.getAttribute('data-modal-id');
+                    // console.log(listItem.getAttribute('data-modal-id'));
+                    // var todoTextLabel = el.parentElement.querySelector('div.todo-itemName').textContent;
+                    var todoTextLabel = el.parentElement.querySelector("div").nextElementSibling.textContent;
+                    // console.log(todoTextLabel);
+                    // var todoTextComment = el.parentElement.querySelector('div.todo-itemComment').textContent;
+                    var todoTextComment = el.parentElement.querySelector('span.todo-itemComment').textContent;
+                      var todoTextComment = todoTextComment.replace(/\s+/g, '');
+                      if (todoTextComment != "") {
+                        todoTextComment = todoTextComment.replace(/\s+/g, '');
+                      } else {
+                        // console.log(todoTextComment);
+                        todoTextComment = "コメントなし"
+                      }
+                      // console.log(todoTextComment);
+              
+              
+                    var modal = document.querySelector('ons-modal.taskDetailsModal');
+              
+                      modal.show();
+                    // }
+              
+                    var mText = modal.querySelector('p') ;
+                    // console.log(mText);
+              
+                    mText.innerHTML =  todoTextLabel;
+                    mText.innerHTML =  "<div class='noDisplay'>" + dataKey+"</div>"+todoTextLabel;
+                    mText.innerHTML += "<br><div class='todo-hLine'></div><br>"+todoTextComment;
+              
+                 
+              
+              
+                  }
+              
+                  function closeModal1(el) {
+                    var modal1 = document.querySelector('ons-modal.taskDetailsModal');
+                    modal1.hide();
+                  }
+              
+              
+              
+              
+              
+                        function doTask(el) {
+                        // console.log(event.target);
+                        var modal = document.querySelector('ons-modal.taskDetailsModal');
+                        
+                        // console.log(modal)
+                        var elname = modal.tagName ;
+                          // get text of the item that was clicked
+                          // console.log(elname);
+                          var dataKey = modal.querySelector("div.noDisplay").innerHTML;
+                          // console.log(dataKey);
+                 
+                          var id = dataKey
+                          // Update checked false to true
+                              firebase.database().ref('todolist/'+partnerID +'/'+id).update({
+                          checked: true,
+                          reviewed:false,
+                          revScore: 0
+                            });
+                            // console.log("Task ID "+ id + "has been updated successfully")
+                            // console.log("Added Review variables")
+                          
+                          modal.hide();
+              
+                          var modal = document.querySelector('ons-modal.doTaskConfirmation');
+              
+                          modal.show();
+                      
+                          var closeButton = document.querySelector('.closeBtn2');
+                          // console.log(closeButton)
+                            closeButton.onclick = function(){
+                            modal.hide();
+                          };
+                        }
+              
+              
+                     function deleteTodo(el) {
+                      var target = el.parentElement.parentElement.getAttribute("data-modal-id");
+              
+                      // console.log(target);
+                      //   myKey ;
+                      // partnerID;
+                          // getUserDetails();
+                          // console.log("In getPoints"+myKey);
+                          console.log("In getPoints "+partnerID);
+              
+                      let todoRef = firebase.database().ref('todolist/' + partnerID +'/' + target);
+                          todoRef.remove()
+                      // console.log("Finished deleting")
+                      
+          ons.notification.confirm("削除しますか？").then(function(){
+                        ons.notification.alert("削除しました。");
+                    });
+                    }
+              
+              
+                        </script>
+        </ons-page>
+      </template>
+
+<!-- --------------------------- -->
+<!-- PAPA REQUESTS PAGE END HERE -->
+<!-- --------------------------- -->
+
+
+
+
+<!-- ------------------------------- -->
+<!-- MAMA COMPLETED PAGE STARTS HERE -->
+<!-- ------------------------------- -->
        <template id="completed.html">
         <ons-page id="completed">
     
@@ -1025,25 +1305,25 @@ window.addEventListener("load", function(event) {
               }
      
 
-            function changeMail() {
-              const userEmail = document.querySelector("#changeUserMail").value;
-              console.log(userEmail);
+            // function changeMail() {
+            //   const userEmail = document.querySelector("#changeUserMail").value;
+            //   console.log(userEmail);
 
-              var user = firebase.auth().currentUser;
-              var UID = user.uid 
+            //   var user = firebase.auth().currentUser;
+            //   var UID = user.uid 
 
-              var currentEmail = firebase.auth().currentUser.email;
-              console.log(currentEmail)
+            //   var currentEmail = firebase.auth().currentUser.email;
+            //   console.log(currentEmail)
               
-              user.updateEmail(userEmail).then(function() {
-                // Update successful.
-                ons.notification.alert('メールを「'+userEmail+'」に変更しました。');
+            //   user.updateEmail(userEmail).then(function() {
+            //     // Update successful.
+            //     ons.notification.alert('メールを「'+userEmail+'」に変更しました。');
 
-              }).catch(function(error) {
-                // An error happened.
-                ons.notification.alert('ユーザーメール変更できませんでした。' + error.message + '）');
-              });
-            }
+            //   }).catch(function(error) {
+            //     // An error happened.
+            //     ons.notification.alert('ユーザーメール変更できませんでした。' + error.message + '）');
+            //   });
+            // }
 
          
    // Get points and profile details
